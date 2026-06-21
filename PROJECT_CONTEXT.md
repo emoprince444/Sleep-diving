@@ -128,7 +128,7 @@ Component relationships:
 
 Текущая задача:
 
-- Build a Russian premium ecommerce mattress catalog from the real Sleep Diving PDF.
+- Полная локализация пользовательского интерфейса Sleep Diving на русский язык завершена; изменения собраны и готовятся к коммиту.
 
 Текущие проблемы:
 
@@ -181,42 +181,31 @@ Component relationships:
 
 Последние изменения:
 
-- Read the supplied Sleep Diving PDF visually because it has no usable text layer.
-- Created `src/data/products.ts` with real mattress models, categories, firmness, height, layers, load, sizes, public RRC prices, and internal `wholesalePrice`.
-- Added `ProductCatalogSection` with filters by category, firmness, height, and per-card size selection.
-- Made catalog card prices update by selected size.
-- Kept internal wholesale prices out of the buyer UI and avoided showing the word "опт".
-- Translated the visible site UI into Russian with premium ecommerce copy.
-- Updated navigation and sticky links to include the catalog.
-- Verified `npm run build` successfully.
+- Завершена полная локализация пользовательского интерфейса на русский язык.
+- Русифицированы оставшиеся английские UI-строки в навигации, таймере, футере, панели покупки, карусели оснований и sticky-навигации.
+- Обновлены имена покупателей в отзывах и social proof на русские форматы.
+- Русифицированы видимые названия материалов каталога: `Memory Foam`, `Soft Comfort`, `Flex`, `TFK/Multi` заменены на премиальные русские формулировки.
+- Приведены формулировки жёсткости, спецификаций и метаданных отзывов к аккуратной русской типографике.
+- Реальные названия моделей из PDF сохранены как товарные имена.
+- Verified `npm run build` successfully after localization.
 
 Измененные файлы:
 
 - `PROJECT_CONTEXT.md`
 - `src/data/product.ts`
 - `src/data/products.ts`
-- `src/App.tsx`
-- `src/components/product/ProductCatalogSection.tsx`
 - `src/components/product/PurchasePanel.tsx`
-- `src/components/product/TrustBadges.tsx`
-- `src/components/product/ProductComparison.tsx`
-- `src/components/product/ReviewsSection.tsx`
-- `src/components/product/LayersSection.tsx`
-- `src/components/product/EditorialSection.tsx`
 - `src/components/product/BedFrameRail.tsx`
-- `src/components/product/ProductSpecsSection.tsx`
-- `src/components/product/FAQSection.tsx`
-- `src/components/product/WhySleepDivingSection.tsx`
-- `src/components/product/TrustedBySleepersSection.tsx`
+- `src/components/layout/Footer.tsx`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after adding the Russian real-product catalog.
+- `npm run build` passed after full Russian UI localization.
 - The page is still static and not connected to real backend/cart/checkout services.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
-- Sticky navigation now has real destinations for Overview, Reviews, FAQ, Layers & Materials, Product Specs, and Compare.
+- Sticky navigation now has Russian labels and real destinations for Overview, Reviews, Questions, Layers & Materials, Product Specs, and Compare.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The visible website is now in Russian and includes real Sleep Diving catalog data from the PDF.

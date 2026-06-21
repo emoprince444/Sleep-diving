@@ -41,7 +41,7 @@ export function Footer() {
             <div>
               <h3 className="text-sm font-bold uppercase tracking-[0.08em] text-sd-gold">Поддержка</h3>
               <div className="mt-5 flex flex-col gap-3 text-sm font-semibold text-white/72">
-                <a className="transition hover:text-white" href="#faq">FAQ</a>
+                <a className="transition hover:text-white" href="#faq">Вопросы и ответы</a>
                 <a className="transition hover:text-white" href="#reviews">Отзывы</a>
                 <a className="transition hover:text-white" href="#layers-and-materials">Материалы</a>
                 <a className="transition hover:text-white" href="#catalog">Гид по размерам</a>
@@ -54,8 +54,8 @@ export function Footer() {
               </p>
               <div className="mt-5 flex overflow-hidden rounded-[6px] border border-white/15 bg-white/8">
                 <input
-                  aria-label="Email"
-                  placeholder="Ваш email"
+                  aria-label="Электронная почта"
+                  placeholder="Ваш e-mail"
                   className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/45 outline-none"
                 />
                 <Button className="h-auto rounded-none bg-sd-gold px-5 text-sm font-bold text-sd-navy hover:bg-sd-gold/90">
@@ -65,7 +65,7 @@ export function Footer() {
             </div>
           </div>
           <div className="mt-14 flex items-center justify-between border-t border-white/10 pt-7 text-xs font-semibold text-white/50 max-sm:flex-col max-sm:items-start max-sm:gap-3">
-            <span>Sleep Diving - премиальные матрасы и системы сна.</span>
+            <span>Sleep Diving — премиальные матрасы и системы сна.</span>
             <span>Конфиденциальность / Условия / Доступность</span>
           </div>
         </div>

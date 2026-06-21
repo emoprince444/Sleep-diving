@@ -90,7 +90,7 @@ export function PurchasePanel() {
         <Button
           variant="ghost"
           size="icon"
-          aria-label="Share product"
+          aria-label="Поделиться товаром"
           className="rounded-full transition hover:bg-sd-cream hover:text-sd-navy"
         >
           <Share2 />
@@ -139,7 +139,7 @@ export function PurchasePanel() {
         <div className="grid grid-cols-2 overflow-hidden rounded-[6px] border border-sd-line bg-white">
           <button className="flex h-14 flex-col items-center justify-center border-r border-sd-line text-base font-bold text-sd-charcoal transition hover:bg-sd-soft">
             Пружинный
-            <span className="text-xs font-medium text-sd-muted">Foam + Springs</span>
+            <span className="text-xs font-medium text-sd-muted">Пена + пружины</span>
           </button>
           <button className="h-14 border-[2px] border-sd-navy bg-sd-cream text-lg font-bold text-sd-charcoal shadow-inner transition hover:bg-sd-cream/80">
             Пенный

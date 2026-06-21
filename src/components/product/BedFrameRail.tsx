@@ -49,10 +49,10 @@ export function BedFrameRail() {
             <div className="h-full w-[14%] rounded-full bg-sd-charcoal" />
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" size="icon" onClick={scrollPrev} aria-label="Previous frames" className="rounded-[6px] transition hover:-translate-y-0.5">
+            <Button variant="outline" size="icon" onClick={scrollPrev} aria-label="Предыдущие основания" className="rounded-[6px] transition hover:-translate-y-0.5">
               <ChevronDown className="rotate-90" />
             </Button>
-            <Button variant="outline" size="icon" onClick={scrollNext} aria-label="Next frames" className="rounded-[6px] transition hover:-translate-y-0.5">
+            <Button variant="outline" size="icon" onClick={scrollNext} aria-label="Следующие основания" className="rounded-[6px] transition hover:-translate-y-0.5">
               <ChevronDown className="-rotate-90" />
             </Button>
           </div>

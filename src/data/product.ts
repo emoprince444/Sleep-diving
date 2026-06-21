@@ -28,17 +28,17 @@ export const stickyNavItems = [
   { label: "Обзор", href: "#overview", active: true },
   { label: "Каталог", href: "#catalog", active: false },
   { label: "Отзывы", href: "#reviews", active: false },
-  { label: "FAQ", href: "#faq", active: false },
+  { label: "Вопросы", href: "#faq", active: false },
   { label: "Слои и материалы", href: "#layers-and-materials", active: false },
   { label: "Характеристики", href: "#product-specs", active: false },
   { label: "Сравнение", href: "#compare", active: false },
 ]
 
 export const promoTimerParts = [
-  { num: "0", label: "Days" },
-  { num: "9", label: "Hrs" },
-  { num: "53", label: "Min" },
-  { num: "48", label: "Sec" },
+  { num: "0", label: "дн." },
+  { num: "9", label: "ч" },
+  { num: "53", label: "мин" },
+  { num: "48", label: "сек" },
 ]
 
 export const galleryItems = [
@@ -94,8 +94,8 @@ export const models = [
     image: comparisonClassic,
     copy: "Сбалансированное снижение давления, дышащий комфортный слой и уверенная ежедневная поддержка.",
     scores: [5, 4, 4, 4],
-    quote: "Поддерживает тело, но не кажется жестким. Уже первая неделя стала спокойнее.",
-    customer: "Maya R.",
+    quote: "Поддерживает тело, но не кажется жёстким. Уже первая неделя стала спокойнее.",
+    customer: "Мария Р.",
   },
   {
     badge: "Хит продаж",
@@ -106,7 +106,7 @@ export const models = [
     copy: "Более прохладная и мягкая конструкция для тех, кто любит глубокое комфортное погружение.",
     scores: [4, 5, 4, 5],
     quote: "Верх мягкий, а поддержка внутри ровно такая, как нужно.",
-    customer: "Andre L.",
+    customer: "Андрей Л.",
   },
   {
     badge: "Зональная поддержка",
@@ -117,7 +117,7 @@ export const models = [
     copy: "Выраженные зоны комфорта, высокий профиль и ощущение премиального гостиничного матраса.",
     scores: [4, 5, 5, 5],
     quote: "Премиальное ощущение, уверенный край и заметно более прохладный сон.",
-    customer: "Nina B.",
+    customer: "Нина Б.",
   },
 ]
 
@@ -137,28 +137,28 @@ export const reviewSummary = {
 
 export const reviews = [
   {
-    customer: "Maya R.",
+    customer: "Мария Р.",
     sleeper: "Сон на боку",
-    title: "Поддержка без ощущения жесткости",
+    title: "Поддержка без ощущения жёсткости",
     quote:
       "Плечам комфортно, но поясница не проваливается. Матрас быстро принял форму, спать стало спокойнее.",
-    meta: "Проверенный покупатель - 160x200",
+    meta: "Проверенный покупатель — 160x200",
   },
   {
-    customer: "Andre L.",
+    customer: "Андрей Л.",
     sleeper: "Комбинированный сон",
     title: "Прохладнее, чем мой старый матрас",
     quote:
       "Я часто ворочаюсь, но матрас не мешает двигаться. Чехол ощущается прохладнее, а край держит лучше ожиданий.",
-    meta: "Проверенный покупатель - 180x200",
+    meta: "Проверенный покупатель — 180x200",
   },
   {
-    customer: "Nina B.",
+    customer: "Нина Б.",
     sleeper: "Сон на спине",
     title: "Ощущение отеля дома",
     quote:
       "Матрас выглядит и ощущается солидно. Достаточно упругий для поддержки и достаточно мягкий, чтобы не просыпаться от давления.",
-    meta: "Проверенный покупатель - 140x200",
+    meta: "Проверенный покупатель — 140x200",
   },
 ]
 
@@ -187,15 +187,15 @@ export const trustedStats = [
 export const trustedQuotes = [
   {
     quote: "Первый матрас, который ощущается мягким, но не теряет поддержку.",
-    customer: "Elena P.",
+    customer: "Елена П.",
   },
   {
     quote: "Доставка прошла спокойно, а понятный тестовый период помог решиться.",
-    customer: "Marcus T.",
+    customer: "Марк Т.",
   },
   {
     quote: "Ощущается как кровать в хорошем бутик-отеле, только дома.",
-    customer: "Priya S.",
+    customer: "Ирина С.",
   },
 ]
 
@@ -228,10 +228,10 @@ export const layerItems = [
 ]
 
 export const bedFrames = [
-  { name: "Cloudbase Foundation", price: "34 900 ₽", value: "56 100 ₽", image: bedFramePlatform },
-  { name: "Harbor Adjustable Frame", price: "74 900 ₽", value: "163 900 ₽", image: bedFrameAdjustable },
-  { name: "Bamboo Platform Frame", price: "39 900 ₽", value: "160 900 ₽", image: bedFramePlatform },
-  { name: "Stillwater Platform Bed", price: "29 900 ₽", value: "89 900 ₽", image: bedFrameAdjustable },
+  { name: "Основание Cloudbase", price: "34 900 ₽", value: "56 100 ₽", image: bedFramePlatform },
+  { name: "Регулируемое основание Harbor", price: "74 900 ₽", value: "163 900 ₽", image: bedFrameAdjustable },
+  { name: "Платформа Bamboo", price: "39 900 ₽", value: "160 900 ₽", image: bedFramePlatform },
+  { name: "Кровать Stillwater", price: "29 900 ₽", value: "89 900 ₽", image: bedFrameAdjustable },
 ]
 
 export const faqs = [
@@ -258,7 +258,7 @@ export const productSpecs = [
     group: "Конструкция",
     items: [
       { label: "Профиль", value: "от 5 до 30 см" },
-      { label: "Ощущение", value: "от мягкого до повышенной жесткости" },
+      { label: "Ощущение", value: "от мягкого до повышенной жёсткости" },
       { label: "Тип", value: "пенные и пружинные модели" },
       { label: "Слои", value: "комфортные системы до 6+ слоев" },
     ],
@@ -267,8 +267,8 @@ export const productSpecs = [
     group: "Материалы",
     items: [
       { label: "Чехол", value: "трикотаж высокой плотности" },
-      { label: "Комфорт", value: "ППУ, латекс, пена Memory Foam" },
-      { label: "Поддержка", value: "пружинные блоки TFK/Multi и плотная основа" },
+      { label: "Комфорт", value: "ППУ, латекс, пена с эффектом памяти" },
+      { label: "Поддержка", value: "независимые пружинные блоки и плотная основа" },
       { label: "Наполнители", value: "кокосовая койра, войлок, пены разной плотности" },
     ],
   },
