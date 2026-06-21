@@ -55,7 +55,7 @@ export function Footer() {
               <div className="mt-5 flex overflow-hidden rounded-[6px] border border-white/15 bg-white/8">
                 <input
                   aria-label="Электронная почта"
-                  placeholder="Ваш e-mail"
+                  placeholder="Ваша почта"
                   className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/45 outline-none"
                 />
                 <Button className="h-auto rounded-none bg-sd-gold px-5 text-sm font-bold text-sd-navy hover:bg-sd-gold/90">

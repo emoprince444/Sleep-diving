@@ -54,7 +54,7 @@ export function LayersSection() {
           </div>
           <img
             src={productImages.layersDiagram}
-            alt="Exploded view of Sleep Diving mattress layers"
+            alt="Слои матраса Sleep Diving в разрезе"
             className="w-full rounded-[6px] object-contain shadow-[0_24px_70px_rgba(24,33,45,0.10)]"
           />
         </div>

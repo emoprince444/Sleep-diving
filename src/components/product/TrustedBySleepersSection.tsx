@@ -30,7 +30,7 @@ export function TrustedBySleepersSection() {
           <div className="grid grid-cols-[0.9fr_1.1fr] gap-6 max-xl:grid-cols-1">
             <img
               src={productImages.bedroomLifestyle}
-              alt="Luxury Sleep Diving bedroom"
+              alt="Премиальная спальня с матрасом Sleep Diving"
               className="h-full min-h-[360px] rounded-[6px] object-cover shadow-[0_20px_54px_rgba(24,33,45,0.12)] max-xl:min-h-[300px]"
             />
             <div className="grid gap-4">

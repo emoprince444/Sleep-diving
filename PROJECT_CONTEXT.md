@@ -128,7 +128,7 @@ Component relationships:
 
 Текущая задача:
 
-- Полная локализация пользовательского интерфейса Sleep Diving на русский язык завершена; изменения собраны и готовятся к коммиту.
+- Полная локализация видимого интерфейса Sleep Diving на русский язык завершена; изменения проверены в браузере, собраны и готовятся к коммиту.
 
 Текущие проблемы:
 
@@ -181,13 +181,10 @@ Component relationships:
 
 Последние изменения:
 
-- Завершена полная локализация пользовательского интерфейса на русский язык.
-- Русифицированы оставшиеся английские UI-строки в навигации, таймере, футере, панели покупки, карусели оснований и sticky-навигации.
-- Обновлены имена покупателей в отзывах и social proof на русские форматы.
-- Русифицированы видимые названия материалов каталога: `Memory Foam`, `Soft Comfort`, `Flex`, `TFK/Multi` заменены на премиальные русские формулировки.
-- Приведены формулировки жёсткости, спецификаций и метаданных отзывов к аккуратной русской типографике.
-- Реальные названия моделей из PDF сохранены как товарные имена.
-- Verified `npm run build` successfully after localization.
+- Убраны оставшиеся английские доступные/видимые строки: title страницы, `html lang`, alt-тексты изображений и текст закрытия dialog-компонента.
+- Проверен локальный сайт в Chromium через Playwright: desktop и mobile не содержат запрещённых английских интерфейсных слов из пользовательского списка; слово `Sleep` осталось только в бренде и реальных товарных именах.
+- Проверено интерактивное переключение фильтра каталога на `Премиум класс`; CTA остаётся на русском.
+- Verified `npm run build` successfully after the final localization pass.
 
 Измененные файлы:
 
@@ -196,23 +193,28 @@ Component relationships:
 - `src/data/products.ts`
 - `src/components/product/PurchasePanel.tsx`
 - `src/components/product/BedFrameRail.tsx`
+- `src/components/product/LayersSection.tsx`
+- `src/components/product/TrustedBySleepersSection.tsx`
 - `src/components/layout/Footer.tsx`
+- `src/components/ui/dialog.tsx`
+- `index.html`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after full Russian UI localization.
+- `npm run build` passed after full Russian visible-interface localization.
 - The page is still static and not connected to real backend/cart/checkout services.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
-- Sticky navigation now has Russian labels and real destinations for Overview, Reviews, Questions, Layers & Materials, Product Specs, and Compare.
+- Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The visible website is now in Russian and includes real Sleep Diving catalog data from the PDF.
+- Browser QA screenshots were captured in `/private/tmp/sleep-localization-desktop.png`, `/private/tmp/sleep-localization-filtered.png`, and `/private/tmp/sleep-localization-mobile.png`.
 
 ## 10. Следующие шаги
 
-- Add interactive cart behavior for the Add To Cart CTAs.
+- Add interactive cart behavior for buyer-facing cart CTAs.
 - Add size selection state shared between the purchase panel and sticky buy bar.
 - Add real newsletter form handling or remove the footer email input before production.
 - Compress and generate responsive WebP/AVIF variants for the new PNG assets before production deployment.
