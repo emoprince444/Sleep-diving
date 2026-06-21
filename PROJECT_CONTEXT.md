@@ -128,16 +128,14 @@ Component relationships:
 
 Текущая задача:
 
-- Полная локализация видимого интерфейса Sleep Diving на русский язык завершена; изменения проверены в браузере, собраны и готовятся к коммиту.
+- Premium motion polish на Framer Motion завершён; изменения проверены интерактивным браузерным smoke-тестом, собраны и готовятся к коммиту.
 
 Текущие проблемы:
 
-- TODO - no real ecommerce cart or checkout behavior yet.
 - TODO - no backend, database, auth, payments, analytics, or deployment pipeline yet.
 - TODO - product content and prices are static mock data.
-- TODO - connect catalog card CTA and size selection to a real cart/checkout flow.
 - TODO - generated PNG assets are large and should be compressed or converted to responsive WebP/AVIF before production.
-- TODO - browser-based visual QA is limited because the in-app Browser runtime failed in this environment and Playwright is not installed in the project.
+- TODO - local cart and consultation form are frontend placeholders until backend/checkout/CRM integration is added.
 
 ## 7. Важные решения
 
@@ -162,6 +160,7 @@ Component relationships:
 - Keep PDP content data in `src/data/product.ts`; sections should consume that data rather than hardcoding repeated product content.
 - Keep real mattress catalog data in `src/data/products.ts`; never render internal `wholesalePrice` or the word "опт" to buyers.
 - Use RRC as the buyer-facing public price.
+- Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
 
 ## 8. Правила для AI-агента
 
@@ -181,44 +180,45 @@ Component relationships:
 
 Последние изменения:
 
-- Выполнен pass по интерактивности видимых кликабельных элементов.
-- Добавлена локальная корзина на React state + `localStorage`: счётчик в Header, cart drawer, удаление товаров, итоговая сумма.
-- CTA `Добавить в корзину` подключены в purchase panel, sticky bar, карточках каталога и странице товара.
-- Добавлена форма консультации: имя, телефон, комментарий, success state; чат, подбор матраса и оформление заказа открывают эту форму.
-- Header cart icon, account/consultation icon, CTA и mobile menu получили реальные действия.
-- Карточки товаров открывают `/product/:id`; `/product/:id` добавлен в Vercel rewrite.
-- Product gallery, FAQ accordion, comparison toggle, bed-frame rail, footer newsletter and links checked/connected.
-- Проверено в Chromium: gallery, cart, remove item, checkout consultation, catalog filters, product page, FAQ, comparison toggle, mobile menu.
-- `npm run build` passed; Vite still reports the existing bundle-size warning just above 500 kB.
+- Добавлен restrained premium motion polish на Framer Motion без изменения архитектуры сайта.
+- Hero/PDP верх страницы получил плавное появление хлебных крошек, галереи и purchase card.
+- Product gallery получил мягкий scroll parallax/scale для главного изображения с fallback для reduced motion.
+- Карточки товаров и каталога получили fade-in при появлении, hover lift, subtle shadow и stagger-анимации.
+- Фильтры каталога получили layout/smooth transitions и аккуратные active/focus состояния.
+- Purchase card получил плавное появление, CTA hover/tap motion и subtle highlight блока цены при смене размера.
+- Trust badges получили stagger fade-in и лёгкий hover на карточках/иконках.
+- FAQ accordion получил smooth open/close и вращение иконки.
+- Cart drawer и consultation modal получили backdrop fade, slide/scale enter/exit через `AnimatePresence`.
+- Mobile menu получил slide-down animation, а sticky Add to Cart - плавное появление.
+- Проверено в Chromium: 14 интерактивных сценариев прошли после motion polish; reduced-motion smoke-тест также прошёл.
+- `npm run build` passed; Vite still reports the existing bundle-size warning above 500 kB.
 
 Измененные файлы:
 
 - `PROJECT_CONTEXT.md`
-- `src/data/product.ts`
+- `src/lib/motion.ts`
 - `src/App.tsx`
 - `src/components/cart/CartContext.tsx`
 - `src/components/layout/Header.tsx`
 - `src/components/layout/StickyBuyBar.tsx`
-- `src/components/layout/Footer.tsx`
-- `src/components/product/BedFrameRail.tsx`
-- `src/components/product/ProductComparison.tsx`
 - `src/components/product/ProductCatalogSection.tsx`
 - `src/components/product/ProductGallery.tsx`
 - `src/components/product/PurchasePanel.tsx`
-- `vercel.json`
+- `src/components/product/TrustBadges.tsx`
+- `src/components/product/FAQSection.tsx`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after the interactivity pass, with a bundle-size warning above the default 500 kB threshold.
+- `npm run build` passed after premium motion polish, with a bundle-size warning above the default 500 kB threshold.
 - The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed interactive gallery thumbnails, cart add/remove, product-card navigation, catalog filters, FAQ accordion, comparison toggle, consultation form success, and mobile menu.
+- Browser QA confirmed interactive gallery thumbnails, cart add/remove, product-card navigation, catalog filters, FAQ accordion, comparison toggle, consultation form success, mobile menu, and reduced-motion compatibility after motion changes.
 
 ## 10. Следующие шаги
 

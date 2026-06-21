@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { BadgeCheck, ChevronDown, PackageCheck, Ruler, ShieldCheck, SlidersHorizontal, Truck } from "lucide-react"
 
 import { useCart } from "@/components/cart/CartContext"
@@ -10,6 +11,7 @@ import {
   productCategories,
   type MattressProduct,
 } from "@/data/products"
+import { fadeUp, premiumTransition, staggerContainer } from "@/lib/motion"
 
 function formatRub(value: number) {
   return new Intl.NumberFormat("ru-RU", {
@@ -29,12 +31,20 @@ function matchesHeight(heightCm: number, option: string) {
 
 export function ProductCard({ product }: { product: MattressProduct }) {
   const { addItem } = useCart()
+  const reducedMotion = useReducedMotion()
   const defaultSize = product.sizes[Math.max(product.sizes.length - 2, 0)]?.size ?? product.sizes[0].size
   const [selectedSize, setSelectedSize] = useState(defaultSize)
   const selectedPrice = product.sizes.find((item) => item.size === selectedSize) ?? product.sizes[0]
 
   return (
-    <article className="group overflow-hidden rounded-[6px] border border-sd-line bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sd-copper/60 hover:shadow-[0_22px_54px_rgba(24,33,45,0.13)]">
+    <motion.article
+      layout
+      variants={fadeUp}
+      transition={premiumTransition}
+      whileHover={reducedMotion ? undefined : { y: -6, boxShadow: "0 24px 58px rgba(24,33,45,0.14)" }}
+      viewport={{ once: true, amount: 0.18 }}
+      className="group overflow-hidden rounded-[6px] border border-sd-line bg-white shadow-sm transition-colors duration-300 hover:border-sd-copper/60"
+    >
       <a href={`/product/${product.id}`} className="relative block h-[245px] overflow-hidden bg-sd-soft" aria-label={`Открыть ${product.name}`}>
         <img src={product.image} alt={product.name} className="size-full object-cover transition duration-700 group-hover:scale-105" />
         <div className="absolute left-4 top-4 rounded-[4px] bg-sd-navy px-3 py-2 text-xs font-bold uppercase tracking-[0.06em] text-white">
@@ -123,11 +133,12 @@ export function ProductCard({ product }: { product: MattressProduct }) {
           </p>
         </div>
       </div>
-    </article>
+    </motion.article>
   )
 }
 
 export function PopularMattressesSection() {
+  const reducedMotion = useReducedMotion()
   const popularProducts = mattressProducts.slice(0, 4)
 
   return (
@@ -151,17 +162,24 @@ export function PopularMattressesSection() {
           </a>
         </div>
 
-        <div className="mt-8 grid grid-cols-4 gap-7 max-2xl:grid-cols-2 max-lg:grid-cols-1">
+        <motion.div
+          className="mt-8 grid grid-cols-4 gap-7 max-2xl:grid-cols-2 max-lg:grid-cols-1"
+          initial={reducedMotion ? false : "hidden"}
+          whileInView="show"
+          viewport={{ once: true, amount: 0.12 }}
+          variants={staggerContainer}
+        >
           {popularProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
 }
 
 export function ProductCatalogSection() {
+  const reducedMotion = useReducedMotion()
   const [category, setCategory] = useState<(typeof productCategories)[number]>("Все")
   const [firmness, setFirmness] = useState<(typeof firmnessOptions)[number]>("Все")
   const [height, setHeight] = useState<(typeof heightOptions)[number]>("Все")
@@ -192,29 +210,29 @@ export function ProductCatalogSection() {
             </p>
           </div>
 
-          <div className="rounded-[6px] border border-sd-line bg-sd-panel p-5 shadow-inner">
+          <motion.div layout className="rounded-[6px] border border-sd-line bg-sd-panel p-5 shadow-inner">
             <div className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.07em] text-sd-charcoal">
               <SlidersHorizontal className="size-4 text-sd-copper" />
               Фильтры
             </div>
             <div className="grid grid-cols-3 gap-3 max-md:grid-cols-1">
-              <select value={category} onChange={(event) => setCategory(event.target.value as typeof category)} className="h-12 rounded-[6px] border border-sd-line bg-white px-4 font-bold text-sd-charcoal outline-none transition hover:border-sd-copper/60">
+              <motion.select layout value={category} onChange={(event) => setCategory(event.target.value as typeof category)} className="h-12 rounded-[6px] border border-sd-line bg-white px-4 font-bold text-sd-charcoal outline-none transition hover:border-sd-copper/60 focus:border-sd-copper focus:shadow-[0_0_0_3px_rgba(194,132,34,0.12)]">
                 {productCategories.map((item) => (
                   <option key={item}>{item}</option>
                 ))}
-              </select>
-              <select value={firmness} onChange={(event) => setFirmness(event.target.value as typeof firmness)} className="h-12 rounded-[6px] border border-sd-line bg-white px-4 font-bold text-sd-charcoal outline-none transition hover:border-sd-copper/60">
+              </motion.select>
+              <motion.select layout value={firmness} onChange={(event) => setFirmness(event.target.value as typeof firmness)} className="h-12 rounded-[6px] border border-sd-line bg-white px-4 font-bold text-sd-charcoal outline-none transition hover:border-sd-copper/60 focus:border-sd-copper focus:shadow-[0_0_0_3px_rgba(194,132,34,0.12)]">
                 {firmnessOptions.map((item) => (
                   <option key={item}>{item}</option>
                 ))}
-              </select>
-              <select value={height} onChange={(event) => setHeight(event.target.value as typeof height)} className="h-12 rounded-[6px] border border-sd-line bg-white px-4 font-bold text-sd-charcoal outline-none transition hover:border-sd-copper/60">
+              </motion.select>
+              <motion.select layout value={height} onChange={(event) => setHeight(event.target.value as typeof height)} className="h-12 rounded-[6px] border border-sd-line bg-white px-4 font-bold text-sd-charcoal outline-none transition hover:border-sd-copper/60 focus:border-sd-copper focus:shadow-[0_0_0_3px_rgba(194,132,34,0.12)]">
                 {heightOptions.map((item) => (
                   <option key={item}>{item}</option>
                 ))}
-              </select>
+              </motion.select>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         <div className="mt-8 flex items-center justify-between gap-4 border-y border-sd-line py-4 max-sm:flex-col max-sm:items-start">
@@ -224,11 +242,20 @@ export function ProductCatalogSection() {
           <p className="text-sm font-semibold text-sd-muted">Для покупателей показана только публичная цена РРЦ.</p>
         </div>
 
-        <div className="mt-8 grid grid-cols-3 gap-7 max-xl:grid-cols-2 max-lg:grid-cols-1">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <motion.div
+          layout
+          className="mt-8 grid grid-cols-3 gap-7 max-xl:grid-cols-2 max-lg:grid-cols-1"
+          initial={reducedMotion ? false : "hidden"}
+          whileInView="show"
+          viewport={{ once: true, amount: 0.08 }}
+          variants={staggerContainer}
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   )

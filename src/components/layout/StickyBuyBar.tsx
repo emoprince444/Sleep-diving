@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 
 import { Rating } from "@/components/brand/Rating"
@@ -6,6 +7,7 @@ import { useCart } from "@/components/cart/CartContext"
 import { Button } from "@/components/ui/button"
 import { productName, stickyNavItems } from "@/data/product"
 import comparisonClassic from "@/assets/sleep-diving-comparison-classic.png"
+import { premiumEase } from "@/lib/motion"
 
 const sizes = [
   { size: "140x200", price: 15900 },
@@ -15,6 +17,7 @@ const sizes = [
 
 export function StickyBuyBar() {
   const { addItem } = useCart()
+  const reducedMotion = useReducedMotion()
   const [selectedSize, setSelectedSize] = useState("160x200")
   const selectedPrice = sizes.find((item) => item.size === selectedSize) ?? sizes[1]
 
@@ -72,7 +75,12 @@ export function StickyBuyBar() {
           </div>
         </nav>
       </div>
-      <div className="fixed inset-x-0 bottom-0 z-50 hidden border-t border-sd-line bg-white/96 px-4 py-3 shadow-[0_-14px_34px_rgba(24,33,45,0.14)] backdrop-blur max-md:block">
+      <motion.div
+        className="fixed inset-x-0 bottom-0 z-50 hidden border-t border-sd-line bg-white/96 px-4 py-3 shadow-[0_-14px_34px_rgba(24,33,45,0.14)] backdrop-blur max-md:block"
+        initial={reducedMotion ? false : { opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.46, ease: premiumEase, delay: 0.18 }}
+      >
         <div className="mx-auto grid max-w-md grid-cols-[1fr_auto] items-center gap-3">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.06em] text-sd-muted">{selectedSize} / каталог</p>
@@ -82,7 +90,7 @@ export function StickyBuyBar() {
             В корзину
           </Button>
         </div>
-      </div>
+      </motion.div>
     </>
   )
 }

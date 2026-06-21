@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { CircleUserRound, Menu, ShoppingCart, X } from "lucide-react"
 
 import { BrandMark } from "@/components/brand/BrandMark"
@@ -6,10 +7,12 @@ import { useCart } from "@/components/cart/CartContext"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { headerNavItems } from "@/data/product"
+import { premiumEase } from "@/lib/motion"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { openCart, openConsultation, totalQuantity } = useCart()
+  const reducedMotion = useReducedMotion()
 
   return (
     <header className="sticky top-0 z-40 border-b border-sd-line bg-white/95 shadow-[0_1px_0_rgba(24,33,45,0.03)] backdrop-blur">
@@ -47,8 +50,15 @@ export function Header() {
           </button>
         </div>
       </div>
-      {mobileMenuOpen && (
-        <nav className="border-t border-sd-line bg-white px-4 py-4 shadow-[0_14px_34px_rgba(24,33,45,0.10)] lg:hidden">
+      <AnimatePresence>
+        {mobileMenuOpen && (
+        <motion.nav
+          className="border-t border-sd-line bg-white px-4 py-4 shadow-[0_14px_34px_rgba(24,33,45,0.10)] lg:hidden"
+          initial={reducedMotion ? false : { opacity: 0, y: -12, height: 0 }}
+          animate={{ opacity: 1, y: 0, height: "auto" }}
+          exit={reducedMotion ? undefined : { opacity: 0, y: -8, height: 0 }}
+          transition={{ duration: 0.34, ease: premiumEase }}
+        >
           <div className="flex flex-col gap-3 text-base font-bold text-sd-navy">
             {headerNavItems.map((item) => (
               <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)} className="rounded-[6px] bg-sd-soft px-4 py-3">
@@ -59,8 +69,9 @@ export function Header() {
               Подобрать матрас
             </button>
           </div>
-        </nav>
-      )}
+        </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

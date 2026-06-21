@@ -1,9 +1,12 @@
 import { useState } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 
 import { faqs } from "@/data/product"
+import { premiumEase } from "@/lib/motion"
 
 export function FAQSection() {
+  const reducedMotion = useReducedMotion()
   const [openFaq, setOpenFaq] = useState(0)
 
   return (
@@ -24,9 +27,24 @@ export function FAQSection() {
                 className="flex w-full items-center justify-between gap-4 py-6 text-left text-xl font-bold text-sd-charcoal transition hover:text-sd-navy max-sm:text-lg"
               >
                 {item.question}
-                <ChevronDown className={`size-5 text-sd-copper transition ${openFaq === index ? "rotate-180" : ""}`} />
+                <motion.span animate={reducedMotion ? undefined : { rotate: openFaq === index ? 180 : 0 }} transition={{ duration: 0.32, ease: premiumEase }}>
+                  <ChevronDown className="size-5 text-sd-copper" />
+                </motion.span>
               </button>
-              {openFaq === index && <p className="pb-7 text-[16px] leading-7 text-sd-muted">{item.answer}</p>}
+              <AnimatePresence initial={false}>
+                {openFaq === index && (
+                  <motion.div
+                    key="answer"
+                    initial={reducedMotion ? false : { height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+                    transition={{ duration: 0.38, ease: premiumEase }}
+                    className="overflow-hidden"
+                  >
+                    <p className="pb-7 text-[16px] leading-7 text-sd-muted">{item.answer}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>

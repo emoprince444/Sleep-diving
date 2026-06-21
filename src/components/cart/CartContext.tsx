@@ -1,7 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { premiumEase } from "@/lib/motion"
 
 export type CartProduct = {
   id: string
@@ -113,13 +115,29 @@ export function useCart() {
 
 export function CartDrawer() {
   const { closeCart, isCartOpen, items, openConsultation, removeItem, totalPrice } = useCart()
-
-  if (!isCartOpen) return null
+  const reducedMotion = useReducedMotion()
 
   return (
-    <div className="fixed inset-0 z-[70] bg-sd-charcoal/35 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Корзина">
+    <AnimatePresence>
+      {isCartOpen && (
+        <motion.div
+          className="fixed inset-0 z-[70] bg-sd-charcoal/35 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Корзина"
+          initial={reducedMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={reducedMotion ? undefined : { opacity: 0 }}
+          transition={{ duration: 0.28, ease: premiumEase }}
+        >
       <button type="button" className="absolute inset-0 cursor-default" onClick={closeCart} aria-label="Закрыть корзину" />
-      <aside className="absolute right-0 top-0 flex h-full w-full max-w-[440px] flex-col bg-white shadow-[0_24px_80px_rgba(24,33,45,0.24)]">
+      <motion.aside
+        className="absolute right-0 top-0 flex h-full w-full max-w-[440px] flex-col bg-white shadow-[0_24px_80px_rgba(24,33,45,0.24)]"
+        initial={reducedMotion ? false : { x: "100%" }}
+        animate={{ x: 0 }}
+        exit={reducedMotion ? undefined : { x: "100%" }}
+        transition={{ duration: 0.46, ease: premiumEase }}
+      >
         <div className="flex items-center justify-between border-b border-sd-line px-6 py-5">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-sd-copper">Корзина</p>
@@ -170,22 +188,42 @@ export function CartDrawer() {
           </Button>
           <p className="mt-3 text-center text-xs font-semibold text-sd-muted">Оформление пока работает как заявка без онлайн-оплаты.</p>
         </div>
-      </aside>
-    </div>
+      </motion.aside>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
 export function ConsultationModal() {
   const { closeConsultation, isConsultationOpen } = useCart()
+  const reducedMotion = useReducedMotion()
   const [sent, setSent] = useState(false)
 
-  if (!isConsultationOpen) return null
+  useEffect(() => {
+    if (isConsultationOpen) setSent(false)
+  }, [isConsultationOpen])
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-sd-charcoal/40 px-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Консультация">
+    <AnimatePresence>
+      {isConsultationOpen && (
+        <motion.div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-sd-charcoal/40 px-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Консультация"
+          initial={reducedMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={reducedMotion ? undefined : { opacity: 0 }}
+          transition={{ duration: 0.28, ease: premiumEase }}
+        >
       <button type="button" className="absolute inset-0 cursor-default" onClick={closeConsultation} aria-label="Закрыть консультацию" />
-      <form
+      <motion.form
         className="relative w-full max-w-[520px] rounded-[6px] bg-white p-7 shadow-[0_24px_80px_rgba(24,33,45,0.24)]"
+        initial={reducedMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={reducedMotion ? undefined : { opacity: 0, y: 12, scale: 0.985 }}
+        transition={{ duration: 0.42, ease: premiumEase }}
         onSubmit={(event) => {
           event.preventDefault()
           setSent(true)
@@ -217,7 +255,9 @@ export function ConsultationModal() {
             </Button>
           </>
         )}
-      </form>
-    </div>
+      </motion.form>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }

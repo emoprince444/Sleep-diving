@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { BadgeCheck, Check, ChevronDown, Clock3, CreditCard, PackageCheck, Share2, Sparkles } from "lucide-react"
 
 import { Rating } from "@/components/brand/Rating"
@@ -7,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { productName, promoTimerParts, purchaseHighlights, upgrades } from "@/data/product"
+import { premiumEase, premiumTransition } from "@/lib/motion"
 
 type Upgrade = (typeof upgrades)[number]
 
@@ -76,6 +78,7 @@ function UpgradeCard({ upgrade, onSelect, selected }: { upgrade: Upgrade; onSele
 
 export function PurchasePanel() {
   const { addItem } = useCart()
+  const reducedMotion = useReducedMotion()
   const highlightIcons = [CreditCard, PackageCheck, Clock3]
   const [selectedUpgrade, setSelectedUpgrade] = useState(upgrades[0].name)
   const [selectedBase, setSelectedBase] = useState<"spring" | "foam">("foam")
@@ -109,7 +112,13 @@ export function PurchasePanel() {
   }
 
   return (
-    <aside className="sticky top-28 flex flex-col gap-5 rounded-[6px] border border-sd-line bg-white p-6 shadow-[0_24px_70px_rgba(24,33,45,0.12)] max-xl:static max-sm:-mx-1 max-sm:p-4">
+    <motion.aside
+      layout
+      initial={reducedMotion ? false : { opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={premiumTransition}
+      className="sticky top-28 flex flex-col gap-5 rounded-[6px] border border-sd-line bg-white p-6 shadow-[0_24px_70px_rgba(24,33,45,0.12)] max-xl:static max-sm:-mx-1 max-sm:p-4"
+    >
       <PromoTimer />
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-4">
@@ -201,7 +210,12 @@ export function PurchasePanel() {
             Гид по размерам
           </a>
         </div>
-        <label className="mt-3 flex h-16 w-full items-center justify-between rounded-[6px] border border-sd-line bg-white px-4 text-left shadow-sm transition hover:border-sd-copper/60 hover:shadow-md max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4">
+        <motion.label
+          key={selectedSize}
+          animate={reducedMotion ? undefined : { boxShadow: ["0 0 0 rgba(194,132,34,0)", "0 0 0 4px rgba(194,132,34,0.13)", "0 0 0 rgba(194,132,34,0)"] }}
+          transition={{ duration: 0.7, ease: premiumEase }}
+          className="mt-3 flex h-16 w-full items-center justify-between rounded-[6px] border border-sd-line bg-white px-4 text-left shadow-sm transition hover:border-sd-copper/60 hover:shadow-md max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4"
+        >
           <select
             value={selectedSize}
             onChange={(event) => setSelectedSize(event.target.value)}
@@ -217,7 +231,7 @@ export function PurchasePanel() {
             <span className="text-2xl font-bold text-sd-navy">от {new Intl.NumberFormat("ru-RU").format(selectedPrice.price)} ₽</span>
             <ChevronDown className="size-4 text-sd-muted" />
           </span>
-        </label>
+        </motion.label>
       </div>
       <div className="grid gap-3">
         {purchaseHighlights.map((item, index) => {
@@ -241,9 +255,11 @@ export function PurchasePanel() {
           )
         })}
       </div>
-      <Button onClick={addPanelProduct} className="h-16 rounded-[6px] bg-sd-gold text-xl font-bold text-sd-navy shadow-[0_14px_34px_rgba(194,132,34,0.24)] transition duration-300 hover:-translate-y-0.5 hover:bg-sd-gold/90 hover:shadow-[0_18px_44px_rgba(194,132,34,0.30)]">
+      <motion.div whileHover={reducedMotion ? undefined : { y: -3 }} whileTap={reducedMotion ? undefined : { scale: 0.99 }}>
+        <Button onClick={addPanelProduct} className="h-16 w-full rounded-[6px] bg-sd-gold text-xl font-bold text-sd-navy shadow-[0_14px_34px_rgba(194,132,34,0.24)] transition duration-300 hover:bg-sd-gold/90 hover:shadow-[0_18px_44px_rgba(194,132,34,0.30)]">
         Добавить в корзину
-      </Button>
+        </Button>
+      </motion.div>
       <div className="grid grid-cols-3 gap-2 text-center max-sm:grid-cols-1">
         {["Рейтинг 4.8/5", "120 ночей на тест", "Доставка по России"].map((item) => (
           <span key={item} className="rounded-[4px] bg-sd-soft px-2 py-2 text-xs font-bold text-sd-muted">
@@ -251,6 +267,6 @@ export function PurchasePanel() {
           </span>
         ))}
       </div>
-    </aside>
+    </motion.aside>
   )
 }

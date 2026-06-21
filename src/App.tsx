@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react"
+import { motion, useReducedMotion } from "framer-motion"
 
 import { CartDrawer, CartProvider, ConsultationModal, useCart } from "@/components/cart/CartContext"
 import { Footer } from "@/components/layout/Footer"
@@ -19,6 +20,7 @@ import { TrustedBySleepersSection } from "@/components/product/TrustedBySleepers
 import { WhySleepDivingSection } from "@/components/product/WhySleepDivingSection"
 import { breadcrumbs } from "@/data/product"
 import { mattressProducts } from "@/data/products"
+import { fadeUp, premiumTransition, staggerContainer } from "@/lib/motion"
 
 function formatRub(value: number) {
   return new Intl.NumberFormat("ru-RU", {
@@ -29,28 +31,45 @@ function formatRub(value: number) {
 }
 
 function HomePage() {
+  const reducedMotion = useReducedMotion()
+
   return (
     <main id="overview" className="min-h-screen bg-white text-sd-charcoal">
       <Header />
       <section className="bg-[linear-gradient(180deg,#fbfaf7_0%,#ffffff_78%)] px-8 pb-10 pt-7 max-lg:px-5 max-sm:px-4 max-sm:pt-5">
         <div className="mx-auto max-w-[1640px]">
-          <div className="mb-7 flex items-center gap-2 overflow-x-auto whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.08em] text-sd-muted">
+          <motion.div
+            className="mb-7 flex items-center gap-2 overflow-x-auto whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.08em] text-sd-muted"
+            initial={reducedMotion ? false : "hidden"}
+            animate="show"
+            variants={staggerContainer}
+          >
             <a className="text-sd-navy underline decoration-sd-gold underline-offset-4 transition hover:text-sd-copper" href="#overview">
               {breadcrumbs[0]}
             </a>
             {breadcrumbs.slice(1).map((item) => (
-              <span key={item} className="contents">
+              <motion.span key={item} className="contents" variants={fadeUp} transition={premiumTransition}>
                 <ChevronDown className="size-3 shrink-0 -rotate-90 text-sd-copper" />
                 <span>{item}</span>
-              </span>
+              </motion.span>
             ))}
-          </div>
+          </motion.div>
           <div className="grid grid-cols-[1.58fr_0.82fr] items-start gap-10 max-xl:grid-cols-1">
-            <div>
+            <motion.div
+              initial={reducedMotion ? false : { opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...premiumTransition, delay: 0.08 }}
+            >
               <ProductGallery />
               <TrustBadges />
-            </div>
-            <PurchasePanel />
+            </motion.div>
+            <motion.div
+              initial={reducedMotion ? false : { opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...premiumTransition, delay: 0.18 }}
+            >
+              <PurchasePanel />
+            </motion.div>
           </div>
         </div>
       </section>
