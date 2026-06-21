@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { BadgeCheck, ChevronDown, PackageCheck, Ruler, ShieldCheck, SlidersHorizontal, Truck } from "lucide-react"
 
 import { useCart } from "@/components/cart/CartContext"
@@ -11,7 +11,7 @@ import {
   productCategories,
   type MattressProduct,
 } from "@/data/products"
-import { fadeUp, premiumTransition, staggerContainer } from "@/lib/motion"
+import { premiumTransition, staggerContainer } from "@/lib/motion"
 
 function formatRub(value: number) {
   return new Intl.NumberFormat("ru-RU", {
@@ -39,10 +39,8 @@ export function ProductCard({ product }: { product: MattressProduct }) {
   return (
     <motion.article
       layout
-      variants={fadeUp}
       transition={premiumTransition}
       whileHover={reducedMotion ? undefined : { y: -6, boxShadow: "0 24px 58px rgba(24,33,45,0.14)" }}
-      viewport={{ once: true, amount: 0.18 }}
       className="group overflow-hidden rounded-[6px] border border-sd-line bg-white shadow-sm transition-colors duration-300 hover:border-sd-copper/60"
     >
       <a href={`/product/${product.id}`} className="relative block h-[245px] overflow-hidden bg-sd-soft" aria-label={`Открыть ${product.name}`}>
@@ -138,7 +136,6 @@ export function ProductCard({ product }: { product: MattressProduct }) {
 }
 
 export function PopularMattressesSection() {
-  const reducedMotion = useReducedMotion()
   const popularProducts = mattressProducts.slice(0, 4)
 
   return (
@@ -164,7 +161,7 @@ export function PopularMattressesSection() {
 
         <motion.div
           className="mt-8 grid grid-cols-4 gap-7 max-2xl:grid-cols-2 max-lg:grid-cols-1"
-          initial={reducedMotion ? false : "hidden"}
+          initial={false}
           whileInView="show"
           viewport={{ once: true, amount: 0.12 }}
           variants={staggerContainer}
@@ -179,7 +176,6 @@ export function PopularMattressesSection() {
 }
 
 export function ProductCatalogSection() {
-  const reducedMotion = useReducedMotion()
   const [category, setCategory] = useState<(typeof productCategories)[number]>("Все")
   const [firmness, setFirmness] = useState<(typeof firmnessOptions)[number]>("Все")
   const [height, setHeight] = useState<(typeof heightOptions)[number]>("Все")
@@ -245,16 +241,14 @@ export function ProductCatalogSection() {
         <motion.div
           layout
           className="mt-8 grid grid-cols-3 gap-7 max-xl:grid-cols-2 max-lg:grid-cols-1"
-          initial={reducedMotion ? false : "hidden"}
+          initial={false}
           whileInView="show"
           viewport={{ once: true, amount: 0.08 }}
           variants={staggerContainer}
         >
-          <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </AnimatePresence>
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </motion.div>
       </div>
     </section>

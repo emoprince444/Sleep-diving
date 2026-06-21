@@ -128,7 +128,7 @@ Component relationships:
 
 Текущая задача:
 
-- Premium motion polish на Framer Motion завершён; изменения проверены интерактивным браузерным smoke-тестом, собраны и готовятся к коммиту.
+- Hotfix после premium motion polish завершён: каталог и блок бестселлеров сделаны отказоустойчивыми, чтобы товары не могли исчезнуть из-за scroll-triggered motion.
 
 Текущие проблемы:
 
@@ -180,6 +180,9 @@ Component relationships:
 
 Последние изменения:
 
+- Исправлен риск белого экрана/невидимых товаров в каталоге после motion polish.
+- Для критичных списков товаров убрана зависимость видимости от `whileInView`/`AnimatePresence`; карточки каталога и бестселлеров теперь видимы сразу, motion остаётся только как безопасное улучшение.
+- Проверено локально в Chromium mobile viewport: `/catalog` показывает 26 товаров, фильтр «Премиум класс» показывает 6 товаров, на главной есть «Популярные матрасы» и кнопка «Смотреть весь каталог».
 - Добавлен restrained premium motion polish на Framer Motion без изменения архитектуры сайта.
 - Hero/PDP верх страницы получил плавное появление хлебных крошек, галереи и purchase card.
 - Product gallery получил мягкий scroll parallax/scale для главного изображения с fallback для reduced motion.
@@ -196,29 +199,20 @@ Component relationships:
 Измененные файлы:
 
 - `PROJECT_CONTEXT.md`
-- `src/lib/motion.ts`
-- `src/App.tsx`
-- `src/components/cart/CartContext.tsx`
-- `src/components/layout/Header.tsx`
-- `src/components/layout/StickyBuyBar.tsx`
 - `src/components/product/ProductCatalogSection.tsx`
-- `src/components/product/ProductGallery.tsx`
-- `src/components/product/PurchasePanel.tsx`
-- `src/components/product/TrustBadges.tsx`
-- `src/components/product/FAQSection.tsx`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after premium motion polish, with a bundle-size warning above the default 500 kB threshold.
+- `npm run build` passed after the catalog visibility hotfix, with a bundle-size warning above the default 500 kB threshold.
 - The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed interactive gallery thumbnails, cart add/remove, product-card navigation, catalog filters, FAQ accordion, comparison toggle, consultation form success, mobile menu, and reduced-motion compatibility after motion changes.
+- Browser QA confirmed `/catalog` renders 26 products, catalog filters update results, and the homepage still shows the popular-products block plus the catalog CTA after the motion hotfix.
 
 ## 10. Следующие шаги
 
