@@ -2,7 +2,6 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Play } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { galleryItems } from "@/data/product"
 
 export function ProductGallery() {
@@ -36,10 +35,10 @@ export function ProductGallery() {
           transition={{ duration: 0.5, ease: "easeOut" }}
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(24,33,45,0.34)_100%)]" />
-        <Button className="absolute bottom-7 left-7 h-14 gap-3 rounded-[6px] bg-white px-8 text-[17px] font-bold text-sd-navy shadow-[0_14px_34px_rgba(24,33,45,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_42px_rgba(24,33,45,0.28)] max-sm:bottom-5 max-sm:left-5 max-sm:h-12 max-sm:px-5 max-sm:text-sm">
+        <a href="#layers-and-materials" className="absolute bottom-7 left-7 inline-flex h-14 items-center gap-3 rounded-[6px] bg-white px-8 text-[17px] font-bold text-sd-navy shadow-[0_14px_34px_rgba(24,33,45,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_42px_rgba(24,33,45,0.28)] max-sm:bottom-5 max-sm:left-5 max-sm:h-12 max-sm:px-5 max-sm:text-sm">
           <Play data-icon="inline-start" className="fill-transparent" />
           Смотреть обзор
-        </Button>
+        </a>
       </div>
     </div>
   )

@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Eye } from "lucide-react"
 
 import { Rating } from "@/components/brand/Rating"
@@ -65,6 +66,8 @@ function ModelCard({ model, index }: { model: (typeof models)[number]; index: nu
 }
 
 export function ProductComparison() {
+  const [comparisonType, setComparisonType] = useState<"spring" | "foam">("foam")
+
   return (
     <section id="compare" className="bg-[linear-gradient(180deg,#ffffff_0%,#fbfaf7_100%)] px-8 py-16 max-lg:px-5 max-sm:py-12">
       <div className="mx-auto max-w-[1640px]">
@@ -77,11 +80,19 @@ export function ProductComparison() {
           </p>
         </div>
         <div className="mx-auto mt-8 grid h-[60px] max-w-[520px] grid-cols-2 overflow-hidden rounded-[6px] border border-sd-line bg-white p-1 shadow-sm">
-          <button className="rounded-[4px] text-center text-lg font-bold text-sd-charcoal transition hover:bg-sd-soft">
+          <button
+            type="button"
+            onClick={() => setComparisonType("spring")}
+            className={`rounded-[4px] text-center text-lg font-bold transition hover:bg-sd-soft ${comparisonType === "spring" ? "bg-sd-navy text-white shadow-[0_10px_22px_rgba(24,33,45,0.18)]" : "text-sd-charcoal"}`}
+          >
             Пружинные
-            <span className="block text-xs font-medium text-sd-muted">Пена + блок</span>
+            <span className={`block text-xs font-medium ${comparisonType === "spring" ? "text-white/70" : "text-sd-muted"}`}>Пена + блок</span>
           </button>
-          <button className="rounded-[4px] bg-sd-navy text-lg font-bold text-white shadow-[0_10px_22px_rgba(24,33,45,0.18)]">
+          <button
+            type="button"
+            onClick={() => setComparisonType("foam")}
+            className={`rounded-[4px] text-lg font-bold transition hover:bg-sd-soft ${comparisonType === "foam" ? "bg-sd-navy text-white shadow-[0_10px_22px_rgba(24,33,45,0.18)]" : "text-sd-charcoal"}`}
+          >
             Пенные
           </button>
         </div>

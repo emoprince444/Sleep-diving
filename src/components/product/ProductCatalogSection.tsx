@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react"
 import { BadgeCheck, ChevronDown, PackageCheck, Ruler, ShieldCheck, SlidersHorizontal, Truck } from "lucide-react"
 
+import { useCart } from "@/components/cart/CartContext"
 import { Button } from "@/components/ui/button"
 import {
   firmnessOptions,
@@ -27,13 +28,14 @@ function matchesHeight(heightCm: number, option: string) {
 }
 
 export function ProductCard({ product }: { product: MattressProduct }) {
+  const { addItem } = useCart()
   const defaultSize = product.sizes[Math.max(product.sizes.length - 2, 0)]?.size ?? product.sizes[0].size
   const [selectedSize, setSelectedSize] = useState(defaultSize)
   const selectedPrice = product.sizes.find((item) => item.size === selectedSize) ?? product.sizes[0]
 
   return (
     <article className="group overflow-hidden rounded-[6px] border border-sd-line bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sd-copper/60 hover:shadow-[0_22px_54px_rgba(24,33,45,0.13)]">
-      <div className="relative h-[245px] overflow-hidden bg-sd-soft">
+      <a href={`/product/${product.id}`} className="relative block h-[245px] overflow-hidden bg-sd-soft" aria-label={`Открыть ${product.name}`}>
         <img src={product.image} alt={product.name} className="size-full object-cover transition duration-700 group-hover:scale-105" />
         <div className="absolute left-4 top-4 rounded-[4px] bg-sd-navy px-3 py-2 text-xs font-bold uppercase tracking-[0.06em] text-white">
           {product.category}
@@ -41,12 +43,16 @@ export function ProductCard({ product }: { product: MattressProduct }) {
         <div className="absolute bottom-4 right-4 rounded-[4px] bg-white px-3 py-2 text-sm font-bold text-sd-navy shadow-md">
           {product.heightCm} см
         </div>
-      </div>
+      </a>
       <div className="p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-sd-copper">{product.collection}</p>
-            <h3 className="mt-2 font-serif text-[30px] leading-tight text-sd-charcoal">{product.name}</h3>
+            <h3 className="mt-2 font-serif text-[30px] leading-tight text-sd-charcoal">
+              <a href={`/product/${product.id}`} className="transition hover:text-sd-navy">
+                {product.name}
+              </a>
+            </h3>
           </div>
           <span className="rounded-full bg-sd-cream px-3 py-1 text-xs font-bold text-sd-navy">{product.firmness}</span>
         </div>
@@ -91,8 +97,11 @@ export function ProductCard({ product }: { product: MattressProduct }) {
             <p className="font-serif text-[34px] leading-none text-sd-navy">{formatRub(selectedPrice.rrp)}</p>
             <p className="mt-1 text-sm font-bold text-sd-rose">Выгода {formatRub(selectedPrice.savings)}</p>
           </div>
-          <Button className="h-12 rounded-[6px] bg-sd-gold px-6 text-base font-bold text-sd-navy shadow-[0_10px_24px_rgba(194,132,34,0.24)] transition hover:-translate-y-0.5 hover:bg-sd-gold/90">
-            Выбрать
+          <Button
+            onClick={() => addItem({ id: product.id, name: product.name, image: product.image, size: selectedPrice.size, price: selectedPrice.rrp })}
+            className="h-12 rounded-[6px] bg-sd-gold px-6 text-base font-bold text-sd-navy shadow-[0_10px_24px_rgba(194,132,34,0.24)] transition hover:-translate-y-0.5 hover:bg-sd-gold/90"
+          >
+            Добавить
           </Button>
         </div>
 

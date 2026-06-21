@@ -181,41 +181,50 @@ Component relationships:
 
 Последние изменения:
 
-- Разделена главная страница и полный каталог матрасов.
-- На главной вместо полного каталога теперь отображается короткий блок `Популярные матрасы` на 4 товара с кнопкой `Смотреть весь каталог`.
-- Полный каталог с 26 товарами, фильтрами, категориями и выбором размера вынесен на `/catalog`; `/matrasy` оставлен как альтернативный путь.
-- Header и footer ведут в отдельный каталог через `/catalog`.
-- Добавлен `vercel.json` с rewrite для прямого открытия `/catalog` и `/matrasy` в SPA.
-- Проверено в Chromium: на главной 4 карточки и нет полного списка, переход из Header открывает `/catalog`, в каталоге 26 карточек.
-- Verified `npm run build` successfully after catalog split.
+- Выполнен pass по интерактивности видимых кликабельных элементов.
+- Добавлена локальная корзина на React state + `localStorage`: счётчик в Header, cart drawer, удаление товаров, итоговая сумма.
+- CTA `Добавить в корзину` подключены в purchase panel, sticky bar, карточках каталога и странице товара.
+- Добавлена форма консультации: имя, телефон, комментарий, success state; чат, подбор матраса и оформление заказа открывают эту форму.
+- Header cart icon, account/consultation icon, CTA и mobile menu получили реальные действия.
+- Карточки товаров открывают `/product/:id`; `/product/:id` добавлен в Vercel rewrite.
+- Product gallery, FAQ accordion, comparison toggle, bed-frame rail, footer newsletter and links checked/connected.
+- Проверено в Chromium: gallery, cart, remove item, checkout consultation, catalog filters, product page, FAQ, comparison toggle, mobile menu.
+- `npm run build` passed; Vite still reports the existing bundle-size warning just above 500 kB.
 
 Измененные файлы:
 
 - `PROJECT_CONTEXT.md`
 - `src/data/product.ts`
 - `src/App.tsx`
-- `src/components/product/ProductCatalogSection.tsx`
+- `src/components/cart/CartContext.tsx`
+- `src/components/layout/Header.tsx`
+- `src/components/layout/StickyBuyBar.tsx`
 - `src/components/layout/Footer.tsx`
+- `src/components/product/BedFrameRail.tsx`
+- `src/components/product/ProductComparison.tsx`
+- `src/components/product/ProductCatalogSection.tsx`
+- `src/components/product/ProductGallery.tsx`
+- `src/components/product/PurchasePanel.tsx`
 - `vercel.json`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after splitting the homepage and full catalog route.
-- The page is still static and not connected to real backend/cart/checkout services.
+- `npm run build` passed after the interactivity pass, with a bundle-size warning above the default 500 kB threshold.
+- The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed 4 homepage product cards, 26 catalog product cards, working Header navigation to `/catalog`, and no console errors.
+- Browser QA confirmed interactive gallery thumbnails, cart add/remove, product-card navigation, catalog filters, FAQ accordion, comparison toggle, consultation form success, and mobile menu.
 
 ## 10. Следующие шаги
 
-- Add interactive cart behavior for buyer-facing cart CTAs.
-- Add size selection state shared between the purchase panel and sticky buy bar.
-- Add real newsletter form handling or remove the footer email input before production.
+- Replace local cart/lead-form placeholders with backend order and CRM integration.
+- Add real checkout or payment flow after cart review.
+- Add real newsletter form handling.
 - Compress and generate responsive WebP/AVIF variants for the new PNG assets before production deployment.
 - Decide cart/checkout architecture and whether to integrate Stripe or another payment provider.
 - Decide hosting/deployment target.

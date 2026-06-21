@@ -2,11 +2,13 @@ import { useCallback } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { ChevronDown } from "lucide-react"
 
+import { useCart } from "@/components/cart/CartContext"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { bedFrames } from "@/data/product"
 
 export function BedFrameRail() {
+  const { openConsultation } = useCart()
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", dragFree: true })
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
@@ -16,9 +18,9 @@ export function BedFrameRail() {
       <div className="mx-auto max-w-[1640px]">
         <div className="flex items-center justify-between">
           <h2 className="font-serif text-[42px] leading-tight text-sd-charcoal">Основания и кровати</h2>
-          <a className="text-xl font-bold text-sd-muted underline underline-offset-4 transition hover:text-sd-navy max-sm:text-base" href="#overview">
-            Смотреть все
-          </a>
+          <button type="button" onClick={openConsultation} className="text-xl font-bold text-sd-muted underline underline-offset-4 transition hover:text-sd-navy max-sm:text-base">
+            Получить консультацию
+          </button>
         </div>
         <div className="mt-9 overflow-hidden" ref={emblaRef}>
           <div className="flex gap-9">

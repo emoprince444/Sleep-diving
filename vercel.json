@@ -7,6 +7,10 @@
     {
       "source": "/matrasy",
       "destination": "/"
+    },
+    {
+      "source": "/product/:path*",
+      "destination": "/"
     }
   ]
 }
