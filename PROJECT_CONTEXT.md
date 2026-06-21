@@ -18,7 +18,7 @@ The main goal is to build a polished, responsive Product Detail Page for the Sle
 - Auth: TODO - no auth is implemented yet
 - Payments: TODO - no payment integration is implemented yet
 - Hosting: TODO - hosting/deployment target is not configured yet
-- Other: Generated local image assets in `src/assets`; static product data in `src/data/product.ts`
+- Other: Generated local branded Sleep Diving image assets in `src/assets`; static product data in `src/data/product.ts`
 
 ## 4. Текущая архитектура
 
@@ -37,9 +37,13 @@ Folder structure:
   - `PurchasePanel.tsx`
   - `TrustBadges.tsx`
   - `ProductComparison.tsx`
+  - `ReviewsSection.tsx`
+  - `WhySleepDivingSection.tsx`
+  - `TrustedBySleepersSection.tsx`
   - `LayersSection.tsx`
   - `EditorialSection.tsx`
   - `BedFrameRail.tsx`
+  - `ProductSpecsSection.tsx`
   - `FAQSection.tsx`
 - `src/components/ui/` - shadcn/ui base components
   - `Button`
@@ -49,6 +53,7 @@ Folder structure:
   - `Dialog`
   - `Tabs`
 - `src/data/product.ts` - static product data, navigation labels, copy, product models, FAQ, image references
+- `src/data/products.ts` - real mattress catalog data extracted from PDF, including public RRC prices and internal wholesale prices
 - `src/assets/` - generated raster assets for the PDP
 - `src/index.css` - Tailwind imports, shadcn theme variables, Sleep Diving color tokens
 - `src/lib/utils.ts` - shared `cn` utility
@@ -59,8 +64,11 @@ Key modules:
 - `Header` renders brand navigation and account/cart/menu icons.
 - `ProductGallery` owns selected image state and animates gallery image changes.
 - `PurchasePanel` renders promo timer, rating/title, product tabs, upgrades, material selector, size selector, and CTA.
-- `StickyBuyBar` renders the sticky size/price/add-to-cart bar and section navigation.
+- `StickyBuyBar` renders the desktop sticky size/price/add-to-cart bar, section navigation, and a mobile fixed bottom Add to Cart bar.
 - `ProductComparison` renders model cards and rating bars.
+- `ProductCatalogSection` renders the Russian product catalog with category, firmness, height, and size filters.
+- `WhySleepDivingSection` renders conversion-focused product reasons using branded cooling imagery.
+- `TrustedBySleepersSection` renders extended social proof, stats, and verified quotes.
 - `LayersSection` renders the mattress layer accordion and layer diagram.
 - `BedFrameRail` uses `embla-carousel-react` for the bed frame rail.
 - `Footer` also owns the floating live chat button.
@@ -90,20 +98,29 @@ Component relationships:
 - Tailwind CSS v4 setup and Sleep Diving design tokens
 - shadcn/ui setup with Button, Card, Badge, Accordion, Dialog, and Tabs
 - Premium Sleep Diving PDP visual system
-- Header with brand mark and ecommerce navigation
-- Product gallery with thumbnails and animated main image
-- Purchase panel with promo timer, rating/title, tabs, upgrade cards, material selector, size selector, and add-to-cart CTA
-- Trust badges
-- Sticky buy bar and section navigation
-- Product comparison section
+- Premium ecommerce visual polish across the PDP
+- Sticky header with brand mark and ecommerce navigation
+- Product gallery with premium hero framing, thumbnails, hover states, and animated main image
+- Framed purchase panel with promo timer, rating/title, tabs, upgrade cards, material selector, size selector, and add-to-cart CTA
+- Polished trust badges
+- Sticky buy bar, section navigation, and mobile fixed Add to Cart CTA
+- Product comparison section with elevated cards and premium media framing
+- Conversion optimization pass with denser section rhythm, stronger purchase-card trust signals, financing, delivery estimate, stock urgency, and expanded social proof
+- Why Sleep Diving section
+- Trusted By Thousands Of Sleepers section
 - Mattress layers/materials section with controlled accordion
 - Editorial lifestyle content
 - Bed frame carousel using Embla
 - FAQ section
 - Customer reviews section connected to sticky navigation
 - Product specs section connected to sticky navigation
+- Ecommerce-style footer with link columns, trust chips, email capture, and live chat
 - Responsive mobile layout
 - Generated image assets in `src/assets`
+- Branded Sleep Diving image asset set for hero, gallery, layers, cooling close-up, lifestyle, bed frames, and comparison cards
+- Russian product catalog with real Sleep Diving mattress models, categories, firmness, height, layers, load, sizes, public RRC prices, and internal-only wholesale prices
+- Category, firmness, height, and size filtering with dynamic price updates by size
+- Full Russian premium ecommerce copy across visible site sections
 - Project pushed to GitHub repository `emoprince444/Sleep-diving`
 - Architecture refactored into `brand`, `layout`, `product`, and `data` modules
 
@@ -111,13 +128,15 @@ Component relationships:
 
 Текущая задача:
 
-- Continue the Sleep Diving PDP by filling missing sticky-navigation destinations and keeping project context synchronized.
+- Build a Russian premium ecommerce mattress catalog from the real Sleep Diving PDF.
 
 Текущие проблемы:
 
 - TODO - no real ecommerce cart or checkout behavior yet.
 - TODO - no backend, database, auth, payments, analytics, or deployment pipeline yet.
 - TODO - product content and prices are static mock data.
+- TODO - connect catalog card CTA and size selection to a real cart/checkout flow.
+- TODO - generated PNG assets are large and should be compressed or converted to responsive WebP/AVIF before production.
 - TODO - browser-based visual QA is limited because the in-app Browser runtime failed in this environment and Playwright is not installed in the project.
 
 ## 7. Важные решения
@@ -127,14 +146,22 @@ Component relationships:
 - Keep DreamCloud/Saatva/Helix as visual-market references only; do not copy protected brand assets, logos, texts, or images.
 - Use Sleep Diving as an original premium mattress brand.
 - Use generated project-local raster assets instead of external copied images.
+- Do not use direct DreamCloud, Saatva, Helix, or other competitor imagery/assets; keep those brands as quality references only.
+- Keep the branded asset direction consistent: photorealistic luxury sleep brand, hotel-quality interiors, soft natural lighting, cream/white/navy palette, premium mattress tailoring.
 - Keep static product data centralized in `src/data/product.ts`.
 - Keep `App.tsx` as composition-only; feature UI lives in section components.
 - Preserve premium ecommerce visual details: white background, navy anchor color, gold CTA/trust accents, serif section headings, thin borders, small radii, dense purchase panel, strong sticky buy bar.
+- Use a consistent premium surface language: 6px radii, thin warm borders, restrained navy/gold accents, soft elevation, and hover/micro-motion states.
+- Keep mobile purchase access prominent with a fixed bottom Add to Cart CTA.
+- Keep vertical spacing premium but conversion-focused; avoid large empty gaps between sections.
+- Keep purchase-card reassurance visible near the CTA: badges, financing, estimated delivery, low-stock indicator, rating/trial/shipping proof.
 - Do not commit `node_modules` or `dist`; `.gitignore` excludes them.
 - Maintain `PROJECT_CONTEXT.md` automatically after every completed task without requiring a separate user reminder.
 - When updating `PROJECT_CONTEXT.md`, always update latest changes, changed files, architecture decisions, current tasks, next steps, and update date.
 - Dedicated sticky-nav anchors should map to real sections before adding more navigation labels.
 - Keep PDP content data in `src/data/product.ts`; sections should consume that data rather than hardcoding repeated product content.
+- Keep real mattress catalog data in `src/data/products.ts`; never render internal `wholesalePrice` or the word "опт" to buyers.
+- Use RRC as the buyer-facing public price.
 
 ## 8. Правила для AI-агента
 
@@ -154,37 +181,52 @@ Component relationships:
 
 Последние изменения:
 
-- Read and restored project context from `AGENT.md` and `PROJECT_CONTEXT.md`.
-- Added a dedicated `ReviewsSection` for the existing `#reviews` sticky navigation anchor.
-- Added a dedicated `ProductSpecsSection` for the existing `#product-specs` sticky navigation anchor.
-- Extended centralized product data with review summary, review cards, and grouped product specs.
-- Connected the new sections in `App.tsx`.
+- Read the supplied Sleep Diving PDF visually because it has no usable text layer.
+- Created `src/data/products.ts` with real mattress models, categories, firmness, height, layers, load, sizes, public RRC prices, and internal `wholesalePrice`.
+- Added `ProductCatalogSection` with filters by category, firmness, height, and per-card size selection.
+- Made catalog card prices update by selected size.
+- Kept internal wholesale prices out of the buyer UI and avoided showing the word "опт".
+- Translated the visible site UI into Russian with premium ecommerce copy.
+- Updated navigation and sticky links to include the catalog.
 - Verified `npm run build` successfully.
-- Started the Vite dev server on `http://127.0.0.1:5173` after sandbox escalation; HTTP smoke returned the Vite app shell.
-- Attempted in-app Browser QA, but the Browser runtime failed with `missing field sandboxPolicy`; attempted Playwright fallback, but Playwright is not installed and `npm exec playwright -- --version` did not complete without fetching packages.
 
 Измененные файлы:
 
-- `AGENT.md`
 - `PROJECT_CONTEXT.md`
-- `src/App.tsx`
 - `src/data/product.ts`
+- `src/data/products.ts`
+- `src/App.tsx`
+- `src/components/product/ProductCatalogSection.tsx`
+- `src/components/product/PurchasePanel.tsx`
+- `src/components/product/TrustBadges.tsx`
+- `src/components/product/ProductComparison.tsx`
 - `src/components/product/ReviewsSection.tsx`
+- `src/components/product/LayersSection.tsx`
+- `src/components/product/EditorialSection.tsx`
+- `src/components/product/BedFrameRail.tsx`
 - `src/components/product/ProductSpecsSection.tsx`
+- `src/components/product/FAQSection.tsx`
+- `src/components/product/WhySleepDivingSection.tsx`
+- `src/components/product/TrustedBySleepersSection.tsx`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after adding Reviews and Product Specs sections.
+- `npm run build` passed after adding the Russian real-product catalog.
 - The page is still static and not connected to real backend/cart/checkout services.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has real destinations for Overview, Reviews, FAQ, Layers & Materials, Product Specs, and Compare.
+- The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
+- The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
+- The visible website is now in Russian and includes real Sleep Diving catalog data from the PDF.
 
 ## 10. Следующие шаги
 
 - Add interactive cart behavior for the Add To Cart CTAs.
 - Add size selection state shared between the purchase panel and sticky buy bar.
+- Add real newsletter form handling or remove the footer email input before production.
+- Compress and generate responsive WebP/AVIF variants for the new PNG assets before production deployment.
 - Decide cart/checkout architecture and whether to integrate Stripe or another payment provider.
 - Decide hosting/deployment target.
 - Add automated visual or component tests for the PDP, preferably with Playwright installed/configured.

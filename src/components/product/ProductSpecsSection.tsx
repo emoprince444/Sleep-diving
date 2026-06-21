@@ -8,7 +8,7 @@ function SpecGroup({ group, index }: { group: (typeof productSpecs)[number]; ind
   const Icon = specIcons[index] ?? PackageCheck
 
   return (
-    <div className="border border-sd-line bg-white">
+    <div className="rounded-[6px] border border-sd-line bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(24,33,45,0.10)]">
       <div className="flex items-center gap-3 border-b border-sd-line px-6 py-5">
         <span className="flex size-10 items-center justify-center rounded-full bg-sd-navy text-white">
           <Icon className="size-5" />
@@ -29,16 +29,16 @@ function SpecGroup({ group, index }: { group: (typeof productSpecs)[number]; ind
 
 export function ProductSpecsSection() {
   return (
-    <section id="product-specs" className="bg-white px-8 py-20 max-lg:px-5">
+    <section id="product-specs" className="bg-white px-8 py-16 max-lg:px-5 max-sm:py-12">
       <div className="mx-auto max-w-[1640px]">
         <div className="grid grid-cols-[0.34fr_0.66fr] gap-14 max-lg:grid-cols-1">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.06em] text-sd-copper">Product specs</p>
+            <p className="text-xs font-bold uppercase tracking-[0.06em] text-sd-copper">Характеристики</p>
             <h2 className="mt-4 font-serif text-[46px] leading-tight text-sd-charcoal max-md:text-[34px]">
-              The exact build, feel, and care details
+              Конструкция, ощущение и уход
             </h2>
             <p className="mt-5 text-lg leading-8 text-sd-muted">
-              A quick scan of the construction and ownership details behind the Sleep Diving Classic.
+              Коротко о материалах, высоте, поддержке и условиях владения матрасами Sleep Diving.
             </p>
           </div>
           <div className="grid grid-cols-3 gap-6 max-xl:grid-cols-1">

@@ -9,7 +9,7 @@ function RatingBar({ label, value }: { label: string; value: number }) {
     <div className="grid grid-cols-[64px_1fr_38px] items-center gap-3 text-sm">
       <span className="font-bold text-sd-charcoal">{label}</span>
       <span className="h-2 overflow-hidden rounded-full bg-sd-line">
-        <span className="block h-full rounded-full bg-sd-gold" style={{ width: `${value}%` }} />
+        <span className="block h-full rounded-full bg-sd-gold transition-all duration-700" style={{ width: `${value}%` }} />
       </span>
       <span className="text-right font-semibold text-sd-muted">{value}%</span>
     </div>
@@ -18,13 +18,13 @@ function RatingBar({ label, value }: { label: string; value: number }) {
 
 function ReviewCard({ review }: { review: (typeof reviews)[number] }) {
   return (
-    <Card className="rounded-none border-sd-line bg-white shadow-none">
+    <Card className="rounded-[6px] border-sd-line bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(24,33,45,0.12)]">
       <CardContent className="flex h-full flex-col p-7">
         <div className="flex items-center justify-between gap-4">
           <Rating small />
           <span className="flex items-center gap-2 text-sm font-bold text-sd-green">
             <CheckCircle2 className="size-4" />
-            Verified
+            Проверено
           </span>
         </div>
         <h3 className="mt-6 text-2xl font-bold leading-tight text-sd-charcoal">{review.title}</h3>
@@ -42,15 +42,15 @@ function ReviewCard({ review }: { review: (typeof reviews)[number] }) {
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="bg-sd-panel px-8 py-20 max-lg:px-5">
-      <div className="mx-auto grid max-w-[1640px] grid-cols-[0.38fr_0.62fr] gap-12 max-lg:grid-cols-1">
+    <section id="reviews" className="bg-sd-panel px-8 py-16 max-lg:px-5 max-sm:py-12">
+      <div className="mx-auto grid max-w-[1640px] grid-cols-[0.38fr_0.62fr] gap-10 max-lg:grid-cols-1">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.06em] text-sd-copper">Customer reviews</p>
+          <p className="text-xs font-bold uppercase tracking-[0.06em] text-sd-copper">Отзывы покупателей</p>
           <h2 className="mt-4 font-serif text-[46px] leading-tight text-sd-charcoal max-md:text-[34px]">
             {reviewSummary.headline}
           </h2>
           <p className="mt-5 text-lg leading-8 text-sd-muted">{reviewSummary.copy}</p>
-          <div className="mt-8 bg-white p-7">
+          <div className="mt-8 rounded-[6px] border border-sd-line bg-white p-7 shadow-[0_18px_44px_rgba(24,33,45,0.08)]">
             <div className="flex items-end gap-4">
               <span className="font-serif text-[64px] leading-none text-sd-charcoal">{reviewSummary.score}</span>
               <div className="pb-2">
