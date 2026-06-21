@@ -32,7 +32,7 @@ export function Footer() {
             <div>
               <h3 className="text-sm font-bold uppercase tracking-[0.08em] text-sd-gold">Каталог</h3>
               <div className="mt-5 flex flex-col gap-3 text-sm font-semibold text-white/72">
-                <a className="transition hover:text-white" href="#catalog">Матрасы</a>
+                <a className="transition hover:text-white" href="/catalog">Матрасы</a>
                 <a className="transition hover:text-white" href="#compare">Сравнение моделей</a>
                 <a className="transition hover:text-white" href="#bed-frames">Основания</a>
                 <a className="transition hover:text-white" href="#product-specs">Характеристики</a>
@@ -44,7 +44,7 @@ export function Footer() {
                 <a className="transition hover:text-white" href="#faq">Вопросы и ответы</a>
                 <a className="transition hover:text-white" href="#reviews">Отзывы</a>
                 <a className="transition hover:text-white" href="#layers-and-materials">Материалы</a>
-                <a className="transition hover:text-white" href="#catalog">Гид по размерам</a>
+                <a className="transition hover:text-white" href="/catalog">Гид по размерам</a>
               </div>
             </div>
             <div>

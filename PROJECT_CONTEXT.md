@@ -181,36 +181,35 @@ Component relationships:
 
 Последние изменения:
 
-- Убраны оставшиеся английские доступные/видимые строки: title страницы, `html lang`, alt-тексты изображений и текст закрытия dialog-компонента.
-- Проверен локальный сайт в Chromium через Playwright: desktop и mobile не содержат запрещённых английских интерфейсных слов из пользовательского списка; слово `Sleep` осталось только в бренде и реальных товарных именах.
-- Проверено интерактивное переключение фильтра каталога на `Премиум класс`; CTA остаётся на русском.
-- Verified `npm run build` successfully after the final localization pass.
+- Разделена главная страница и полный каталог матрасов.
+- На главной вместо полного каталога теперь отображается короткий блок `Популярные матрасы` на 4 товара с кнопкой `Смотреть весь каталог`.
+- Полный каталог с 26 товарами, фильтрами, категориями и выбором размера вынесен на `/catalog`; `/matrasy` оставлен как альтернативный путь.
+- Header и footer ведут в отдельный каталог через `/catalog`.
+- Добавлен `vercel.json` с rewrite для прямого открытия `/catalog` и `/matrasy` в SPA.
+- Проверено в Chromium: на главной 4 карточки и нет полного списка, переход из Header открывает `/catalog`, в каталоге 26 карточек.
+- Verified `npm run build` successfully after catalog split.
 
 Измененные файлы:
 
 - `PROJECT_CONTEXT.md`
 - `src/data/product.ts`
-- `src/data/products.ts`
-- `src/components/product/PurchasePanel.tsx`
-- `src/components/product/BedFrameRail.tsx`
-- `src/components/product/LayersSection.tsx`
-- `src/components/product/TrustedBySleepersSection.tsx`
+- `src/App.tsx`
+- `src/components/product/ProductCatalogSection.tsx`
 - `src/components/layout/Footer.tsx`
-- `src/components/ui/dialog.tsx`
-- `index.html`
+- `vercel.json`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after full Russian visible-interface localization.
+- `npm run build` passed after splitting the homepage and full catalog route.
 - The page is still static and not connected to real backend/cart/checkout services.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
-- The visible website is now in Russian and includes real Sleep Diving catalog data from the PDF.
-- Browser QA screenshots were captured in `/private/tmp/sleep-localization-desktop.png`, `/private/tmp/sleep-localization-filtered.png`, and `/private/tmp/sleep-localization-mobile.png`.
+- The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
+- Browser QA confirmed 4 homepage product cards, 26 catalog product cards, working Header navigation to `/catalog`, and no console errors.
 
 ## 10. Следующие шаги
 

@@ -26,7 +26,7 @@ function matchesHeight(heightCm: number, option: string) {
   return true
 }
 
-function ProductCard({ product }: { product: MattressProduct }) {
+export function ProductCard({ product }: { product: MattressProduct }) {
   const defaultSize = product.sizes[Math.max(product.sizes.length - 2, 0)]?.size ?? product.sizes[0].size
   const [selectedSize, setSelectedSize] = useState(defaultSize)
   const selectedPrice = product.sizes.find((item) => item.size === selectedSize) ?? product.sizes[0]
@@ -115,6 +115,40 @@ function ProductCard({ product }: { product: MattressProduct }) {
         </div>
       </div>
     </article>
+  )
+}
+
+export function PopularMattressesSection() {
+  const popularProducts = mattressProducts.slice(0, 4)
+
+  return (
+    <section id="popular-mattresses" className="bg-white px-8 py-16 max-lg:px-5 max-sm:py-12">
+      <div className="mx-auto max-w-[1640px]">
+        <div className="flex items-end justify-between gap-6 max-md:flex-col max-md:items-start">
+          <div className="max-w-[760px]">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-sd-copper">Популярные матрасы</p>
+            <h2 className="mt-4 font-serif text-[48px] leading-tight text-sd-charcoal max-md:text-[34px]">
+              Бестселлеры Sleep Diving для спокойного выбора
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-sd-muted">
+              Короткая подборка моделей, с которых удобно начать знакомство с каталогом.
+            </p>
+          </div>
+          <a
+            href="/catalog"
+            className="inline-flex h-12 items-center justify-center rounded-[6px] bg-sd-navy px-6 text-base font-bold text-white shadow-[0_12px_28px_rgba(24,33,45,0.16)] transition hover:-translate-y-0.5 hover:bg-sd-navy/92"
+          >
+            Смотреть весь каталог
+          </a>
+        </div>
+
+        <div className="mt-8 grid grid-cols-4 gap-7 max-2xl:grid-cols-2 max-lg:grid-cols-1">
+          {popularProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 

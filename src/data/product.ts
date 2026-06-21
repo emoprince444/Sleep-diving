@@ -18,15 +18,15 @@ export const reviewCount = "8 214 отзывов"
 export const breadcrumbs = ["Главная", "Матрасы", productName]
 
 export const headerNavItems = [
-  { label: "Матрасы", href: "#catalog" },
-  { label: "Сравнение", href: "#compare" },
-  { label: "Кровати", href: "#bed-frames" },
-  { label: "Материалы", href: "#layers-and-materials" },
+  { label: "Каталог", href: "/catalog" },
+  { label: "Сравнение", href: "/#compare" },
+  { label: "Кровати", href: "/#bed-frames" },
+  { label: "Материалы", href: "/#layers-and-materials" },
 ]
 
 export const stickyNavItems = [
   { label: "Обзор", href: "#overview", active: true },
-  { label: "Каталог", href: "#catalog", active: false },
+  { label: "Бестселлеры", href: "#popular-mattresses", active: false },
   { label: "Отзывы", href: "#reviews", active: false },
   { label: "Вопросы", href: "#faq", active: false },
   { label: "Слои и материалы", href: "#layers-and-materials", active: false },

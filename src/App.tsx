@@ -9,7 +9,7 @@ import { FAQSection } from "@/components/product/FAQSection"
 import { LayersSection } from "@/components/product/LayersSection"
 import { ProductSpecsSection } from "@/components/product/ProductSpecsSection"
 import { ProductComparison } from "@/components/product/ProductComparison"
-import { ProductCatalogSection } from "@/components/product/ProductCatalogSection"
+import { PopularMattressesSection, ProductCatalogSection } from "@/components/product/ProductCatalogSection"
 import { ProductGallery } from "@/components/product/ProductGallery"
 import { PurchasePanel } from "@/components/product/PurchasePanel"
 import { ReviewsSection } from "@/components/product/ReviewsSection"
@@ -18,7 +18,7 @@ import { TrustedBySleepersSection } from "@/components/product/TrustedBySleepers
 import { WhySleepDivingSection } from "@/components/product/WhySleepDivingSection"
 import { breadcrumbs } from "@/data/product"
 
-function App() {
+function HomePage() {
   return (
     <main id="overview" className="min-h-screen bg-white text-sd-charcoal">
       <Header />
@@ -45,7 +45,7 @@ function App() {
         </div>
       </section>
       <StickyBuyBar />
-      <ProductCatalogSection />
+      <PopularMattressesSection />
       <WhySleepDivingSection />
       <TrustedBySleepersSection />
       <ProductComparison />
@@ -60,6 +60,26 @@ function App() {
       <Footer />
     </main>
   )
+}
+
+function CatalogPage() {
+  return (
+    <main className="min-h-screen bg-white text-sd-charcoal">
+      <Header />
+      <ProductCatalogSection />
+      <Footer />
+    </main>
+  )
+}
+
+function App() {
+  const path = window.location.pathname
+
+  if (path === "/catalog" || path === "/matrasy") {
+    return <CatalogPage />
+  }
+
+  return <HomePage />
 }
 
 export default App
