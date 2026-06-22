@@ -56,7 +56,7 @@ export function ProductCard({ product }: { product: MattressProduct }) {
       whileHover={reducedMotion ? undefined : { y: -6, boxShadow: "0 24px 58px rgba(24,33,45,0.14)" }}
       className="group flex h-full flex-col overflow-hidden rounded-[6px] border border-sd-line bg-white shadow-sm transition-colors duration-300 hover:border-sd-copper/60"
     >
-      <a href={`/product/${product.id}`} className="relative block h-[245px] overflow-hidden bg-sd-soft max-sm:h-[138px]" aria-label={`Открыть ${copy.displayName}`}>
+      <a href={`/product/${product.id}`} className="relative block h-[245px] overflow-hidden bg-sd-soft max-sm:h-[108px]" aria-label={`Открыть ${copy.displayName}`}>
         <img src={product.image} alt={product.name} className="size-full object-cover transition duration-700 group-hover:scale-105" />
         <div className="absolute left-4 top-4 rounded-[4px] bg-white/95 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-sd-navy shadow-[0_10px_24px_rgba(24,33,45,0.10)] max-sm:hidden">
           {productCategoryLabels[product.category]}
@@ -65,16 +65,16 @@ export function ProductCard({ product }: { product: MattressProduct }) {
           {product.heightCm} см
         </div>
       </a>
-      <div className="flex flex-1 flex-col p-6 max-sm:p-4">
+      <div className="flex flex-1 flex-col p-6 max-sm:p-3">
         <div className="flex items-start justify-between gap-4 max-sm:gap-2">
           <div className="min-w-0">
             <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-sd-copper max-sm:text-[10px]">{productCategoryLabels[product.category]}</p>
-            <h3 className="mt-2 font-serif text-[34px] leading-[1.02] text-sd-charcoal max-sm:mt-1 max-sm:text-[28px]">
+            <h3 className="mt-2 font-serif text-[34px] leading-[1.02] text-sd-charcoal max-sm:mt-0.5 max-sm:text-[28px]">
               <a href={`/product/${product.id}`} className="transition hover:text-sd-navy">
                 {copy.displayName}
               </a>
             </h3>
-            <p className="mt-3 text-[15px] font-semibold leading-6 text-sd-navy max-sm:mt-1 max-sm:overflow-hidden max-sm:text-sm max-sm:leading-5 max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:2] max-sm:[display:-webkit-box]">{copy.productType}</p>
+            <p className="mt-3 text-[15px] font-semibold leading-6 text-sd-navy max-sm:mt-0.5 max-sm:overflow-hidden max-sm:text-sm max-sm:leading-5 max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:1] max-sm:[display:-webkit-box]">{copy.productType}</p>
           </div>
           <span className="shrink-0 rounded-full bg-sd-cream px-3 py-1 text-[11px] font-bold uppercase tracking-[0.06em] text-sd-navy max-sm:hidden">{product.firmness}</span>
         </div>
@@ -135,7 +135,7 @@ export function ProductCard({ product }: { product: MattressProduct }) {
           </ul>
         </div>
 
-        <div className="mt-5 flex flex-wrap items-end justify-between gap-3 border-t border-sd-line pt-5 max-sm:mt-3 max-sm:items-center max-sm:gap-2 max-sm:pt-3">
+        <div className="mt-5 flex flex-wrap items-end justify-between gap-3 border-t border-sd-line pt-5 max-sm:mt-2.5 max-sm:items-center max-sm:gap-2 max-sm:pt-2.5">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-sm font-semibold text-sd-muted line-through max-sm:text-xs">{formatRub(selectedPrice.oldPrice)}</p>

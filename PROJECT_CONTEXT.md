@@ -129,7 +129,7 @@ Component relationships:
 
 Текущая задача:
 
-- Sleep Diving Catalog Card Compression Pass завершён: мобильные карточки каталога сжаты для быстрого просмотра, desktop-карточки сохранены.
+- Sleep Diving Catalog Image Ratio Pass завершён: mobile image height and spacing in catalog cards reduced again while desktop remains unchanged.
 
 Текущие проблемы:
 
@@ -185,6 +185,11 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнен Sleep Diving Catalog Image Ratio Pass только для мобильных карточек каталога.
+- Mobile product image height reduced from 138px to 108px, preserving the existing premium crop and desktop image ratio.
+- Mobile card content padding and vertical gaps tightened conservatively without changing typography, pricing style, CTA style, data, PDP, or desktop layout.
+- Product subtitle on mobile is clamped to one line so price and CTA appear earlier.
+- Проверено локально в Chromium mobile: первая карточка уменьшилась примерно с 335px до 269px, image height 108px, price and `Подробнее` CTA visible, CTA leads to PDP, console errors нет.
 - Выполнен Sleep Diving Catalog Card Compression Pass только для мобильных карточек каталога и блока популярных товаров.
 - На mobile карточка теперь показывает только image, collection label, product name, short subtitle, price/discount and one CTA `Подробнее`.
 - С mobile-карточек скрыты size selector, size/warranty/delivery/return blocks, benefits section, materials section, load/spec details and duplicated image badges.
@@ -241,14 +246,14 @@ Component relationships:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after the mobile catalog card compression pass, with a bundle-size warning above the default 500 kB threshold.
+- `npm run build` passed after the mobile catalog image ratio pass, with a bundle-size warning above the default 500 kB threshold.
 - The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed mobile catalog cards are compressed, show price and one `Подробнее` CTA, and route to the Product Detail Page while desktop cards remain detailed.
+- Browser QA confirmed mobile catalog card height is about 269px, price and one `Подробнее` CTA remain visible, and the CTA routes to Product Detail Page while desktop cards remain detailed.
 
 ## 10. Следующие шаги
 
