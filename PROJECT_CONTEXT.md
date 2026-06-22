@@ -120,6 +120,7 @@ Component relationships:
 - Branded Sleep Diving image asset set for hero, gallery, layers, cooling close-up, lifestyle, bed frames, and comparison cards
 - Russian product catalog with real Sleep Diving mattress models, categories, firmness, height, layers, load, sizes, public RRC prices, and internal-only wholesale prices
 - Category, firmness, height, and size filtering with dynamic price updates by size
+- Premium product-card copy layer with short display names, product types, calm descriptions, benefits, and collection labels
 - Full Russian premium ecommerce copy across visible site sections
 - Project pushed to GitHub repository `emoprince444/Sleep-diving`
 - Architecture refactored into `brand`, `layout`, `product`, and `data` modules
@@ -128,7 +129,7 @@ Component relationships:
 
 Текущая задача:
 
-- Hotfix после premium motion polish завершён: каталог и блок бестселлеров сделаны отказоустойчивыми, чтобы товары не могли исчезнуть из-за scroll-triggered motion.
+- Premium Typography & Content Pass для карточек товаров завершён; карточки получили короткие имена, отдельный тип товара, премиальные описания, преимущества и улучшенную визуальную иерархию.
 
 Текущие проблемы:
 
@@ -161,6 +162,7 @@ Component relationships:
 - Keep real mattress catalog data in `src/data/products.ts`; never render internal `wholesalePrice` or the word "опт" to buyers.
 - Use RRC as the buyer-facing public price.
 - Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
+- Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
 
 ## 8. Правила для AI-агента
 
@@ -176,10 +178,17 @@ Component relationships:
 
 ## 9. Последнее состояние проекта
 
-Дата обновления: 2026-06-21
+Дата обновления: 2026-06-22
 
 Последние изменения:
 
+- Выполнен Premium Typography & Content Pass для карточек товаров каталога и блока бестселлеров.
+- Добавлен слой `productCardCopy` для всех 26 матрасов: короткие display-названия, отдельный тип товара, спокойные премиальные описания и преимущества.
+- Бейджи категорий в карточках заменены на premium labels: «Базовая коллекция», «Комфорт коллекция», `Signature Collection`.
+- Характеристики карточек перестроены в формат «Размер / Гарантия / Доставка / Возврат» с единым премиальным стилем и иконками.
+- Перед ценой добавлен блок преимуществ; для Shamsa используются преимущества про комфорт спального места, снижение давления, диваны/матрасы и гипоаллергенные материалы.
+- Улучшены заголовки, межстрочные интервалы, мобильная читаемость и CTA/cart naming из карточек.
+- Проверено локально в Chromium mobile и desktop: `/catalog` показывает 26 товаров, старое `Shamsa Topper` в карточках не отображается, новый бейдж и преимущества видны, console errors нет.
 - Исправлен риск белого экрана/невидимых товаров в каталоге после motion polish.
 - Для критичных списков товаров убрана зависимость видимости от `whileInView`/`AnimatePresence`; карточки каталога и бестселлеров теперь видимы сразу, motion остаётся только как безопасное улучшение.
 - Проверено локально в Chromium mobile viewport: `/catalog` показывает 26 товаров, фильтр «Премиум класс» показывает 6 товаров, на главной есть «Популярные матрасы» и кнопка «Смотреть весь каталог».
@@ -199,20 +208,21 @@ Component relationships:
 Измененные файлы:
 
 - `PROJECT_CONTEXT.md`
+- `src/data/products.ts`
 - `src/components/product/ProductCatalogSection.tsx`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after the catalog visibility hotfix, with a bundle-size warning above the default 500 kB threshold.
+- `npm run build` passed after the premium product-card typography/content pass, with a bundle-size warning above the default 500 kB threshold.
 - The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed `/catalog` renders 26 products, catalog filters update results, and the homepage still shows the popular-products block plus the catalog CTA after the motion hotfix.
+- Browser QA confirmed `/catalog` renders 26 products, premium card copy appears on mobile/desktop, catalog filters update results, and the homepage still shows the popular-products block plus the catalog CTA.
 
 ## 10. Следующие шаги
 
