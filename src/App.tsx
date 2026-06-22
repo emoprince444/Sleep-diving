@@ -1,4 +1,6 @@
+import { useState } from "react"
 import { ChevronDown } from "lucide-react"
+import { BadgeCheck, BedDouble, CheckCircle2, HeartHandshake, Maximize2, RotateCcw, ShieldCheck, Truck } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 
 import { CartDrawer, CartProvider, ConsultationModal, useCart } from "@/components/cart/CartContext"
@@ -19,7 +21,7 @@ import { TrustBadges } from "@/components/product/TrustBadges"
 import { TrustedBySleepersSection } from "@/components/product/TrustedBySleepersSection"
 import { WhySleepDivingSection } from "@/components/product/WhySleepDivingSection"
 import { breadcrumbs } from "@/data/product"
-import { mattressProducts } from "@/data/products"
+import { getProductCardCopy, mattressProducts, type MattressProduct, type ProductCategory } from "@/data/products"
 import { fadeUp, premiumTransition, staggerContainer } from "@/lib/motion"
 
 function formatRub(value: number) {
@@ -28,6 +30,38 @@ function formatRub(value: number) {
     currency: "RUB",
     maximumFractionDigits: 0,
   }).format(value)
+}
+
+function formatSize(size: string) {
+  return `${size.replace("x", "×")} см`
+}
+
+const productDetailCategoryLabels: Record<ProductCategory, string> = {
+  "Эконом класс": "Базовая коллекция",
+  "Средний ценовой сегмент": "Comfort Collection",
+  "Премиум класс": "Signature Collection",
+}
+
+function getDiscountPercent(oldPrice: number, price: number) {
+  return Math.round(((oldPrice - price) / oldPrice) * 100)
+}
+
+function getAudience(product: MattressProduct) {
+  const audience = [
+    product.firmness.includes("мяг") ? "Тем, кто любит мягкое первое касание и расслабленное положение плеч." : "Тем, кто хочет ровную поддержку без ощущения лишней мягкости.",
+    product.loadKg ? `Парам и взрослым спальням с нагрузкой до ${product.loadKg} кг на спальное место.` : "Для диванов, гостевых зон и обновления привычного матраса без полной замены.",
+    product.heightCm >= 25 ? "Тем, кто ценит высокий гостиничный профиль и выразительную посадку кровати." : "Для аккуратных интерьеров, где важны комфорт и визуальная лёгкость.",
+  ]
+
+  if (product.layers.some((layer) => layer.toLowerCase().includes("кокос"))) {
+    audience.push("Покупателям, которым нужна более собранная поверхность и стабильная поддержка.")
+  } else if (product.layers.some((layer) => layer.toLowerCase().includes("латекс"))) {
+    audience.push("Тем, кто предпочитает эластичное, деликатно пружинящее ощущение сна.")
+  } else {
+    audience.push("Тем, кто ищет спокойный ежедневный комфорт без сложной настройки.")
+  }
+
+  return audience
 }
 
 function HomePage() {
@@ -104,46 +138,196 @@ function CatalogPage() {
 function ProductDetailPage({ productId }: { productId: string }) {
   const { addItem } = useCart()
   const product = mattressProducts.find((item) => item.id === productId) ?? mattressProducts[0]
+  const copy = getProductCardCopy(product)
   const defaultPrice = product.sizes[Math.max(product.sizes.length - 2, 0)] ?? product.sizes[0]
+  const [selectedSize, setSelectedSize] = useState(defaultPrice.size)
+  const selectedPrice = product.sizes.find((item) => item.size === selectedSize) ?? defaultPrice
+  const discountPercent = getDiscountPercent(selectedPrice.oldPrice, selectedPrice.rrp)
+  const audience = getAudience(product)
+  const proofItems = [
+    { label: "Гарантия", value: product.warranty, icon: ShieldCheck },
+    { label: "Доставка", value: "По всей стране", icon: Truck },
+    { label: "Возврат", value: "14 дней", icon: RotateCcw },
+    { label: "Высота", value: `${product.heightCm} см`, icon: Maximize2 },
+  ]
+  const reasons = [
+    "Премиальные материалы подобраны под ежедневный сон, а не только под красивую спецификацию.",
+    "Каждая модель держит баланс между мягким первым касанием и стабильной поддержкой тела.",
+    "Корзина и заявка помогают быстро зафиксировать выбранный размер без лишних шагов.",
+  ]
 
   return (
     <main className="min-h-screen bg-white text-sd-charcoal">
       <Header />
-      <section className="px-8 py-12 max-lg:px-5 max-sm:px-4">
-        <div className="mx-auto grid max-w-[1340px] grid-cols-[0.9fr_1.1fr] gap-10 max-lg:grid-cols-1">
-          <img src={product.image} alt={product.name} className="min-h-[420px] w-full rounded-[6px] object-cover shadow-[0_24px_70px_rgba(24,33,45,0.12)] max-sm:min-h-[280px]" />
-          <div>
-            <a href="/catalog" className="text-sm font-bold text-sd-copper underline underline-offset-4">Вернуться в каталог</a>
-            <p className="mt-6 text-xs font-bold uppercase tracking-[0.08em] text-sd-copper">{product.category}</p>
-            <h1 className="mt-3 font-serif text-[56px] leading-tight text-sd-charcoal max-md:text-[38px]">{product.name}</h1>
-            <div className="mt-5 flex flex-wrap gap-3 text-sm font-bold text-sd-muted">
-              <span className="rounded-[4px] bg-sd-soft px-3 py-2">{product.heightCm} см</span>
-              <span className="rounded-[4px] bg-sd-soft px-3 py-2">{product.firmness}</span>
-              <span className="rounded-[4px] bg-sd-soft px-3 py-2">{product.warranty}</span>
-            </div>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-sd-muted">
-              {product.collection}. Нагрузка: {product.loadKg ? `до ${product.loadKg} кг на спальное место` : "для корректировки комфорта основного матраса"}.
-            </p>
-            <div className="mt-7 rounded-[6px] border border-sd-line bg-sd-panel p-5">
-              <p className="text-sm font-bold uppercase tracking-[0.07em] text-sd-charcoal">Состав</p>
-              <ul className="mt-3 grid gap-2 text-base leading-7 text-sd-muted">
-                {product.layers.map((layer) => (
-                  <li key={layer}>{layer}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="mt-8 flex flex-wrap items-end justify-between gap-4 border-t border-sd-line pt-6">
-              <div>
-                <p className="text-sm font-semibold text-sd-muted">Размер {defaultPrice.size}</p>
-                <p className="font-serif text-[42px] leading-none text-sd-navy">{formatRub(defaultPrice.rrp)}</p>
+      <section className="bg-[linear-gradient(180deg,#fbfaf7_0%,#ffffff_84%)] px-8 py-10 max-lg:px-5 max-sm:px-4 max-sm:py-6">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-[0.92fr_1.08fr] gap-12 max-lg:grid-cols-1 max-sm:gap-7">
+          <div className="min-w-0">
+            <a href="/catalog" className="text-sm font-bold text-sd-copper underline underline-offset-4 transition hover:text-sd-navy">Вернуться в каталог</a>
+            <div className="relative mt-6 overflow-hidden rounded-[6px] border border-sd-line bg-sd-soft shadow-[0_28px_80px_rgba(24,33,45,0.13)]">
+              <img src={product.image} alt={copy.displayName} className="aspect-[1.12/1] w-full object-cover max-sm:aspect-[1/0.86]" />
+              <div className="absolute left-4 top-4 rounded-[4px] bg-white/95 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-sd-navy shadow-[0_10px_28px_rgba(24,33,45,0.10)]">
+                {productDetailCategoryLabels[product.category]}
               </div>
+            </div>
+          </div>
+
+          <div className="min-w-0">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-sd-copper">{productDetailCategoryLabels[product.category]}</p>
+            <h1 className="mt-3 font-serif text-[64px] leading-[0.98] text-sd-charcoal max-xl:text-[54px] max-md:text-[42px]">
+              {copy.displayName}
+            </h1>
+            <p className="mt-4 max-w-2xl text-xl font-semibold leading-8 text-sd-navy max-sm:text-lg">
+              {copy.productType}
+            </p>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-sd-muted max-sm:text-base max-sm:leading-7">
+              {copy.description} Модель создана для спокойного, уверенного сна: с продуманной высотой, чистой посадкой на кровати и ощущением комфорта, которое не требует громких обещаний.
+            </p>
+
+            <div className="mt-7 rounded-[6px] border border-sd-line bg-white p-6 shadow-[0_24px_70px_rgba(24,33,45,0.10)] max-sm:p-5">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="text-sm font-semibold text-sd-muted line-through">{formatRub(selectedPrice.oldPrice)}</p>
+                  <div className="mt-1 flex flex-wrap items-end gap-3">
+                    <p className="font-serif text-[48px] leading-none text-sd-navy max-sm:text-[40px]">{formatRub(selectedPrice.rrp)}</p>
+                    <span className="mb-1 rounded-[4px] bg-sd-rose px-3 py-1.5 text-xs font-bold uppercase tracking-[0.06em] text-white">
+                      -{discountPercent}%
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm font-bold text-sd-rose">Выгода {formatRub(selectedPrice.savings)}</p>
+                </div>
+                <div className="rounded-[4px] bg-sd-panel px-4 py-3 text-right max-sm:w-full max-sm:text-left">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-sd-muted">Выбранный размер</p>
+                  <p className="mt-1 font-bold text-sd-charcoal">{formatSize(selectedSize)}</p>
+                </div>
+              </div>
+
+              <label className="mt-6 block text-xs font-bold uppercase tracking-[0.08em] text-sd-muted" htmlFor={`${product.id}-detail-size`}>
+                Выберите размер
+              </label>
+              <div className="relative mt-2">
+                <select
+                  id={`${product.id}-detail-size`}
+                  value={selectedSize}
+                  onChange={(event) => setSelectedSize(event.target.value)}
+                  className="h-14 w-full appearance-none rounded-[6px] border border-sd-line bg-white px-4 pr-11 text-base font-bold text-sd-charcoal outline-none transition hover:border-sd-copper/60 focus:border-sd-navy"
+                >
+                  {product.sizes.map((item) => (
+                    <option key={item.size} value={item.size}>
+                      {formatSize(item.size)}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-sd-muted" />
+              </div>
+
               <button
                 type="button"
-                onClick={() => addItem({ id: product.id, name: product.name, image: product.image, size: defaultPrice.size, price: defaultPrice.rrp })}
-                className="inline-flex h-14 items-center rounded-[6px] bg-sd-gold px-8 text-lg font-bold text-sd-navy shadow-[0_14px_34px_rgba(194,132,34,0.24)] transition hover:-translate-y-0.5 hover:bg-sd-gold/90"
+                onClick={() => addItem({ id: product.id, name: copy.displayName, image: product.image, size: selectedPrice.size, price: selectedPrice.rrp })}
+                className="mt-5 inline-flex h-14 w-full items-center justify-center rounded-[6px] bg-sd-gold px-8 text-lg font-bold text-sd-navy shadow-[0_14px_34px_rgba(194,132,34,0.24)] transition hover:-translate-y-0.5 hover:bg-sd-gold/90"
               >
-                Добавить в корзину
+                Купить
               </button>
+
+              <div className="mt-5 grid grid-cols-2 gap-3 max-sm:grid-cols-1">
+                {proofItems.map((item) => {
+                  const Icon = item.icon
+
+                  return (
+                    <div key={item.label} className="flex items-start gap-3 rounded-[6px] bg-sd-soft px-3.5 py-3">
+                      <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-sd-copper shadow-[0_6px_16px_rgba(24,33,45,0.06)]">
+                        <Icon className="size-4" strokeWidth={1.7} />
+                      </span>
+                      <span>
+                        <span className="block text-[11px] font-bold uppercase tracking-[0.08em] text-sd-muted">{item.label}</span>
+                        <span className="mt-1 block font-bold leading-5 text-sd-charcoal">{item.value}</span>
+                      </span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-8 py-14 max-lg:px-5 max-sm:px-4 max-sm:py-10">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-[0.42fr_0.58fr] gap-10 max-lg:grid-cols-1">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-sd-copper">Слои и ощущения</p>
+            <h2 className="mt-3 font-serif text-[44px] leading-tight text-sd-charcoal max-md:text-[34px]">
+              Состав, который читается как комфорт
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-sd-muted max-sm:text-base max-sm:leading-7">
+              Мы показываем слои не как складскую спецификацию, а как понятную карту ощущений: что отвечает за мягкость, что за опору, а что помогает матрасу сохранять форму.
+            </p>
+          </div>
+          <div className="grid gap-4">
+            {product.layers.map((layer, index) => (
+              <article key={layer} className="grid grid-cols-[52px_1fr] gap-4 rounded-[6px] border border-sd-line bg-white p-5 shadow-[0_14px_40px_rgba(24,33,45,0.05)] max-sm:grid-cols-1">
+                <span className="flex size-12 items-center justify-center rounded-full bg-sd-panel text-sm font-bold text-sd-navy">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="font-bold leading-6 text-sd-charcoal">{layer}</h3>
+                  <p className="mt-2 text-sm leading-6 text-sd-muted">
+                    {index === 0
+                      ? "Отвечает за первое тактильное ощущение и аккуратный внешний вид матраса."
+                      : index === product.layers.length - 1
+                        ? "Формирует устойчивую основу и помогает матрасу сохранять геометрию."
+                        : "Работает на баланс давления, упругости и поддержки в ежедневном сне."}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-sd-panel px-8 py-14 max-lg:px-5 max-sm:px-4 max-sm:py-10">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-8 max-lg:grid-cols-1">
+          <div className="rounded-[6px] border border-sd-line bg-white p-7 shadow-[0_18px_54px_rgba(24,33,45,0.07)] max-sm:p-5">
+            <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-sd-copper">
+              <BedDouble className="size-4" strokeWidth={1.7} />
+              Для кого подходит
+            </p>
+            <h2 className="mt-3 font-serif text-[38px] leading-tight text-sd-charcoal max-sm:text-[30px]">Спокойный выбор под ваш сценарий сна</h2>
+            <ul className="mt-6 grid gap-3 text-base leading-7 text-sd-muted">
+              {audience.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <CheckCircle2 className="mt-1 size-5 shrink-0 text-sd-green" strokeWidth={1.7} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-[6px] border border-sd-line bg-white p-7 shadow-[0_18px_54px_rgba(24,33,45,0.07)] max-sm:p-5">
+            <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-sd-copper">
+              <HeartHandshake className="size-4" strokeWidth={1.7} />
+              Почему выбирают Sleep Diving
+            </p>
+            <h2 className="mt-3 font-serif text-[38px] leading-tight text-sd-charcoal max-sm:text-[30px]">Премиальность без лишнего шума</h2>
+            <ul className="mt-6 grid gap-3 text-base leading-7 text-sd-muted">
+              {reasons.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <BadgeCheck className="mt-1 size-5 shrink-0 text-sd-green" strokeWidth={1.7} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 grid grid-cols-3 gap-3 text-center max-sm:grid-cols-1">
+              <div className="rounded-[6px] bg-sd-soft px-4 py-3">
+                <p className="font-serif text-2xl text-sd-navy">4.8/5</p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-[0.08em] text-sd-muted">Рейтинг</p>
+              </div>
+              <div className="rounded-[6px] bg-sd-soft px-4 py-3">
+                <p className="font-serif text-2xl text-sd-navy">120</p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-[0.08em] text-sd-muted">Ночей теста</p>
+              </div>
+              <div className="rounded-[6px] bg-sd-soft px-4 py-3">
+                <p className="font-serif text-2xl text-sd-navy">0 ₽</p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-[0.08em] text-sd-muted">Доставка</p>
+              </div>
             </div>
           </div>
         </div>

@@ -129,7 +129,7 @@ Component relationships:
 
 Текущая задача:
 
-- Premium Typography & Content Pass для карточек товаров завершён; карточки получили короткие имена, отдельный тип товара, премиальные описания, преимущества и улучшенную визуальную иерархию.
+- Premium Product Page Pass завершён: отдельные страницы товаров получили ecommerce first screen с ценой, размером, CTA, гарантией, доставкой и premium content sections.
 
 Текущие проблемы:
 
@@ -163,6 +163,7 @@ Component relationships:
 - Use RRC as the buyer-facing public price.
 - Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
 - Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
+- Keep Product Detail Page focused on conversion: first viewport must show price, old price, savings, size selection, buy CTA, warranty, delivery, and collection label.
 
 ## 8. Правила для AI-агента
 
@@ -182,6 +183,14 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнен Premium Product Page Pass только для Product Detail Page (`/product/:id`).
+- Первый экран товара теперь показывает цену, старую цену, процент скидки, выгоду, выбор размера, кнопку «Купить», гарантию, доставку, возврат и высоту.
+- Product Detail Page использует premium display-copy (`getProductCardCopy`): короткие имена, тип товара и спокойное продающее описание вместо складского описания.
+- Старый buyer-facing термин «Эконом класс» на странице товара заменён через label map на «Базовая коллекция»; также используются `Comfort Collection` и `Signature Collection`.
+- Блок состава оформлен как «Слои и ощущения» с объяснением роли каждого слоя.
+- Добавлены блоки «Для кого подходит» и «Почему выбирают Sleep Diving».
+- Улучшена мобильная версия страницы товара: адаптивное изображение, full-width CTA, компактная сетка trust-параметров и читаемые секции.
+- Проверено локально в Chromium mobile/desktop: цена и старая цена видны, размер меняет цену, «Купить» открывает корзину, «Эконом класс» не отображается, console errors нет.
 - Выполнен Premium Typography & Content Pass для карточек товаров каталога и блока бестселлеров.
 - Добавлен слой `productCardCopy` для всех 26 матрасов: короткие display-названия, отдельный тип товара, спокойные премиальные описания и преимущества.
 - Бейджи категорий в карточках заменены на premium labels: «Базовая коллекция», «Комфорт коллекция», `Signature Collection`.
@@ -208,6 +217,7 @@ Component relationships:
 Измененные файлы:
 
 - `PROJECT_CONTEXT.md`
+- `src/App.tsx`
 - `src/data/products.ts`
 - `src/components/product/ProductCatalogSection.tsx`
 
@@ -215,14 +225,14 @@ Component relationships:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after the premium product-card typography/content pass, with a bundle-size warning above the default 500 kB threshold.
+- `npm run build` passed after the premium Product Detail Page pass, with a bundle-size warning above the default 500 kB threshold.
 - The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed `/catalog` renders 26 products, premium card copy appears on mobile/desktop, catalog filters update results, and the homepage still shows the popular-products block plus the catalog CTA.
+- Browser QA confirmed `/product/shamsa-topper` renders the premium first screen on mobile/desktop, size selection changes price, the buy CTA opens cart, and the old category term is not visible.
 
 ## 10. Следующие шаги
 
