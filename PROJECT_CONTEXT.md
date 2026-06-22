@@ -130,7 +130,7 @@ Component relationships:
 
 Текущая задача:
 
-- Collection Positioning Pass завершён: catalog cards and PDP hero now show short calm positioning labels that explain each model family role at a glance.
+- Catalog Simplification Pass завершён: catalog cards are back to lightweight discovery surfaces with image, collection, name, positioning label, short product type, price, and PDP CTA only.
 
 Текущие проблемы:
 
@@ -165,6 +165,7 @@ Component relationships:
 - Keep catalog product-image mapping centralized in `src/data/products.ts`; when real product imagery is available, prefer exact product/series images over generic generated comparison imagery.
 - Store imported product catalog imagery under `src/assets/product-images/` so real catalog assets are separated from generated PDP/editorial assets.
 - Keep model positioning copy centralized in `src/data/products.ts` as part of `ProductCardCopy`; catalog cards and PDP should consume the same short label so product-family meaning stays consistent.
+- Keep catalog cards as discovery surfaces: do not add PDP-level specs, long descriptions, size selectors, material lists, or benefit blocks back into catalog cards.
 - Use RRC as the buyer-facing public price.
 - Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
 - Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
@@ -198,6 +199,20 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнен Catalog Simplification Pass.
+- Catalog product cards simplified to the discovery-only content set: product image, collection label, product name, positioning label, short product type, price, and `Подробнее` CTA.
+- Removed PDP-level detail from catalog cards: size/warranty/delivery/return stat cards, size selector, `Что вы почувствуете` benefits block, long description, materials list, height badge, firmness pill, old price and savings copy.
+- Catalog CTA now consistently routes to PDP via `Подробнее`, keeping detailed evaluation and size selection on product detail pages.
+- Positioning labels remain visible in catalog cards and continue to differentiate the model lineup.
+- Проверено локально: `npm run build` passed; Vite still reports the existing JS chunk warning above 500 kB.
+- Source audit confirmed removed catalog-card strings are absent from `ProductCatalogSection.tsx`: `Что вы почувствуете`, `Выберите размер`, `Материалы`, `Возврат`, `Гарантия`, `Доставка`.
+- Проверено Playwright CLI screenshots: desktop `/catalog` and mobile `/catalog`; cards are visibly shorter/lighter and more products appear per screen.
+- Playwright API interaction script was skipped after npm registry access failed in the sandbox; CLI screenshot QA and build/source audit were used instead.
+- Published the Catalog Simplification Pass to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-qwyhmv322-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_G7buveXCv8wK4SbNT4YqEnA6Xk5D`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
 - Выполнен Collection Positioning Pass.
 - В `ProductCardCopy` добавлено поле `positioningLabel` для короткого premium-позиционирования каждой модели.
 - В каталожных карточках label выводится под названием товара и над product type, без изменения структуры карточки, фильтров, цен или CTA.
