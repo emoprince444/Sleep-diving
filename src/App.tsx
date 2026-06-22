@@ -21,7 +21,7 @@ import { GalleryBenefitsPanel, TrustBadges } from "@/components/product/TrustBad
 import { TrustedBySleepersSection } from "@/components/product/TrustedBySleepersSection"
 import { WhySleepDivingSection } from "@/components/product/WhySleepDivingSection"
 import { breadcrumbs } from "@/data/product"
-import { getProductCardCopy, mattressProducts, type MattressProduct, type ProductCategory } from "@/data/products"
+import { getProductCardCopy, mattressProducts, similarProductMap, type MattressProduct, type ProductCategory } from "@/data/products"
 import { fadeUp, premiumTransition, staggerContainer } from "@/lib/motion"
 
 function formatRub(value: number) {
@@ -161,6 +161,19 @@ function ProductDetailPage({ productId }: { productId: string }) {
     "Каждая модель держит баланс между мягким первым касанием и стабильной поддержкой тела.",
     "Корзина и заявка помогают быстро зафиксировать выбранный размер без лишних шагов.",
   ]
+  const similarProducts = (similarProductMap[product.id] ?? [])
+    .map((item) => {
+      const similarProduct = mattressProducts.find((candidate) => candidate.id === item.productId)
+
+      return similarProduct
+        ? {
+          product: similarProduct,
+          copy: getProductCardCopy(similarProduct),
+          bullets: item.bullets.slice(0, 3),
+        }
+        : null
+    })
+    .filter((item): item is { product: MattressProduct; copy: ReturnType<typeof getProductCardCopy>; bullets: string[] } => Boolean(item))
   const addSelectedToCart = () => addItem({ id: product.id, name: copy.displayName, image: product.image, size: selectedPrice.size, price: selectedPrice.rrp })
 
   return (
@@ -288,6 +301,52 @@ function ProductDetailPage({ productId }: { productId: string }) {
           </div>
         </div>
       </section>
+
+      {similarProducts.length > 0 && (
+        <section id="similar-models" className="bg-white px-8 py-14 max-lg:px-5 max-sm:px-4 max-sm:py-7">
+          <div className="mx-auto max-w-[1440px]">
+            <div className="flex items-end justify-between gap-8 max-lg:flex-col max-lg:items-start max-sm:gap-3">
+              <div className="max-w-3xl">
+                <p className="text-xs font-bold uppercase tracking-[0.1em] text-sd-copper">Похожие модели</p>
+                <h2 className="mt-3 font-serif text-[44px] leading-tight text-sd-charcoal max-md:text-[34px] max-sm:text-[30px]">
+                  Сравните ощущение без технической таблицы
+                </h2>
+              </div>
+              <p className="max-w-md text-base leading-7 text-sd-muted max-sm:text-sm max-sm:leading-6">
+                Подобрали ближайшие альтернативы к {copy.displayName}, чтобы было проще выбрать между мягкостью, плотностью и стабильностью поддержки.
+              </p>
+            </div>
+
+            <div className="mt-8 grid grid-cols-3 gap-5 max-lg:grid-cols-1 max-sm:mt-5 max-sm:gap-3">
+              {similarProducts.map((item) => (
+                <article key={item.product.id} className="group grid grid-rows-[180px_1fr] overflow-hidden rounded-[6px] border border-sd-line bg-white shadow-[0_16px_46px_rgba(24,33,45,0.06)] transition duration-300 hover:-translate-y-1 hover:border-sd-copper/60 hover:shadow-[0_22px_60px_rgba(24,33,45,0.10)] max-sm:grid-rows-[132px_1fr]">
+                  <a href={`/product/${item.product.id}`} className="block overflow-hidden bg-sd-soft" aria-label={`Открыть ${item.copy.displayName}`}>
+                    <img src={item.product.image} alt={item.product.name} className="size-full object-cover transition duration-700 group-hover:scale-105" />
+                  </a>
+                  <div className="flex flex-col p-5 max-sm:p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-sd-copper">{item.copy.positioningLabel}</p>
+                    <h3 className="mt-2 font-serif text-[30px] leading-none text-sd-charcoal max-sm:text-[26px]">
+                      {item.copy.displayName}
+                    </h3>
+                    <p className="mt-2 text-sm font-bold leading-5 text-sd-navy">{item.copy.productType}</p>
+                    <ul className="mt-4 grid gap-2 text-sm leading-6 text-sd-muted max-sm:text-sm max-sm:leading-5">
+                      {item.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-2">
+                          <CheckCircle2 className="mt-1 size-4 shrink-0 text-sd-green" strokeWidth={1.8} />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <a href={`/product/${item.product.id}`} className="mt-5 inline-flex h-10 w-fit items-center justify-center rounded-[6px] border border-sd-line px-4 text-sm font-bold text-sd-navy transition hover:border-sd-copper/70 hover:bg-sd-panel">
+                      Смотреть модель
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="px-8 py-14 max-lg:px-5 max-sm:px-4 max-sm:py-7">
         <div className="mx-auto grid max-w-[1440px] grid-cols-[0.42fr_0.58fr] gap-10 max-lg:grid-cols-1">

@@ -50,6 +50,7 @@ Completed optimization passes:
 - Mobile Product Page Optimization Pass
 - Catalog Card Compression Pass
 - Catalog Image Ratio Pass
+- PDP Comparison Pass
 
 ### Mobile Product Page Optimization Pass
 
@@ -93,6 +94,20 @@ Changes:
 - Increased catalog browsing speed
 - Preserved premium visual quality
 - Desktop preserved
+
+### PDP Comparison Pass
+
+Status: Completed.
+
+Changes:
+
+- Added compact PDP similar-model comparison section
+- Uses approved product-to-similar-products relationships
+- Uses customer-facing comparison copy instead of raw specifications
+- Shows 2-3 relevant alternatives per PDP
+- Keeps comparison bullets grounded in original catalog pages and current product data
+- Avoids large technical tables and marketplace-style comparison UI
+- Preserves compact desktop and mobile PDP layouts
 
 ## Important Rules
 

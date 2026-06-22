@@ -48,6 +48,11 @@ export type ProductCardCopy = {
   benefits: string[]
 }
 
+export type SimilarProduct = {
+  productId: string
+  bullets: string[]
+}
+
 const categories: ProductCategory[] = ["Эконом класс", "Средний ценовой сегмент", "Премиум класс"]
 export const productCategories = ["Все", ...categories] as const
 
@@ -276,6 +281,140 @@ export function getProductCardCopy(product: MattressProduct) {
     benefits: ["Комфортная поддержка", "Премиальные материалы", "Подходит для ежедневного сна", "Аккуратная посадка на кровати"],
   }
 }
+
+export const similarProductMap: Record<string, SimilarProduct[]> = {
+  "shamsa-topper": [
+    { productId: "firaj-rafii", bullets: ["Если нужен уже полноценный низкий матрас, а не корректирующий топпер."] },
+    { productId: "firaj-vasad", bullets: ["Выше и ощутимее по поддержке."] },
+    { productId: "basis", bullets: ["Более стабильное пружинное ощущение для ежедневного сна."] },
+  ],
+  "firaj-rafii": [
+    { productId: "firaj-vasad", bullets: ["Более выраженный профиль при том же спокойном ощущении."] },
+    { productId: "firaj-sahin", bullets: ["Выше и устойчивее по посадке."] },
+    { productId: "basis", bullets: ["Более отзывчивая пружинная поддержка вместо беспружинной основы."] },
+  ],
+  "firaj-vasad": [
+    { productId: "firaj-rafii", bullets: ["Ниже и лаконичнее."] },
+    { productId: "firaj-sahin", bullets: ["Выше и плотнее по ощущению."] },
+    { productId: "firaj-mukhtalif", bullets: ["Больше вариативности благодаря двум сторонам комфорта."] },
+  ],
+  "firaj-sahin": [
+    { productId: "firaj-vasad", bullets: ["Ниже и легче по посадке."] },
+    { productId: "firaj-kasi", bullets: ["Более собранная и упругая поверхность."] },
+    { productId: "basis", bullets: ["Более отзывчивая пружинная альтернатива похожей высоты."] },
+  ],
+  "firaj-mukhtalif": [
+    { productId: "firaj-kasi", bullets: ["Более жёсткая и стабильная поверхность."] },
+    { productId: "mukhtalif", bullets: ["Похожая идея двух сторон, но с пружинной поддержкой."] },
+    { productId: "vasad", bullets: ["Спокойнее и универсальнее без смены сторон."] },
+  ],
+  "firaj-kasi": [
+    { productId: "firaj-mukhtalif", bullets: ["Мягче по одной из сторон."] },
+    { productId: "matin", bullets: ["Более отзывчивая пружинная поддержка при жёстком ощущении."] },
+    { productId: "sleep-box", bullets: ["Более плотное premium-ощущение и выше запас поддержки."] },
+  ],
+  hafif: [
+    { productId: "hafif-plus", bullets: ["Выше и заметнее по профилю."] },
+    { productId: "basis", bullets: ["Более универсальная средняя поддержка."] },
+    { productId: "batra", bullets: ["Мягче и адаптивнее за счёт латекса."] },
+  ],
+  vasad: [
+    { productId: "vasad-econom", bullets: ["Практичнее и ниже по профилю."] },
+    { productId: "mukhtalif", bullets: ["Больше гибкости благодаря двум сторонам комфорта."] },
+    { productId: "basis", bullets: ["Проще и мягче по составу без кокосовой стабилизации."] },
+  ],
+  mukhtalif: [
+    { productId: "vasad", bullets: ["Более ровное средне-жёсткое ощущение."] },
+    { productId: "firaj-mukhtalif", bullets: ["Беспружинная версия с похожей логикой двух сторон."] },
+    { productId: "malek", bullets: ["Более мягкая адаптация за счёт латексированной пены."] },
+  ],
+  "vasad-econom": [
+    { productId: "vasad", bullets: ["Более собранная поддержка за счёт натурального кокоса."] },
+    { productId: "basis", bullets: ["Проще и мягче по составу."] },
+    { productId: "hafif-plus", bullets: ["Выше профиль и более объёмное пружинное ощущение."] },
+  ],
+  matin: [
+    { productId: "firaj-kasi", bullets: ["Жёсткое беспружинное ощущение в более базовом классе."] },
+    { productId: "jumana-vasat-rish", bullets: ["Жёсткая поддержка с более адаптивным латексным слоем."] },
+    { productId: "sleep-magnat", bullets: ["Самый высокий и флагманский вариант жёсткой поддержки."] },
+  ],
+  "hafif-plus": [
+    { productId: "hafif", bullets: ["Ниже и легче по ощущению."] },
+    { productId: "jumana-vasat-plus", bullets: ["Выше и стабильнее для основной спальни."] },
+    { productId: "basis", bullets: ["Более простая пружинная база."] },
+  ],
+  basis: [
+    { productId: "vasad-econom", bullets: ["Больше стабильности за счёт биококоса."] },
+    { productId: "hafif", bullets: ["Мягче и легче по поддержке."] },
+    { productId: "firaj-sahin", bullets: ["Беспружинная альтернатива похожей высоты."] },
+  ],
+  batra: [
+    { productId: "balkiz", bullets: ["Выше профиль и более средне-жёсткое ощущение."] },
+    { productId: "batra-kasi", bullets: ["Более собранная поддержка без латексной мягкости."] },
+    { productId: "malek", bullets: ["Больше вариативности благодаря двум сторонам комфорта."] },
+  ],
+  balkiz: [
+    { productId: "batra", bullets: ["Мягче и ниже по профилю."] },
+    { productId: "malek", bullets: ["Более гибкое ощущение за счёт двух сторон."] },
+    { productId: "jumana-vasat-plus", bullets: ["Похожий высокий профиль, но без латексного акцента в составе."] },
+  ],
+  malek: [
+    { productId: "mukhtalif", bullets: ["Похожая двусторонняя логика в более простой конструкции."] },
+    { productId: "batra-kasi", bullets: ["Стабильнее и ровнее по средней поддержке."] },
+    { productId: "balkiz", bullets: ["Выше и насыщеннее по материалам."] },
+  ],
+  "batra-kasi": [
+    { productId: "batra", bullets: ["Мягче и адаптивнее за счёт латекса."] },
+    { productId: "balkiz", bullets: ["Выше и комфортнее при средней жёсткости."] },
+    { productId: "matin", bullets: ["Более жёсткая и собранная поверхность."] },
+  ],
+  "jumana-vasat-rish": [
+    { productId: "matin", bullets: ["Более прямое жёсткое ощущение без латексного слоя."] },
+    { productId: "jumana-vasat-plus", bullets: ["Выше и мягче по общей поддержке."] },
+    { productId: "vasad", bullets: ["Более универсальная средняя жёсткость."] },
+  ],
+  "jumana-vasat-plus": [
+    { productId: "hafif-plus", bullets: ["Ниже и легче по поддержке."] },
+    { productId: "balkiz", bullets: ["Похожий высокий профиль с более насыщенными материалами."] },
+    { productId: "jumana-vasat-rish", bullets: ["Жёстче и упругее."] },
+  ],
+  balance: [
+    { productId: "basis", bullets: ["Проще и ниже по профилю."] },
+    { productId: "batra-kasi", bullets: ["Более собранная поддержка с кокосом."] },
+    { productId: "vasad", bullets: ["Стабильная средняя жёсткость с независимым блоком и кокосом."] },
+  ],
+  "sleep-combi": [
+    { productId: "sleep-foam", bullets: ["Мягче и лучше для пары, если хочется более комфортной поверхности."] },
+    { productId: "sleep-box", bullets: ["Плотнее и жёстче по поддержке."] },
+    { productId: "firaj-sahin", bullets: ["Более базовая беспружинная альтернатива без memory foam акцента."] },
+  ],
+  "sleep-foam": [
+    { productId: "sleep-combi", bullets: ["Больше акцент на эффект памяти и релаксацию."] },
+    { productId: "sleep-soft", bullets: ["Выше профиль и более премиальное мягкое ощущение."] },
+    { productId: "batra", bullets: ["Мягкая пружинная альтернатива с натуральным латексом."] },
+  ],
+  "sleep-box": [
+    { productId: "firaj-kasi", bullets: ["Более базовая жёсткая альтернатива."] },
+    { productId: "sleep-combi", bullets: ["Мягче и адаптивнее за счёт memory foam."] },
+    { productId: "sleep-hard", bullets: ["Выше, стабильнее и ближе к Signature-уровню поддержки."] },
+  ],
+  "sleep-soft": [
+    { productId: "sleep-foam", bullets: ["Ниже и спокойнее как мягкая беспружинная альтернатива."] },
+    { productId: "sleep-hard", bullets: ["Такой же высокий Signature-профиль, но с более собранной поддержкой."] },
+    { productId: "batra", bullets: ["Мягкая латексная альтернатива в пружинной линейке."] },
+  ],
+  "sleep-hard": [
+    { productId: "sleep-soft", bullets: ["Мягче и более расслабляющее ощущение."] },
+    { productId: "sleep-magnat", bullets: ["Жёстче и стабильнее как флагманская поддержка."] },
+    { productId: "sleep-box", bullets: ["Плотная беспружинная альтернатива ниже по профилю."] },
+  ],
+  "sleep-magnat": [
+    { productId: "sleep-hard", bullets: ["Менее жёсткий Signature-вариант с memory foam."] },
+    { productId: "matin", bullets: ["Более доступная жёсткая пружинная альтернатива."] },
+    { productId: "jumana-vasat-rish", bullets: ["Жёсткая поддержка с более адаптивным латексным слоем."] },
+  ],
+}
+
 
 export const mattressProducts: MattressProduct[] = [
   {

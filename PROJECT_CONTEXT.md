@@ -130,7 +130,7 @@ Component relationships:
 
 Текущая задача:
 
-- Source-of-truth catalog alignment завершён: product positioning copy is now cross-checked against the original SleepDiving tag catalog pages for spring, foam, and single-size mattresses.
+- PDP Comparison Pass завершён: product detail pages now show compact, customer-facing similar-model comparisons based on the approved relationship map.
 
 Текущие проблемы:
 
@@ -170,6 +170,7 @@ Component relationships:
   - `https://sleepdiving.ru/tag/pruzhinnye-matrasy/`
   - `https://sleepdiving.ru/tag/bespruzhinnye-matrasy/`
   - `https://sleepdiving.ru/tag/odnospalnye-matrasy/`
+- Keep PDP similar-model relationships in `src/data/products.ts` as `similarProductMap`; PDP renders customer-facing comparison bullets from this data instead of raw technical tables.
 - Use RRC as the buyer-facing public price.
 - Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
 - Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
@@ -203,6 +204,20 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнен PDP Comparison Pass.
+- Added `similarProductMap` to `src/data/products.ts` with 2-3 approved similar alternatives for every mattress.
+- Similar-model copy uses customer-facing comparison language and avoids raw technical specs while staying grounded in current product data and original SleepDiving catalog source pages.
+- Product detail pages now render a compact `Похожие модели` section after the hero/purchase area and before the layers section.
+- The comparison section uses 3-column desktop cards and stacked mobile cards with product image, positioning label, short product type, up to 3 bullets, and a restrained `Смотреть модель` link.
+- No large technical tables or marketplace-style comparison UI were added.
+- `AGENTS.md` and `AGENT.md` updated with PDP Comparison Pass completion notes.
+- Проверено локально: `npm run build` passed; Vite still reports the existing JS chunk warning above 500 kB.
+- Проверено Playwright CLI screenshots: desktop `/product/sleep-combi`, mobile `/product/sleep-combi`, desktop `/product/sleep-soft`, plus full-page desktop/mobile screenshots to verify the comparison cards and stacking.
+- Published the PDP Comparison Pass to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-4ueqbmzex-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_Fu5FmNXLVRoTdWqAUA4KzTccqbAD`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
 - Выполнена сверка positioning/copy с оригинальными SleepDiving catalog tag pages.
 - Original source pages confirmed product grouping: `Sleep Foam` and `SleepCombi` are listed under беспружинные; Batra, Balkiz, Malek, Matin, Mukhtalif, Hafif, Hafif Plus, Jumana and Batra Kasi appear in spring/single-size catalog contexts.
 - `Sleep Combi` positioning updated to `Эффект памяти`, with product type/description aligned to the original source summary about elastic memory foam and muscle relaxation.
@@ -390,6 +405,7 @@ Component relationships:
 - Catalog product cards now use real product-specific images from the uploaded archive, with 18 unique product-image assets mapped across 26 catalog products.
 - Sleep, Batra, and Jumana model families now have corresponding real imagery instead of repeated generic catalog images.
 - Catalog and PDP now explain model-family differences with short positioning labels, making the lineup easier to scan without opening specifications.
+- PDPs now include a compact similar-model comparison section powered by `similarProductMap`, using customer-facing alternatives instead of technical tables.
 - Desktop PDP pricing selectors now use a cleaner premium hierarchy with savings visually attached to price.
 - Desktop PDP left-column content flow now continues from gallery into trust/benefits content before deeper page sections.
 - Desktop header navigation now starts closer to the brand mark while preserving right-side action balance and mobile behavior.
