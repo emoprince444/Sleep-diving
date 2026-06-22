@@ -1,7 +1,21 @@
-import classicImage from "@/assets/sleep-diving-comparison-classic.png"
-import luxeImage from "@/assets/sleep-diving-comparison-luxe.png"
-import premierImage from "@/assets/sleep-diving-comparison-premier.png"
-import layersImage from "@/assets/sleep-diving-layers-exploded.png"
+import batraPl1Image from "@/assets/product-images/batra-pl-1.jpg"
+import batraPl2Image from "@/assets/product-images/batra-pl-2.jpg"
+import firajKasiImage from "@/assets/product-images/firaj-kasi.png"
+import firajMukhtalifImage from "@/assets/product-images/firaj-mukhtalif.png"
+import firajRafiiImage from "@/assets/product-images/firaj-rafii.jpg"
+import firajSahinImage from "@/assets/product-images/firaj-sahin.png"
+import firajVasadImage from "@/assets/product-images/firaj-vasad.jpg"
+import jumanaKhafifImage from "@/assets/product-images/jumana-khafif.jpg"
+import jumanaMukhtalifImage from "@/assets/product-images/jumana-mukhtalif.jpg"
+import malekImage from "@/assets/product-images/malek.png"
+import matinImage from "@/assets/product-images/matin.png"
+import shamsaTopperImage from "@/assets/product-images/shamsa-topper.png"
+import sleepBoxImage from "@/assets/product-images/sleep-box.jpg"
+import sleepCombiImage from "@/assets/product-images/sleep-combi.jpg"
+import sleepFoamImage from "@/assets/product-images/sleep-foam.jpg"
+import sleepHardImage from "@/assets/product-images/sleep-hard.jpg"
+import sleepMagnatImage from "@/assets/product-images/sleep-magnat.jpg"
+import sleepSoftImage from "@/assets/product-images/sleep-soft.jpg"
 
 export type ProductCategory = "Эконом класс" | "Средний ценовой сегмент" | "Премиум класс"
 
@@ -66,10 +80,6 @@ function prices(rows: [string, number, number][]) {
     }
   })
 }
-
-const economyImage = classicImage
-const middleImage = premierImage
-const premiumImage = luxeImage
 
 export const productCardCopy: Record<string, ProductCardCopy> = {
   "shamsa-topper": {
@@ -248,7 +258,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 5,
     loadKg: null,
-    image: layersImage,
+    image: shamsaTopperImage,
     warranty: "18 месяцев",
     delivery: "Доставка по России",
     layers: ["Чехол: трикотаж высокой плотности", "Комфортный слой: ППУ высокой эластичности"],
@@ -262,7 +272,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 10,
     loadKg: 120,
-    image: economyImage,
+    image: firajRafiiImage,
     warranty: "18 месяцев",
     delivery: "Доставка по России",
     layers: ["Чехол: трикотаж высокой плотности", "Комфортный слой: ППУ повышенной комфортности"],
@@ -276,7 +286,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 15,
     loadKg: 120,
-    image: economyImage,
+    image: firajVasadImage,
     warranty: "18 месяцев",
     delivery: "Доставка по России",
     layers: ["Чехол: трикотаж высокой плотности", "Комфортный слой: ППУ повышенной комфортности"],
@@ -290,7 +300,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 20,
     loadKg: 120,
-    image: economyImage,
+    image: firajSahinImage,
     warranty: "18 месяцев",
     delivery: "Доставка по России",
     layers: ["Чехол: трикотаж высокой плотности", "Комфортный слой: ППУ повышенной комфортности"],
@@ -304,7 +314,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "повышенная/средняя жёсткость",
     heightCm: 16,
     loadKg: 120,
-    image: economyImage,
+    image: firajMukhtalifImage,
     warranty: "18 месяцев",
     delivery: "Доставка по России",
     layers: ["Чехол: трикотаж высокой плотности", "Натуральное волокно кокоса", "ППУ повышенной комфортности с двух сторон"],
@@ -318,7 +328,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "повышенная жёсткость",
     heightCm: 19,
     loadKg: 120,
-    image: economyImage,
+    image: firajKasiImage,
     warranty: "18 месяцев",
     delivery: "Доставка по России",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности", "Натуральное волокно кокоса с двух сторон"],
@@ -332,7 +342,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "мягкий",
     heightCm: 19,
     loadKg: 80,
-    image: middleImage,
+    image: jumanaKhafifImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности с двух сторон", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -346,7 +356,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 22,
     loadKg: 120,
-    image: middleImage,
+    image: batraPl1Image,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности с двух сторон", "Натуральное волокно кокоса с двух сторон", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -360,7 +370,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость/мягкий",
     heightCm: 21,
     loadKg: 120,
-    image: middleImage,
+    image: jumanaMukhtalifImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности с двух сторон", "Натуральное волокно кокоса", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -374,7 +384,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 20,
     loadKg: 120,
-    image: middleImage,
+    image: firajVasadImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности с двух сторон", "Биококос с двух сторон", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -388,7 +398,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "повышенная жёсткость",
     heightCm: 20,
     loadKg: 120,
-    image: middleImage,
+    image: matinImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "Натуральное волокно кокоса с двух сторон", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -402,7 +412,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 25,
     loadKg: 100,
-    image: middleImage,
+    image: jumanaKhafifImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности с двух сторон", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -416,7 +426,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 20,
     loadKg: 120,
-    image: middleImage,
+    image: firajRafiiImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности с двух сторон", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -430,7 +440,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "мягкий",
     heightCm: 20,
     loadKg: 130,
-    image: middleImage,
+    image: batraPl1Image,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "Натуральный латекс с двух сторон", "Натуральный войлок", "Мультизональный пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -444,7 +454,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 27,
     loadKg: 130,
-    image: middleImage,
+    image: batraPl2Image,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "Натуральное волокно кокоса с двух сторон", "Натуральный латекс с двух сторон", "Латексированная пена с двух сторон", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -458,7 +468,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость/мягкий",
     heightCm: 22,
     loadKg: 130,
-    image: middleImage,
+    image: malekImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "Латексированная пена с двух сторон", "Натуральное волокно кокоса", "Натуральный войлок", "Мультизональный пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -472,7 +482,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 22,
     loadKg: 120,
-    image: middleImage,
+    image: batraPl2Image,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности с двух сторон", "Натуральное волокно кокоса с двух сторон", "Натуральный войлок", "Мультизональный пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -486,7 +496,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "повышенная жёсткость",
     heightCm: 22,
     loadKg: 120,
-    image: middleImage,
+    image: jumanaMukhtalifImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "Натуральный латекс с двух сторон", "Натуральное волокно кокоса с двух сторон", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -500,7 +510,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 27,
     loadKg: 120,
-    image: middleImage,
+    image: jumanaKhafifImage,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности", "Натуральное волокно кокоса", "Натуральный войлок", "Независимый пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -514,7 +524,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 25,
     loadKg: 120,
-    image: middleImage,
+    image: batraPl1Image,
     warranty: "24 месяца",
     delivery: "Бесплатная доставка от 160x200",
     layers: ["Чехол: трикотаж высокой плотности", "ППУ повышенной комфортности", "Натуральный войлок", "Мультизональный пружинный блок", "Каркас: ППУ высокой плотности"],
@@ -528,7 +538,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 20,
     loadKg: 120,
-    image: premiumImage,
+    image: sleepCombiImage,
     warranty: "36 месяцев",
     delivery: "Премиальная доставка",
     layers: ["Чехол: трикотаж высокой плотности", "Пена высокой плотности с эффектом пружины", "Латексированная пена", "Пена с эффектом памяти", "Каркас: ППУ высокой плотности"],
@@ -542,7 +552,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "мягкий",
     heightCm: 21,
     loadKg: 120,
-    image: premiumImage,
+    image: sleepFoamImage,
     warranty: "36 месяцев",
     delivery: "Премиальная доставка",
     layers: ["Чехол: трикотаж высокой плотности", "Латекс", "Мягкая эластичная пена", "Пена с эффектом памяти", "Каркас: ППУ высокой плотности"],
@@ -556,7 +566,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "повышенная жёсткость",
     heightCm: 22,
     loadKg: 140,
-    image: premiumImage,
+    image: sleepBoxImage,
     warranty: "36 месяцев",
     delivery: "Премиальная доставка",
     layers: ["Чехол: трикотаж высокой плотности", "Латексированная пена с двух сторон", "Упругая пена высокой плотности с эффектом пружины", "Каркас: ППУ высокой плотности"],
@@ -570,7 +580,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "мягкий",
     heightCm: 30,
     loadKg: 150,
-    image: premiumImage,
+    image: sleepSoftImage,
     warranty: "36 месяцев",
     delivery: "Премиальная доставка",
     layers: ["Чехол: трикотаж высокой плотности", "Высокоэластичная пена", "Мягкая эластичная пена", "Пена с эффектом памяти", "Натуральный войлок", "Мультизональный пружинный блок S 1000", "Кокосовая койра", "Каркас: ППУ высокой плотности"],
@@ -584,7 +594,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "средняя жёсткость",
     heightCm: 30,
     loadKg: 150,
-    image: premiumImage,
+    image: sleepHardImage,
     warranty: "36 месяцев",
     delivery: "Премиальная доставка",
     layers: ["Чехол: трикотаж высокой плотности", "Высокоэластичная пена", "Упругая эластичная пена повышенной жёсткости", "Пена с эффектом памяти", "Натуральный войлок", "Мультизональный пружинный блок S 370", "Кокосовая койра", "Каркас: ППУ высокой плотности"],
@@ -598,7 +608,7 @@ export const mattressProducts: MattressProduct[] = [
     firmness: "повышенная жёсткость",
     heightCm: 30,
     loadKg: 150,
-    image: premiumImage,
+    image: sleepMagnatImage,
     warranty: "36 месяцев",
     delivery: "Премиальная доставка",
     layers: ["Чехол: трикотаж высокой плотности", "Высокоэластичная пена повышенной жёсткости с двух сторон", "Натуральный войлок", "Мини-блок повышенной жёсткости с двух сторон", "Кокосовая койра", "Каркас: ППУ высокой плотности"],

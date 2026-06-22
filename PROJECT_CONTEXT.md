@@ -55,6 +55,7 @@ Folder structure:
 - `src/data/product.ts` - static product data, navigation labels, copy, product models, FAQ, image references
 - `src/data/products.ts` - real mattress catalog data extracted from PDF, including public RRC prices and internal wholesale prices
 - `src/assets/` - generated raster assets for the PDP
+- `src/assets/product-images/` - product-specific catalog images extracted from the uploaded real product image archive
 - `src/index.css` - Tailwind imports, shadcn theme variables, Sleep Diving color tokens
 - `src/lib/utils.ts` - shared `cn` utility
 
@@ -118,7 +119,7 @@ Component relationships:
 - Responsive mobile layout
 - Generated image assets in `src/assets`
 - Branded Sleep Diving image asset set for hero, gallery, layers, cooling close-up, lifestyle, bed frames, and comparison cards
-- Russian product catalog with real Sleep Diving mattress models, categories, firmness, height, layers, load, sizes, public RRC prices, and internal-only wholesale prices
+- Russian product catalog with real Sleep Diving mattress models, categories, firmness, height, layers, load, sizes, public RRC prices, internal-only wholesale prices, and product-specific image mapping
 - Category, firmness, height, and size filtering with dynamic price updates by size
 - Premium product-card copy layer with short display names, product types, calm descriptions, benefits, and collection labels
 - Full Russian premium ecommerce copy across visible site sections
@@ -129,13 +130,14 @@ Component relationships:
 
 Текущая задача:
 
-- PDP empty-space refinement завершён: desktop whitespace after the benefits area was reduced sharply with denser purchase-column rhythm and a continued benefits panel.
+- Real Product Image Mapping Pass завершён: catalog products now use product-specific images from the uploaded mattress/topper archive instead of the previous generic repeated image set.
 
 Текущие проблемы:
 
 - TODO - no backend, database, auth, payments, analytics, or deployment pipeline yet.
 - TODO - product content and prices are static mock data.
 - TODO - generated PNG assets are large and should be compressed or converted to responsive WebP/AVIF before production.
+- TODO - new real product PNG/JPG catalog assets should be compressed or converted to responsive WebP/AVIF before a full production hardening pass.
 - TODO - local cart and consultation form are frontend placeholders until backend/checkout/CRM integration is added.
 
 ## 7. Важные решения
@@ -160,6 +162,8 @@ Component relationships:
 - Dedicated sticky-nav anchors should map to real sections before adding more navigation labels.
 - Keep PDP content data in `src/data/product.ts`; sections should consume that data rather than hardcoding repeated product content.
 - Keep real mattress catalog data in `src/data/products.ts`; never render internal `wholesalePrice` or the word "опт" to buyers.
+- Keep catalog product-image mapping centralized in `src/data/products.ts`; when real product imagery is available, prefer exact product/series images over generic generated comparison imagery.
+- Store imported product catalog imagery under `src/assets/product-images/` so real catalog assets are separated from generated PDP/editorial assets.
 - Use RRC as the buyer-facing public price.
 - Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
 - Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
@@ -193,6 +197,21 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнен Real Product Image Mapping Pass для каталога Sleep Diving.
+- Загруженные изображения из `/Users/ll/Desktop/матрасы и топперы взрывы.zip` были извлечены во временную папку, визуально проверены и сопоставлены с товарами каталога.
+- Добавлена папка `src/assets/product-images/` с real product imagery для Sleep, Batra, Jumana, Firaj и topper-моделей.
+- `src/data/products.ts` больше не использует три общие generic-картинки для всего каталога; 26 товаров теперь распределены на 18 уникальных product image imports.
+- Sleep Combi, Sleep Foam, Sleep Box, Sleep Soft, Sleep Hard и Sleep Magnat получили отдельные изображения, визуально отличающиеся друг от друга.
+- Batra и Batra Kasi используют соответствующие Batra images; Jumana Rish и Jumana Plus используют соответствующие Jumana images.
+- Product names, prices, descriptions, filters, catalog card design and layout preserved.
+- Проверено локально: `npm run build` passed; Vite still reports the existing JS chunk warning above 500 kB, and the new unoptimized image assets add expected image-weight output.
+- Проверено Playwright CLI fallback: desktop `/catalog` screenshot shows varied product images in the first grid row; mobile full-page `/catalog` screenshot shows all product cards rendering with the new imagery and no layout breakage.
+- Browser plugin was unavailable due to a sandbox-state runtime error, so validation used Playwright CLI screenshots.
+- Published the Real Product Image Mapping Pass to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-qfnu4x369-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_G7dA3SooXF6Tg3A9Mxbzxj4asitG`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
 - Published the desktop PDP empty-space refinement to Vercel production.
 - Production alias updated: `https://sleep-two-delta.vercel.app`.
 - Deployment URL: `https://sleep-fxnrt7cgo-emoprince444.vercel.app`.
@@ -306,6 +325,8 @@ Component relationships:
 
 Измененные файлы:
 
+- `src/data/products.ts`
+- `src/assets/product-images/`
 - `src/components/product/PurchasePanel.tsx`
 - `src/components/product/TrustBadges.tsx`
 - `src/components/layout/StickyBuyBar.tsx`
@@ -322,6 +343,8 @@ Component relationships:
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
 - Completed tasks must now be deployed to the Vercel production site automatically after local validation and `PROJECT_CONTEXT.md` updates.
 - Desktop PDP top section now has much less dead space after the benefits area; left and right columns feel more balanced during scroll.
+- Catalog product cards now use real product-specific images from the uploaded archive, with 18 unique product-image assets mapped across 26 catalog products.
+- Sleep, Batra, and Jumana model families now have corresponding real imagery instead of repeated generic catalog images.
 - Desktop PDP pricing selectors now use a cleaner premium hierarchy with savings visually attached to price.
 - Desktop PDP left-column content flow now continues from gallery into trust/benefits content before deeper page sections.
 - Desktop header navigation now starts closer to the brand mark while preserving right-side action balance and mobile behavior.
@@ -339,9 +362,9 @@ Component relationships:
 - Replace local cart/lead-form placeholders with backend order and CRM integration.
 - Add real checkout or payment flow after cart review.
 - Add real newsletter form handling.
-- Compress and generate responsive WebP/AVIF variants for the new PNG assets before production deployment.
+- Compress and generate responsive WebP/AVIF variants for the new catalog product images before a production performance hardening pass.
 - Decide cart/checkout architecture and whether to integrate Stripe or another payment provider.
-- Decide hosting/deployment target.
+- Continue using Vercel as the current deployment target and keep production deployment automatic after completed tasks.
 - Add automated visual or component tests for the PDP, preferably with Playwright installed/configured.
 - Run full rendered QA once the in-app Browser runtime is available or Playwright is added.
 - Consider a second small PDP conversion pass only after reviewing analytics or more mobile screenshots; avoid adding more density near the CTA without evidence.
