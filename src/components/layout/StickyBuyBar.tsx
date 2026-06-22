@@ -42,17 +42,17 @@ export function StickyBuyBar() {
             </span>
           </div>
           <div className="grid grid-cols-[1fr_1fr] gap-4">
-            <label className="flex h-14 items-center justify-between rounded-[6px] border border-sd-line bg-white px-4 shadow-sm transition hover:border-sd-copper/60 hover:shadow-md">
+            <label className="grid h-14 grid-cols-[auto_1fr_auto] items-center gap-4 rounded-[6px] border border-sd-line bg-white px-4 shadow-sm transition hover:border-sd-copper/60 hover:shadow-md">
               <select value={selectedSize} onChange={(event) => setSelectedSize(event.target.value)} aria-label="Выберите размер" className="appearance-none bg-transparent text-lg font-bold text-sd-charcoal outline-none">
                 {sizes.map((item) => (
                   <option key={item.size}>{item.size}</option>
                 ))}
               </select>
-              <span className="flex items-center gap-3">
-                <span className="text-sm font-bold text-sd-rose">Выгода 5 900 ₽</span>
-                <span className="text-xl font-bold text-sd-navy">от {new Intl.NumberFormat("ru-RU").format(selectedPrice.price)} ₽</span>
-                <ChevronDown className="size-4 text-sd-muted" />
+              <span className="justify-self-end text-right">
+                <span className="block text-xl font-bold leading-none text-sd-navy">от {new Intl.NumberFormat("ru-RU").format(selectedPrice.price)} ₽</span>
+                <span className="mt-1 block text-xs font-bold uppercase tracking-[0.06em] text-sd-rose">Экономия 5 900 ₽</span>
               </span>
+              <ChevronDown className="size-4 text-sd-muted" />
             </label>
             <Button onClick={addStickyProduct} className="h-14 rounded-[6px] bg-sd-gold text-lg font-bold text-sd-navy shadow-[0_12px_28px_rgba(194,132,34,0.20)] transition hover:-translate-y-0.5 hover:bg-sd-gold/90">
               Добавить в корзину

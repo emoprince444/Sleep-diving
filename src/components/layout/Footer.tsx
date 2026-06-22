@@ -11,7 +11,7 @@ export function Footer() {
 
   return (
     <>
-      <Button onClick={openConsultation} className="fixed bottom-6 right-8 z-50 h-14 gap-3 rounded-[6px] bg-sd-chat px-5 text-base font-bold text-white shadow-xl transition hover:-translate-y-0.5 hover:bg-sd-chat/95 max-md:bottom-24 max-sm:right-4">
+      <Button onClick={openConsultation} className="fixed bottom-6 right-8 z-50 h-14 gap-3 rounded-[6px] bg-sd-chat px-5 text-base font-bold text-white shadow-xl transition hover:-translate-y-0.5 hover:bg-sd-chat/95 max-md:hidden">
         <span className="size-3 rounded-full bg-[#52d841]" />
         Чат
         <MessageCircle data-icon="inline-end" />

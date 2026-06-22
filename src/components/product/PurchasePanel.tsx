@@ -15,10 +15,10 @@ type Upgrade = (typeof upgrades)[number]
 function PromoTimer() {
   return (
     <div className="overflow-hidden rounded-[6px] bg-sd-navy text-white shadow-[0_18px_42px_rgba(24,33,45,0.18)]">
-      <div className="grid grid-cols-[1fr_auto] items-center gap-4 px-5 py-4 max-sm:grid-cols-1">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-4 px-5 py-3 max-sm:grid-cols-1 max-sm:py-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-sd-gold">Сезон комфортного сна</p>
-          <p className="mt-1 max-w-[290px] text-[20px] font-semibold leading-snug">
+          <p className="mt-1 max-w-[290px] text-[18px] font-semibold leading-snug max-sm:text-[20px]">
             Выгодные условия на матрасы и комплекты Sleep Diving
           </p>
         </div>
@@ -49,7 +49,7 @@ function UpgradeCard({ upgrade, onSelect, selected }: { upgrade: Upgrade; onSele
     <button
       type="button"
       onClick={onSelect}
-      className={`relative flex min-h-[210px] flex-col items-start rounded-[6px] border bg-white p-4 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(24,33,45,0.12)] ${
+      className={`relative flex min-h-[178px] flex-col items-start rounded-[6px] border bg-white p-4 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(24,33,45,0.12)] max-sm:min-h-[210px] ${
         selected ? "border-sd-navy ring-2 ring-sd-gold/55" : "border-sd-line hover:border-sd-copper/60"
       }`}
     >
@@ -60,8 +60,8 @@ function UpgradeCard({ upgrade, onSelect, selected }: { upgrade: Upgrade; onSele
       )}
       <span className="text-base font-bold text-sd-navy">{upgrade.name}</span>
       <span className="text-sm font-semibold text-sd-muted">{upgrade.price}</span>
-      <img src={upgrade.image} alt="" className="mx-auto mt-3 h-16 w-32 rounded-[4px] object-cover" />
-      <div className="mt-3 flex flex-col gap-2">
+      <img src={upgrade.image} alt="" className="mx-auto mt-2 h-14 w-32 rounded-[4px] object-cover max-sm:mt-3 max-sm:h-16" />
+      <div className="mt-2 flex flex-col gap-1.5 max-sm:mt-3 max-sm:gap-2">
         {upgrade.details.map((detail) => (
           <span key={detail} className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.04em] text-sd-muted">
             <Check className="size-4 text-sd-green" strokeWidth={2.4} />
@@ -117,7 +117,7 @@ export function PurchasePanel() {
       initial={reducedMotion ? false : { opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={premiumTransition}
-      className="sticky top-28 flex flex-col gap-5 rounded-[6px] border border-sd-line bg-white p-6 shadow-[0_24px_70px_rgba(24,33,45,0.12)] max-xl:static max-sm:-mx-1 max-sm:p-4"
+      className="sticky top-28 flex flex-col gap-4 rounded-[6px] border border-sd-line bg-white p-5 shadow-[0_24px_70px_rgba(24,33,45,0.12)] max-xl:static max-sm:-mx-1 max-sm:gap-5 max-sm:p-4"
     >
       <PromoTimer />
       <div className="flex items-start justify-between gap-4">
@@ -132,7 +132,7 @@ export function PurchasePanel() {
             </Badge>
           </div>
           <Rating />
-          <h1 className="font-serif text-[34px] leading-[1.06] text-sd-charcoal max-sm:text-[30px]">
+          <h1 className="font-serif text-[32px] leading-[1.06] text-sd-charcoal max-sm:text-[30px]">
             {productName}
           </h1>
         </div>
@@ -162,10 +162,10 @@ export function PurchasePanel() {
             Преимущества
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="love" className="mt-4 text-[16px] leading-7 text-sd-muted">
+        <TabsContent value="love" className="mt-3 text-[15px] leading-7 text-sd-muted max-sm:mt-4 max-sm:text-[16px]">
           Многослойная конструкция с дышащим чехлом, снижением давления и сбалансированной поддержкой для глубокого восстановления.
         </TabsContent>
-        <TabsContent value="benefits" className="mt-4 text-[16px] leading-7 text-sd-muted">
+        <TabsContent value="benefits" className="mt-3 text-[15px] leading-7 text-sd-muted max-sm:mt-4 max-sm:text-[16px]">
           Деликатная адаптация к телу, устойчивость к движениям партнёра, понятный подбор размера и тестовый период дома.
         </TabsContent>
       </Tabs>
@@ -175,12 +175,12 @@ export function PurchasePanel() {
           Сравнить
         </a>
       </div>
-      <div className="grid grid-cols-2 gap-5 pt-2 max-sm:grid-cols-1">
+      <div className="grid grid-cols-2 gap-4 pt-1 max-sm:grid-cols-1 max-sm:gap-5 max-sm:pt-2">
         {upgrades.map((upgrade) => (
           <UpgradeCard key={upgrade.name} upgrade={upgrade} selected={selectedUpgrade === upgrade.name} onSelect={() => setSelectedUpgrade(upgrade.name)} />
         ))}
       </div>
-      <div className="rounded-[6px] border border-sd-line bg-sd-panel p-5 shadow-inner">
+      <div className="rounded-[6px] border border-sd-line bg-sd-panel p-4 shadow-inner max-sm:p-5">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-base font-bold text-sd-charcoal">Выберите основу</h2>
           <a href="#layers-and-materials" className="text-sm font-medium text-sd-muted underline underline-offset-4 transition hover:text-sd-navy">
@@ -204,7 +204,7 @@ export function PurchasePanel() {
             Пенный
           </button>
         </div>
-        <div className="mt-6 flex items-center justify-between">
+        <div className="mt-5 flex items-center justify-between max-sm:mt-6">
           <h2 className="text-base font-bold text-sd-charcoal">Выберите размер</h2>
           <a href="#faq" className="text-sm font-medium text-sd-muted underline underline-offset-4 transition hover:text-sd-navy">
             Гид по размерам
@@ -214,7 +214,7 @@ export function PurchasePanel() {
           key={selectedSize}
           animate={reducedMotion ? undefined : { boxShadow: ["0 0 0 rgba(194,132,34,0)", "0 0 0 4px rgba(194,132,34,0.13)", "0 0 0 rgba(194,132,34,0)"] }}
           transition={{ duration: 0.7, ease: premiumEase }}
-          className="mt-3 flex h-16 w-full items-center justify-between rounded-[6px] border border-sd-line bg-white px-4 text-left shadow-sm transition hover:border-sd-copper/60 hover:shadow-md max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4"
+          className="mt-3 grid h-16 w-full grid-cols-[auto_1fr_auto] items-center gap-4 rounded-[6px] border border-sd-line bg-white px-4 text-left shadow-sm transition hover:border-sd-copper/60 hover:shadow-md max-sm:flex max-sm:h-auto max-sm:flex-col max-sm:items-start max-sm:gap-2 max-sm:py-4"
         >
           <select
             value={selectedSize}
@@ -226,10 +226,10 @@ export function PurchasePanel() {
               <option key={item.size}>{item.size}</option>
             ))}
           </select>
-          <span className="flex items-center gap-2 max-sm:w-full max-sm:justify-between">
-            <span className="text-sm font-bold text-sd-rose">Выгода {new Intl.NumberFormat("ru-RU").format(selectedPrice.oldPrice - selectedPrice.price)} ₽</span>
-            <span className="text-2xl font-bold text-sd-navy">от {new Intl.NumberFormat("ru-RU").format(selectedPrice.price)} ₽</span>
-            <ChevronDown className="size-4 text-sd-muted" />
+          <span className="justify-self-end text-right max-sm:flex max-sm:w-full max-sm:items-center max-sm:justify-between max-sm:gap-2 max-sm:text-left">
+            <span className="block text-2xl font-bold leading-none text-sd-navy max-sm:order-2">от {new Intl.NumberFormat("ru-RU").format(selectedPrice.price)} ₽</span>
+            <span className="mt-1 block text-xs font-bold uppercase tracking-[0.06em] text-sd-rose max-sm:order-1 max-sm:mt-0">Экономия {new Intl.NumberFormat("ru-RU").format(selectedPrice.oldPrice - selectedPrice.price)} ₽</span>
+            <ChevronDown className="size-4 text-sd-muted max-sm:order-3" />
           </span>
         </motion.label>
       </div>
@@ -240,7 +240,7 @@ export function PurchasePanel() {
           return (
             <div
               key={item.label}
-              className="flex items-center gap-3 rounded-[6px] border border-sd-line bg-white px-4 py-3 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-sd-copper/60 hover:shadow-md"
+              className="flex items-center gap-3 rounded-[6px] border border-sd-line bg-white px-4 py-2.5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-sd-copper/60 hover:shadow-md max-sm:py-3"
             >
               <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sd-cream text-sd-copper">
                 <Icon className="size-5" />
@@ -256,7 +256,7 @@ export function PurchasePanel() {
         })}
       </div>
       <motion.div whileHover={reducedMotion ? undefined : { y: -3 }} whileTap={reducedMotion ? undefined : { scale: 0.99 }}>
-        <Button onClick={addPanelProduct} className="h-16 w-full rounded-[6px] bg-sd-gold text-xl font-bold text-sd-navy shadow-[0_14px_34px_rgba(194,132,34,0.24)] transition duration-300 hover:bg-sd-gold/90 hover:shadow-[0_18px_44px_rgba(194,132,34,0.30)]">
+        <Button onClick={addPanelProduct} className="h-14 w-full rounded-[6px] bg-sd-gold text-xl font-bold text-sd-navy shadow-[0_14px_34px_rgba(194,132,34,0.24)] transition duration-300 hover:bg-sd-gold/90 hover:shadow-[0_18px_44px_rgba(194,132,34,0.30)] max-sm:h-16">
         Добавить в корзину
         </Button>
       </motion.div>

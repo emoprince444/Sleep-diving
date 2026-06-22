@@ -17,7 +17,7 @@ import { PopularMattressesSection, ProductCatalogSection } from "@/components/pr
 import { ProductGallery } from "@/components/product/ProductGallery"
 import { PurchasePanel } from "@/components/product/PurchasePanel"
 import { ReviewsSection } from "@/components/product/ReviewsSection"
-import { TrustBadges } from "@/components/product/TrustBadges"
+import { GalleryBenefitsPanel, TrustBadges } from "@/components/product/TrustBadges"
 import { TrustedBySleepersSection } from "@/components/product/TrustedBySleepersSection"
 import { WhySleepDivingSection } from "@/components/product/WhySleepDivingSection"
 import { breadcrumbs } from "@/data/product"
@@ -70,7 +70,7 @@ function HomePage() {
   return (
     <main id="overview" className="min-h-screen bg-white text-sd-charcoal">
       <Header />
-      <section className="bg-[linear-gradient(180deg,#fbfaf7_0%,#ffffff_78%)] px-8 pb-10 pt-7 max-lg:px-5 max-sm:px-4 max-sm:pt-5">
+      <section className="bg-[linear-gradient(180deg,#fbfaf7_0%,#ffffff_78%)] px-8 pb-5 pt-7 max-xl:pb-10 max-lg:px-5 max-sm:px-4 max-sm:pt-5">
         <div className="mx-auto max-w-[1640px]">
           <motion.div
             className="mb-7 flex items-center gap-2 overflow-x-auto whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.08em] text-sd-muted"
@@ -96,6 +96,7 @@ function HomePage() {
             >
               <ProductGallery />
               <TrustBadges />
+              <GalleryBenefitsPanel />
             </motion.div>
             <motion.div
               initial={reducedMotion ? false : { opacity: 0, y: 18 }}
@@ -149,6 +150,11 @@ function ProductDetailPage({ productId }: { productId: string }) {
     { label: "Гарантия", value: product.warranty, icon: ShieldCheck },
     { label: "Доставка", value: "По всей стране", icon: Truck },
     { label: "Возврат", value: "14 дней", icon: RotateCcw },
+  ]
+  const ctaTrustItems = [
+    { label: "Доставка", value: "3-7 дней", icon: Truck },
+    { label: "Гарантия", value: product.warranty, icon: ShieldCheck },
+    { label: "Тест дома", value: "120 ночей", icon: BadgeCheck },
   ]
   const reasons = [
     "Премиальные материалы подобраны под ежедневный сон, а не только под красивую спецификацию.",
@@ -230,6 +236,22 @@ function ProductDetailPage({ productId }: { productId: string }) {
               >
                 Добавить в корзину
               </button>
+
+              <div className="mt-3 grid grid-cols-3 gap-2 max-sm:grid-cols-1">
+                {ctaTrustItems.map((item) => {
+                  const Icon = item.icon
+
+                  return (
+                    <div key={item.label} className="flex items-center gap-2 rounded-[6px] border border-sd-line bg-sd-panel px-3 py-2.5 max-sm:px-3 max-sm:py-2">
+                      <Icon className="size-4 shrink-0 text-sd-copper" strokeWidth={1.8} />
+                      <span className="min-w-0">
+                        <span className="block text-[10px] font-bold uppercase tracking-[0.08em] text-sd-muted">{item.label}</span>
+                        <span className="block truncate text-sm font-bold leading-5 text-sd-charcoal">{item.value}</span>
+                      </span>
+                    </div>
+                  )
+                })}
+              </div>
 
               <div className="mt-4 hidden rounded-[6px] bg-sd-panel p-3 max-sm:block">
                 <ul className="grid gap-1.5 text-sm leading-5 text-sd-muted">

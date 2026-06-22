@@ -129,7 +129,7 @@ Component relationships:
 
 Текущая задача:
 
-- Sleep Diving Catalog Image Ratio Pass завершён: mobile image height and spacing in catalog cards reduced again while desktop remains unchanged.
+- PDP empty-space refinement завершён: desktop whitespace after the benefits area was reduced sharply with denser purchase-column rhythm and a continued benefits panel.
 
 Текущие проблемы:
 
@@ -166,6 +166,14 @@ Component relationships:
 - Keep Product Detail Page focused on conversion: first viewport must show price, old price, savings, size selection, buy CTA, warranty, delivery, and collection label.
 - On mobile Product Detail Page, keep the hero compact and show product name, short description, price, selected size, size picker, and Add to Cart before deeper materials/details.
 - On mobile catalog cards, prioritize browsing speed: image, collection label, name, short subtitle, price, discount, and one primary CTA; detailed specs belong on PDP or desktop catalog cards.
+- Treat `AGENTS.md` as the canonical agent instruction file; `AGENT.md` is kept synchronized for compatibility.
+- Keep purchase reassurance directly adjacent to the PDP primary CTA: delivery timing, warranty, and trial period should be visible without sending the buyer to deeper sections.
+- Hide the floating consultation chat button on mobile because the PDP already has a fixed bottom purchase CTA and overlapping purchase controls is worse for conversion than persistent chat access.
+- Keep the desktop header as two visual clusters: logo plus primary navigation on the left, CTA/account/cart controls on the right. Adjust cluster spacing before reducing spacing between individual nav links.
+- On desktop PDP, the left gallery column should continue into meaningful conversion content before the next large content sections; do not solve gallery-column emptiness with artificial spacing.
+- Keep PDP price selectors premium and hierarchical: size, price, then savings. Savings copy should belong visually to the price and use `Экономия` rather than marketplace-style floating discount text.
+- After every completed task, automatically deploy the production site to Vercel without requiring a separate user reminder.
+- When the desktop PDP right purchase column is taller than the left gallery/benefits flow, reduce dead space by balancing meaningful content and compacting existing purchase surfaces before using artificial spacing.
 
 ## 8. Правила для AI-агента
 
@@ -185,6 +193,65 @@ Component relationships:
 
 Последние изменения:
 
+- Published the desktop PDP empty-space refinement to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-fxnrt7cgo-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_7XEK9vxXT4PkviDgpntJPdSc9TCb`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
+- Выполнен desktop PDP empty-space refinement по пользовательскому скриншоту.
+- Desktop `PurchasePanel` стал плотнее: reduced outer gap/padding, smaller promo title, shorter upgrade cards, tighter upgrade images/details, tighter base/size block, shorter reassurance rows and CTA.
+- Mobile overrides preserved for the purchase panel, so mobile height/rhythm remains intentionally unchanged.
+- `GalleryBenefitsPanel` extended with a compact bottom reassurance row: `Подбор без давления`, `Понятные условия возврата`, `Доставка выбранного размера`.
+- Проверено Playwright desktop: top section height reduced, purchase panel height reduced to about 1320px, and measured empty area after benefits is effectively removed (`emptyAfterBenefits: -14`).
+- Проверено Playwright mobile: desktop benefits panel remains hidden and sticky mobile buy remains visible.
+- Проверено локально: `npm run build` passed; Vite still reports the existing bundle-size warning above 500 kB.
+- Published the PDP Refinement Pass to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-u30r2tn3n-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_HEvYEpbWD2dWXxc6A3u69r4S6qvr`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
+- Added the rule to `AGENTS.md` and `AGENT.md`: after every completed task, automatically update the production Vercel site without a separate user reminder.
+- Выполнен PDP Refinement Pass для desktop PDP.
+- В desktop sticky buy bar изменён price selector: size остаётся слева, price стал главным правым элементом, `Экономия 5 900 ₽` размещена под ценой.
+- В основном purchase panel применена та же premium hierarchy для size/price/savings, с responsive overrides для сохранения mobile flow.
+- Текст `Выгода 5 900 ₽` заменён на `Экономия 5 900 ₽` в selector presentation.
+- Desktop bottom padding hero/PDP intro section reduced from `pb-10` to `pb-5`, while `max-xl:pb-10` preserves tablet/mobile spacing.
+- Проверено локально: `npm run build` passed; Vite still reports the existing bundle-size warning above 500 kB.
+- Проверено Playwright desktop/mobile на `/`: old `Выгода 5 900 ₽` text absent, `Экономия` visible, price renders above savings in selector area, sticky mobile buy remains visible, console errors/warnings нет.
+- Published the PDP Content Flow Pass to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-j5zah3bmj-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_AfVEoCjuKgHm7uYBsp667Laf8zWC`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
+- Выполнен PDP Content Flow Pass только для desktop PDP.
+- Под gallery/trust area добавлен desktop-only `GalleryBenefitsPanel` с premium benefits: `8 214 отзывов`, `120 ночей на тест`, `Гарантия комфорта`, `Бесплатная доставка`.
+- Новый блок использует существующие project data (`reviewCount`) и trust semantics, без fake urgency, popups, aggressive sales elements or purchase-column redesign.
+- Блок скрыт на mobile через responsive classes, поэтому mobile PDP flow and sticky buy behavior preserved.
+- Проверено локально: `npm run build` passed; Vite still reports the existing bundle-size warning above 500 kB.
+- Проверено Playwright desktop/mobile на `/`: desktop benefits panel visible below gallery area, purchase CTA remains in right column, mobile benefits panel hidden, sticky mobile buy button visible, console errors/warnings нет.
+- Published the current local working tree to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-7xg4rr2qs-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_FqkoyM9aUDCm8YbsmNeenZv7Pwzx`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
+- Выполнен Header Navigation Density Pass только для desktop header.
+- Primary navigation cluster (`Каталог`, `Сравнение`, `Выгода до 20%`, `Кровати`, `Материалы`) теперь находится в одной left-cluster группе с логотипом Sleep Diving.
+- Gap между logo и primary navigation стал controlled через existing flex/gap utilities (`gap-10 xl:gap-12`), вместо распределения через `justify-between` между тремя независимыми header элементами.
+- CTA `Подобрать матрас`, account и cart controls вынесены в правый action-кластер и визуально остались справа.
+- Расстояние между самими nav links сохранено (`gap-8`), поэтому header стал плотнее без ощущения cramped menu.
+- Mobile поведение сохранено: desktop nav и CTA скрыты, cart и burger menu остаются видимыми.
+- Проверено локально: `npm run build` passed; Vite still reports the existing bundle-size warning above 500 kB.
+- Проверено Playwright desktop/mobile на `/`: desktop logo-to-nav gap 48px, nav visible, CTA/right icons visible and balanced; mobile desktop nav hidden, CTA hidden, burger menu visible; console errors/warnings нет.
+- Выполнен PDP Conversion Pass для dedicated Product Detail Page.
+- Под основной кнопкой `Добавить в корзину` добавлен компактный trust-блок: доставка `3-7 дней`, гарантия конкретной модели и `120 ночей` теста дома.
+- Trust-блок расположен внутри purchase card рядом с CTA, без редизайна PDP и без изменения каталожных карточек.
+- На mobile скрыта floating chat-кнопка, чтобы она не перекрывала выбор размера, основной CTA и новый reassurance-блок; desktop chat сохранён.
+- Проверено локально: `npm run build` passed; Vite still reports the existing bundle-size warning above 500 kB.
+- Проверено Playwright mobile на `/product/shamsa-topper`: страница не blank, trust-блок видим, primary CTA видима, клик по `Добавить в корзину` открывает корзину, console errors/warnings нет.
+- Created canonical `AGENTS.md` and synchronized existing `AGENT.md` with the same content.
+- Agent instructions now document Sleep Diving as a premium mattress ecommerce experience inspired by DreamCloud, Saatva, Eight Sleep, and Casper.
+- Added current stack, design principles, decision priorities, completed state, completed optimization passes, catalog-card rules, next planned PDP Conversion Pass, future Premium Motion Pass, and working style.
+- Documented the rule that catalog cards are discovery surfaces and detailed specs belong on PDP.
 - Выполнен Sleep Diving Catalog Image Ratio Pass только для мобильных карточек каталога.
 - Mobile product image height reduced from 138px to 108px, preserving the existing premium crop and desktop image ratio.
 - Mobile card content padding and vertical gaps tightened conservatively without changing typography, pricing style, CTA style, data, PDP, or desktop layout.
@@ -239,21 +306,33 @@ Component relationships:
 
 Измененные файлы:
 
+- `src/components/product/PurchasePanel.tsx`
+- `src/components/product/TrustBadges.tsx`
+- `src/components/layout/StickyBuyBar.tsx`
+- `src/App.tsx`
+- `src/components/layout/Header.tsx`
+- `src/components/layout/Footer.tsx`
+- `AGENTS.md`
+- `AGENT.md`
 - `PROJECT_CONTEXT.md`
-- `src/components/product/ProductCatalogSection.tsx`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after the mobile catalog image ratio pass, with a bundle-size warning above the default 500 kB threshold.
+- Completed tasks must now be deployed to the Vercel production site automatically after local validation and `PROJECT_CONTEXT.md` updates.
+- Desktop PDP top section now has much less dead space after the benefits area; left and right columns feel more balanced during scroll.
+- Desktop PDP pricing selectors now use a cleaner premium hierarchy with savings visually attached to price.
+- Desktop PDP left-column content flow now continues from gallery into trust/benefits content before deeper page sections.
+- Desktop header navigation now starts closer to the brand mark while preserving right-side action balance and mobile behavior.
+- PDP purchase confidence has been improved with CTA-adjacent delivery, warranty, and trial reassurance.
 - The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed mobile catalog card height is about 269px, price and one `Подробнее` CTA remain visible, and the CTA routes to Product Detail Page while desktop cards remain detailed.
+- Agent/project docs are now synchronized with the latest completed catalog/PDP optimization passes and next planned conversion work.
 
 ## 10. Следующие шаги
 
@@ -265,5 +344,6 @@ Component relationships:
 - Decide hosting/deployment target.
 - Add automated visual or component tests for the PDP, preferably with Playwright installed/configured.
 - Run full rendered QA once the in-app Browser runtime is available or Playwright is added.
+- Consider a second small PDP conversion pass only after reviewing analytics or more mobile screenshots; avoid adding more density near the CTA without evidence.
 - Continue updating this file after major product, architecture, or integration changes.
 - Keep `PROJECT_CONTEXT.md` synchronized after every completed task, including changed files and latest decisions.
