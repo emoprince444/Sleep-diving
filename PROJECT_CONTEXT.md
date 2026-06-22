@@ -130,7 +130,7 @@ Component relationships:
 
 Текущая задача:
 
-- Catalog Simplification Pass завершён: catalog cards are back to lightweight discovery surfaces with image, collection, name, positioning label, short product type, price, and PDP CTA only.
+- Source-of-truth catalog alignment завершён: product positioning copy is now cross-checked against the original SleepDiving tag catalog pages for spring, foam, and single-size mattresses.
 
 Текущие проблемы:
 
@@ -166,6 +166,10 @@ Component relationships:
 - Store imported product catalog imagery under `src/assets/product-images/` so real catalog assets are separated from generated PDP/editorial assets.
 - Keep model positioning copy centralized in `src/data/products.ts` as part of `ProductCardCopy`; catalog cards and PDP should consume the same short label so product-family meaning stays consistent.
 - Keep catalog cards as discovery surfaces: do not add PDP-level specs, long descriptions, size selectors, material lists, or benefit blocks back into catalog cards.
+- Treat original SleepDiving catalog tag pages as source-of-truth inputs for model grouping and short positioning copy when available:
+  - `https://sleepdiving.ru/tag/pruzhinnye-matrasy/`
+  - `https://sleepdiving.ru/tag/bespruzhinnye-matrasy/`
+  - `https://sleepdiving.ru/tag/odnospalnye-matrasy/`
 - Use RRC as the buyer-facing public price.
 - Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
 - Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
@@ -199,6 +203,19 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнена сверка positioning/copy с оригинальными SleepDiving catalog tag pages.
+- Original source pages confirmed product grouping: `Sleep Foam` and `SleepCombi` are listed under беспружинные; Batra, Balkiz, Malek, Matin, Mukhtalif, Hafif, Hafif Plus, Jumana and Batra Kasi appear in spring/single-size catalog contexts.
+- `Sleep Combi` positioning updated to `Эффект памяти`, with product type/description aligned to the original source summary about elastic memory foam and muscle relaxation.
+- `Sleep Foam` positioning updated to `Подпружиненный комфорт`, with product type/description aligned to the original source summary about a comfortable springy-feeling surface and suitability for couples.
+- `Batra`, `Balkiz`, `Batra Kasi`, `Hafif`, and `Hafif Plus` copy adjusted toward source-backed positioning: latex/adaptive support, medium firmness, and PocketSpring cues.
+- All positioning labels remain within the 2-4 word constraint.
+- Проверено локально: `npm run build` passed; Vite still reports the existing JS chunk warning above 500 kB.
+- Проверено Playwright CLI screenshots: desktop `/catalog` and desktop `/product/sleep-combi`; simplified catalog remains stable and Combi PDP shows the source-aligned memory-foam positioning.
+- Published the source-of-truth catalog alignment to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-3nr0yix7h-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_FBKtRF7WAE75e1ZF9cTECfJtvLAH`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
 - Выполнен Catalog Simplification Pass.
 - Catalog product cards simplified to the discovery-only content set: product image, collection label, product name, positioning label, short product type, price, and `Подробнее` CTA.
 - Removed PDP-level detail from catalog cards: size/warranty/delivery/return stat cards, size selector, `Что вы почувствуете` benefits block, long description, materials list, height badge, firmness pill, old price and savings copy.
