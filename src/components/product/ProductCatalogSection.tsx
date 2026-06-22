@@ -56,34 +56,34 @@ export function ProductCard({ product }: { product: MattressProduct }) {
       whileHover={reducedMotion ? undefined : { y: -6, boxShadow: "0 24px 58px rgba(24,33,45,0.14)" }}
       className="group flex h-full flex-col overflow-hidden rounded-[6px] border border-sd-line bg-white shadow-sm transition-colors duration-300 hover:border-sd-copper/60"
     >
-      <a href={`/product/${product.id}`} className="relative block h-[245px] overflow-hidden bg-sd-soft" aria-label={`Открыть ${copy.displayName}`}>
+      <a href={`/product/${product.id}`} className="relative block h-[245px] overflow-hidden bg-sd-soft max-sm:h-[138px]" aria-label={`Открыть ${copy.displayName}`}>
         <img src={product.image} alt={product.name} className="size-full object-cover transition duration-700 group-hover:scale-105" />
-        <div className="absolute left-4 top-4 rounded-[4px] bg-white/95 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-sd-navy shadow-[0_10px_24px_rgba(24,33,45,0.10)]">
+        <div className="absolute left-4 top-4 rounded-[4px] bg-white/95 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-sd-navy shadow-[0_10px_24px_rgba(24,33,45,0.10)] max-sm:hidden">
           {productCategoryLabels[product.category]}
         </div>
-        <div className="absolute bottom-4 right-4 rounded-[4px] bg-sd-navy px-3 py-2 text-sm font-bold text-white shadow-md">
+        <div className="absolute bottom-4 right-4 rounded-[4px] bg-sd-navy px-3 py-2 text-sm font-bold text-white shadow-md max-sm:hidden">
           {product.heightCm} см
         </div>
       </a>
-      <div className="flex flex-1 flex-col p-6 max-sm:p-5">
-        <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-1 flex-col p-6 max-sm:p-4">
+        <div className="flex items-start justify-between gap-4 max-sm:gap-2">
           <div className="min-w-0">
-            <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-sd-copper">{productCategoryLabels[product.category]}</p>
-            <h3 className="mt-2 font-serif text-[34px] leading-[1.02] text-sd-charcoal max-sm:text-[30px]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-sd-copper max-sm:text-[10px]">{productCategoryLabels[product.category]}</p>
+            <h3 className="mt-2 font-serif text-[34px] leading-[1.02] text-sd-charcoal max-sm:mt-1 max-sm:text-[28px]">
               <a href={`/product/${product.id}`} className="transition hover:text-sd-navy">
                 {copy.displayName}
               </a>
             </h3>
-            <p className="mt-3 text-[15px] font-semibold leading-6 text-sd-navy">{copy.productType}</p>
+            <p className="mt-3 text-[15px] font-semibold leading-6 text-sd-navy max-sm:mt-1 max-sm:overflow-hidden max-sm:text-sm max-sm:leading-5 max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:2] max-sm:[display:-webkit-box]">{copy.productType}</p>
           </div>
-          <span className="shrink-0 rounded-full bg-sd-cream px-3 py-1 text-[11px] font-bold uppercase tracking-[0.06em] text-sd-navy">{product.firmness}</span>
+          <span className="shrink-0 rounded-full bg-sd-cream px-3 py-1 text-[11px] font-bold uppercase tracking-[0.06em] text-sd-navy max-sm:hidden">{product.firmness}</span>
         </div>
 
-        <p className="mt-5 min-h-[78px] text-[15px] leading-7 text-sd-muted max-sm:min-h-0">
+        <p className="mt-5 min-h-[78px] text-[15px] leading-7 text-sd-muted max-sm:hidden">
           {copy.description}
         </p>
 
-        <div className="mt-5 grid grid-cols-2 gap-2.5 text-sm max-sm:grid-cols-1">
+        <div className="mt-5 grid grid-cols-2 gap-2.5 text-sm max-sm:hidden">
           {stats.map((item) => {
             const Icon = item.icon
 
@@ -101,10 +101,10 @@ export function ProductCard({ product }: { product: MattressProduct }) {
           })}
         </div>
 
-        <label className="mt-6 block text-xs font-bold uppercase tracking-[0.07em] text-sd-muted" htmlFor={`${product.id}-size`}>
+        <label className="mt-6 block text-xs font-bold uppercase tracking-[0.07em] text-sd-muted max-sm:hidden" htmlFor={`${product.id}-size`}>
           Выберите размер
         </label>
-        <div className="relative mt-2">
+        <div className="relative mt-2 max-sm:hidden">
           <select
             id={`${product.id}-size`}
             value={selectedSize}
@@ -120,7 +120,7 @@ export function ProductCard({ product }: { product: MattressProduct }) {
           <ChevronDown className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-sd-muted" />
         </div>
 
-        <div className="mt-5 rounded-[6px] border border-sd-line bg-white p-4 shadow-[0_12px_34px_rgba(24,33,45,0.04)]">
+        <div className="mt-5 rounded-[6px] border border-sd-line bg-white p-4 shadow-[0_12px_34px_rgba(24,33,45,0.04)] max-sm:hidden">
           <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.08em] text-sd-charcoal">
             <Sparkles className="size-4 text-sd-copper" strokeWidth={1.7} />
             Что вы почувствуете
@@ -135,21 +135,30 @@ export function ProductCard({ product }: { product: MattressProduct }) {
           </ul>
         </div>
 
-        <div className="mt-5 flex flex-wrap items-end justify-between gap-3 border-t border-sd-line pt-5">
+        <div className="mt-5 flex flex-wrap items-end justify-between gap-3 border-t border-sd-line pt-5 max-sm:mt-3 max-sm:items-center max-sm:gap-2 max-sm:pt-3">
           <div>
-            <p className="text-sm font-semibold text-sd-muted line-through">{formatRub(selectedPrice.oldPrice)}</p>
-            <p className="font-serif text-[34px] leading-none text-sd-navy">{formatRub(selectedPrice.rrp)}</p>
-            <p className="mt-1 text-sm font-bold text-sd-rose">Выгода {formatRub(selectedPrice.savings)}</p>
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-sm font-semibold text-sd-muted line-through max-sm:text-xs">{formatRub(selectedPrice.oldPrice)}</p>
+              <p className="hidden text-xs font-bold text-sd-rose max-sm:block">-{Math.round((selectedPrice.savings / selectedPrice.oldPrice) * 100)}%</p>
+            </div>
+            <p className="font-serif text-[34px] leading-none text-sd-navy max-sm:text-[30px]">{formatRub(selectedPrice.rrp)}</p>
+            <p className="mt-1 text-sm font-bold text-sd-rose max-sm:hidden">Выгода {formatRub(selectedPrice.savings)}</p>
           </div>
           <Button
             onClick={() => addItem({ id: product.id, name: copy.displayName, image: product.image, size: selectedPrice.size, price: selectedPrice.rrp })}
-            className="h-12 rounded-[6px] bg-sd-gold px-6 text-base font-bold text-sd-navy shadow-[0_10px_24px_rgba(194,132,34,0.24)] transition hover:-translate-y-0.5 hover:bg-sd-gold/90"
+            className="h-12 rounded-[6px] bg-sd-gold px-6 text-base font-bold text-sd-navy shadow-[0_10px_24px_rgba(194,132,34,0.24)] transition hover:-translate-y-0.5 hover:bg-sd-gold/90 max-sm:hidden"
           >
             Добавить
           </Button>
+          <a
+            href={`/product/${product.id}`}
+            className="hidden h-11 items-center justify-center rounded-[6px] bg-sd-navy px-5 text-sm font-bold text-white shadow-[0_10px_24px_rgba(24,33,45,0.14)] transition hover:bg-sd-navy/92 max-sm:inline-flex"
+          >
+            Подробнее
+          </a>
         </div>
 
-        <div className="mt-5 rounded-[6px] bg-sd-panel p-4">
+        <div className="mt-5 rounded-[6px] bg-sd-panel p-4 max-sm:hidden">
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-sd-charcoal">
             Материалы
           </p>

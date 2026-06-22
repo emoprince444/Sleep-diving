@@ -129,7 +129,7 @@ Component relationships:
 
 Текущая задача:
 
-- Mobile Product Page Optimization Pass завершён: мобильная PDP стала короче, цена/размер/CTA подняты в первый экран, добавлен sticky mobile CTA.
+- Sleep Diving Catalog Card Compression Pass завершён: мобильные карточки каталога сжаты для быстрого просмотра, desktop-карточки сохранены.
 
 Текущие проблемы:
 
@@ -165,6 +165,7 @@ Component relationships:
 - Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
 - Keep Product Detail Page focused on conversion: first viewport must show price, old price, savings, size selection, buy CTA, warranty, delivery, and collection label.
 - On mobile Product Detail Page, keep the hero compact and show product name, short description, price, selected size, size picker, and Add to Cart before deeper materials/details.
+- On mobile catalog cards, prioritize browsing speed: image, collection label, name, short subtitle, price, discount, and one primary CTA; detailed specs belong on PDP or desktop catalog cards.
 
 ## 8. Правила для AI-агента
 
@@ -184,6 +185,12 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнен Sleep Diving Catalog Card Compression Pass только для мобильных карточек каталога и блока популярных товаров.
+- На mobile карточка теперь показывает только image, collection label, product name, short subtitle, price/discount and one CTA `Подробнее`.
+- С mobile-карточек скрыты size selector, size/warranty/delivery/return blocks, benefits section, materials section, load/spec details and duplicated image badges.
+- Высота mobile hero image в карточке уменьшена до компактного формата; отступы между title/subtitle/price/CTA сокращены.
+- Desktop catalog card layout intentionally preserved, including size selector, cart CTA, specs, benefits and materials.
+- Проверено локально в Chromium mobile: первая карточка около 335px высотой, price and CTA visible, CTA leads to Product Detail Page, console errors нет.
 - Выполнен Mobile Product Page Optimization Pass только для мобильной Product Detail Page.
 - На mobile hero image стал компактнее, убран повторяющийся бейдж коллекции поверх изображения, сокращены вертикальные отступы.
 - На первом мобильном экране теперь видны название, короткое описание, цена, выбранный размер и покупка.
@@ -228,20 +235,20 @@ Component relationships:
 Измененные файлы:
 
 - `PROJECT_CONTEXT.md`
-- `src/App.tsx`
+- `src/components/product/ProductCatalogSection.tsx`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after the mobile Product Detail Page optimization pass, with a bundle-size warning above the default 500 kB threshold.
+- `npm run build` passed after the mobile catalog card compression pass, with a bundle-size warning above the default 500 kB threshold.
 - The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed `/product/shamsa-topper` mobile first viewport includes product name, price, selected size, and purchase CTA; size selection changes price; sticky mobile CTA opens cart; desktop still shows the normal PDP without sticky mobile CTA.
+- Browser QA confirmed mobile catalog cards are compressed, show price and one `Подробнее` CTA, and route to the Product Detail Page while desktop cards remain detailed.
 
 ## 10. Следующие шаги
 
