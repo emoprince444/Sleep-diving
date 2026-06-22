@@ -129,7 +129,7 @@ Component relationships:
 
 Текущая задача:
 
-- Premium Product Page Pass завершён: отдельные страницы товаров получили ecommerce first screen с ценой, размером, CTA, гарантией, доставкой и premium content sections.
+- Mobile Product Page Optimization Pass завершён: мобильная PDP стала короче, цена/размер/CTA подняты в первый экран, добавлен sticky mobile CTA.
 
 Текущие проблемы:
 
@@ -164,6 +164,7 @@ Component relationships:
 - Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
 - Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
 - Keep Product Detail Page focused on conversion: first viewport must show price, old price, savings, size selection, buy CTA, warranty, delivery, and collection label.
+- On mobile Product Detail Page, keep the hero compact and show product name, short description, price, selected size, size picker, and Add to Cart before deeper materials/details.
 
 ## 8. Правила для AI-агента
 
@@ -183,6 +184,16 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнен Mobile Product Page Optimization Pass только для мобильной Product Detail Page.
+- На mobile hero image стал компактнее, убран повторяющийся бейдж коллекции поверх изображения, сокращены вертикальные отступы.
+- На первом мобильном экране теперь видны название, короткое описание, цена, выбранный размер и покупка.
+- Описание на mobile ограничено двумя строками, чтобы цена и CTA появлялись раньше.
+- Блок цены стал компактнее: старая цена и выгода рядом, крупная текущая цена, размер рядом с ценой.
+- CTA переименован в «Добавить в корзину» и поднят сразу под выбор размера.
+- Характеристики на mobile оформлены как компактная сетка 2×2: высота, гарантия, доставка, возврат.
+- Добавлен sticky mobile CTA снизу: «Купить» + «от ... ₽» с текущим выбранным размером.
+- Материалы и подробные блоки на mobile получили меньшие отступы и компактные карточки; desktop smoke confirmed unchanged.
+- Проверено локально в Chromium mobile: в первом viewport есть имя, цена, размер и покупка; размер меняет цену; sticky CTA открывает корзину; console errors нет.
 - Выполнен Premium Product Page Pass только для Product Detail Page (`/product/:id`).
 - Первый экран товара теперь показывает цену, старую цену, процент скидки, выгоду, выбор размера, кнопку «Купить», гарантию, доставку, возврат и высоту.
 - Product Detail Page использует premium display-copy (`getProductCardCopy`): короткие имена, тип товара и спокойное продающее описание вместо складского описания.
@@ -218,21 +229,19 @@ Component relationships:
 
 - `PROJECT_CONTEXT.md`
 - `src/App.tsx`
-- `src/data/products.ts`
-- `src/components/product/ProductCatalogSection.tsx`
 
 Краткое резюме текущего состояния:
 
 - The project is a working frontend-only Sleep Diving PDP prototype.
 - The architecture has been refactored into clear `brand`, `layout`, `product`, and `data` modules.
-- `npm run build` passed after the premium Product Detail Page pass, with a bundle-size warning above the default 500 kB threshold.
+- `npm run build` passed after the mobile Product Detail Page optimization pass, with a bundle-size warning above the default 500 kB threshold.
 - The page is still frontend-only and not connected to real backend/cart/checkout services, but has local cart and lead-form behavior.
 - Agent maintenance rules are now documented in `AGENT.md` and mirrored in `PROJECT_CONTEXT.md`.
 - Sticky navigation now has Russian labels and real destinations for the overview, reviews, questions, materials, specs, and comparison sections.
 - The visual system now uses cohesive branded Sleep Diving imagery instead of the original temporary placeholders.
 - The page now has stronger conversion signals: denser rhythm, purchase urgency, financing/delivery reassurance, and expanded social proof.
 - The homepage now shows only a short popular-products section, while the full real Sleep Diving catalog data from the PDF is available on `/catalog`.
-- Browser QA confirmed `/product/shamsa-topper` renders the premium first screen on mobile/desktop, size selection changes price, the buy CTA opens cart, and the old category term is not visible.
+- Browser QA confirmed `/product/shamsa-topper` mobile first viewport includes product name, price, selected size, and purchase CTA; size selection changes price; sticky mobile CTA opens cart; desktop still shows the normal PDP without sticky mobile CTA.
 
 ## 10. Следующие шаги
 
