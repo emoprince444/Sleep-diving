@@ -183,7 +183,10 @@ function ProductDetailPage({ productId }: { productId: string }) {
             <h1 className="mt-3 font-serif text-[64px] leading-[0.98] text-sd-charcoal max-xl:text-[54px] max-md:text-[42px] max-sm:mt-2 max-sm:text-[38px]">
               {copy.displayName}
             </h1>
-            <p className="mt-4 max-w-2xl text-xl font-semibold leading-8 text-sd-navy max-sm:mt-2 max-sm:text-base max-sm:leading-6">
+            <p className="mt-4 text-sm font-bold uppercase tracking-[0.08em] text-sd-navy max-sm:mt-2 max-sm:text-xs">
+              {copy.positioningLabel}
+            </p>
+            <p className="mt-2 max-w-2xl text-xl font-semibold leading-8 text-sd-navy max-sm:text-base max-sm:leading-6">
               {copy.productType}
             </p>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-sd-muted max-sm:mt-2 max-sm:overflow-hidden max-sm:text-sm max-sm:leading-6 max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:2] max-sm:[display:-webkit-box]">

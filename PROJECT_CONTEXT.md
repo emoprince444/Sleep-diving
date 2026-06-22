@@ -130,7 +130,7 @@ Component relationships:
 
 Текущая задача:
 
-- Real Product Image Mapping Pass завершён: catalog products now use product-specific images from the uploaded mattress/topper archive instead of the previous generic repeated image set.
+- Collection Positioning Pass завершён: catalog cards and PDP hero now show short calm positioning labels that explain each model family role at a glance.
 
 Текущие проблемы:
 
@@ -164,6 +164,7 @@ Component relationships:
 - Keep real mattress catalog data in `src/data/products.ts`; never render internal `wholesalePrice` or the word "опт" to buyers.
 - Keep catalog product-image mapping centralized in `src/data/products.ts`; when real product imagery is available, prefer exact product/series images over generic generated comparison imagery.
 - Store imported product catalog imagery under `src/assets/product-images/` so real catalog assets are separated from generated PDP/editorial assets.
+- Keep model positioning copy centralized in `src/data/products.ts` as part of `ProductCardCopy`; catalog cards and PDP should consume the same short label so product-family meaning stays consistent.
 - Use RRC as the buyer-facing public price.
 - Use Framer Motion for restrained premium micro-interactions and always respect `prefers-reduced-motion`.
 - Keep imported mattress facts/prices intact; use a separate premium display-copy layer for customer-facing product-card naming and descriptions.
@@ -197,6 +198,19 @@ Component relationships:
 
 Последние изменения:
 
+- Выполнен Collection Positioning Pass.
+- В `ProductCardCopy` добавлено поле `positioningLabel` для короткого premium-позиционирования каждой модели.
+- В каталожных карточках label выводится под названием товара и над product type, без изменения структуры карточки, фильтров, цен или CTA.
+- В PDP hero label выводится под названием модели и над product type, чтобы роль модели считывалась сразу.
+- Добавлены calm/informative labels для ключевых моделей: `Флагманская поддержка`, `Максимальный комфорт`, `Усиленная поддержка`, `Сбалансированный выбор`, `Премиальный беспружинный`, `Эффект памяти`, `Плотная поддержка`.
+- Все 26 labels проверены на длину: ни один не превышает 4 слова.
+- Проверено локально: `npm run build` passed; Vite still reports the existing JS chunk warning above 500 kB.
+- Проверено Playwright CLI screenshots: desktop `/catalog`, mobile `/catalog`, desktop `/product/sleep-magnat`; labels visible, catalog/PDP layout stable.
+- Published the Collection Positioning Pass to Vercel production.
+- Production alias updated: `https://sleep-two-delta.vercel.app`.
+- Deployment URL: `https://sleep-9fhetqf7t-emoprince444.vercel.app`.
+- Vercel deployment id: `dpl_DJHj96ZDsjGj2ZxBAPZgAcXSvWXq`.
+- Проверено `curl -I`: production alias and deployment URL both return HTTP 200.
 - Выполнен Real Product Image Mapping Pass для каталога Sleep Diving.
 - Загруженные изображения из `/Users/ll/Desktop/матрасы и топперы взрывы.zip` были извлечены во временную папку, визуально проверены и сопоставлены с товарами каталога.
 - Добавлена папка `src/assets/product-images/` с real product imagery для Sleep, Batra, Jumana, Firaj и topper-моделей.
@@ -325,12 +339,10 @@ Component relationships:
 
 Измененные файлы:
 
+- `src/App.tsx`
+- `src/components/product/ProductCatalogSection.tsx`
 - `src/data/products.ts`
 - `src/assets/product-images/`
-- `src/components/product/PurchasePanel.tsx`
-- `src/components/product/TrustBadges.tsx`
-- `src/components/layout/StickyBuyBar.tsx`
-- `src/App.tsx`
 - `src/components/layout/Header.tsx`
 - `src/components/layout/Footer.tsx`
 - `AGENTS.md`
@@ -345,6 +357,7 @@ Component relationships:
 - Desktop PDP top section now has much less dead space after the benefits area; left and right columns feel more balanced during scroll.
 - Catalog product cards now use real product-specific images from the uploaded archive, with 18 unique product-image assets mapped across 26 catalog products.
 - Sleep, Batra, and Jumana model families now have corresponding real imagery instead of repeated generic catalog images.
+- Catalog and PDP now explain model-family differences with short positioning labels, making the lineup easier to scan without opening specifications.
 - Desktop PDP pricing selectors now use a cleaner premium hierarchy with savings visually attached to price.
 - Desktop PDP left-column content flow now continues from gallery into trust/benefits content before deeper page sections.
 - Desktop header navigation now starts closer to the brand mark while preserving right-side action balance and mobile behavior.

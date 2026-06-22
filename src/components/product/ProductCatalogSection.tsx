@@ -74,6 +74,7 @@ export function ProductCard({ product }: { product: MattressProduct }) {
                 {copy.displayName}
               </a>
             </h3>
+            <p className="mt-2 text-sm font-bold uppercase tracking-[0.06em] text-sd-navy max-sm:mt-1 max-sm:text-[11px]">{copy.positioningLabel}</p>
             <p className="mt-3 text-[15px] font-semibold leading-6 text-sd-navy max-sm:mt-0.5 max-sm:overflow-hidden max-sm:text-sm max-sm:leading-5 max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:1] max-sm:[display:-webkit-box]">{copy.productType}</p>
           </div>
           <span className="shrink-0 rounded-full bg-sd-cream px-3 py-1 text-[11px] font-bold uppercase tracking-[0.06em] text-sd-navy max-sm:hidden">{product.firmness}</span>
